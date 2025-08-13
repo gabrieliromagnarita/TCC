@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/*********************** cabeçalho ***********************/
+
+#header{
+    height: 13%;
+    width: 100%;
+    background-color: #1F201A;
+}
+
+#sub-header{
+    margin-top: 0.02%;
+    height: 9%;
+    width: 100%;
+    background-color: #1F201A;
+}
+
+#content{
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+}
+
+#content-bottom{
+    height: 20%;
+    width: 100%;
+    background-color: aqua;
+}
