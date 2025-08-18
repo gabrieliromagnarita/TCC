@@ -1,17 +1,17 @@
 <HTML lang="pt-br">
     <HEAD>
         <title>cadastre-se</title>
-        <link rel="stylesheet" href="estilo.css" type="text/css">
+        <link rel="stylesheet" href="static/estilo.css" type="text/css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=1240,shrink-to-fit=no">
     </HEAD>
     <BODY>
         <div id="header">
-            <img src="imagens/logo-face-a-face.png" id="logo-face-a-face">
+            <img src="static/imagens/logo-face-a-face.png" id="logo-face-a-face">
             <div id="icons">
-                <img src="imagens/search-bar-icon.png" id="search-bar-icon">
-                <img src="imagens/user-icon.png" id="user-icon">
-                <img src="imagens/shopping-cart-icon.png" id="shopping-cart-icon">
+                <img src="static/imagens/search-bar-icon.png" id="search-bar-icon">
+                <img src="static/imagens/user-icon.png" id="user-icon">
+                <img src="static/imagens/shopping-cart-icon.png" id="shopping-cart-icon">
             </div>
         </div>
         <div id="sub-header">
@@ -20,7 +20,7 @@
             <a href="" class="header-text faq">FAQ</a>
         </div>
         <div id="content">
-            <form name="form-cadastro" method="post" action="/cadastro.py">
+            <form name="form-cadastro" method="post" action="/cadastrar">
                 Nome:<br>
                 <input type="text" name="nome-cadastro" id="nome-cadastro" size=70>
                 <br><br>
@@ -41,8 +41,8 @@
                 <br><br>
                 <div id="content-bottom">
                     <input type="submit" name="cadastrar-botao" value="CADASTRAR" id="button">
-                    <text>já tem uma conta?</text>
-                    <a href="">fazer log-in</a> 
+                    <text class="bottom-text texto">já tem uma conta?</text>
+                    <a href="" class="bottom-text link">fazer log-in</a> 
                 </div>
                 
             </form>

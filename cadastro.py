@@ -48,11 +48,11 @@ def cadastrar_user():
                 'nascimento': nascimento,
             }
             db.collection('usuarios').add(user_info)
-            print(f'Usuário criado com sucesso!')
+            return'Usuário criado com sucesso!'
         except Exception:
-            print(f'Falha na criação do usuário!')
+            return'Falha na criação do usuário!'
     except Exception:
-        print(f'Falha na criação do usuário!1')        
+        return'Falha na criação do usuário!1'    
 
 if __name__ == "__main__":
     app.run(debug=True)
