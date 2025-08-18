@@ -9,11 +9,27 @@ body{
     height: 13%;
     width: 100%;
     background-color: #20201E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 0.001px solid white;
 }
 
 #logo-face-a-face{
-    height: 80%;
+    height: 100%;
     width: auto;
+}
+
+#icons{
+    position: absolute;
+    right: 2%;
+    height: 100%;
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0, 1%;
 }
 
 #search-bar-icon{
@@ -32,20 +48,69 @@ body{
 }
 
 #sub-header{
-    margin-top: 0.02%;
     height: 9%;
     width: 100%;
     background-color: #20201E;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
+.header-text {
+    position: absolute;
+    font-size: 120%;
+    text-decoration: none;
+    color: white;
+}
+
+.header-text:hover{
+    color: #33B1AE;
+}
+
+.header-text.historia{
+    right: 60%;
+}
+
+.header-text.home{
+    position: relative;
+}
+
+.header-text.faq{
+    left: 60%;
+}
+
+/*********************** corpo ***********************/
 #content{
     height: 100%;
     width: 100%;
     background-color: blue;
 }
 
+/*********************** rodapé ***********************/
+
 #content-bottom{
     height: 20%;
     width: 100%;
-    background-color: aqua;
+    background-color: rgb(0, 255, 0);
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#button{
+    width: 20%;
+    height: 25%;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-size: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
 }
