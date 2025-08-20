@@ -21,24 +21,22 @@
         </div>
         <div id="content">
             <form name="form-cadastro" method="post" action="/cadastrar">
-                Nome:<br>
-                <input type="text" name="nome-cadastro" id="nome-cadastro" size=70>
-                <br><br>
-                E-mail:<br>
-                <input type="email" name="email-cadastro" id="email-cadastro" size=70>
-                <br><br>
-                Telefone:<br>
-                <input type="tel" name="fone-cadastro" id="fone-cadastro" size=70>
-                <br><br>
-                Senha:<br>
-                <input type="password" name="senha-cadastro" id="senha-cadastro" size=70>
-                <br><br>
-                Confirme a senha:<br>
-                <input type="password" name="senhaConfirm-cadastro" id="senhaConfirm-cadastro" size=70>
-                <br><br>
-                Data de nascimento(opcional):<br>
-                <input type="date" name="dataNasc-cadastro" id="dataNasc-cadastro" size=70>
-                <br><br>
+                <div id="left">
+                    Nome:<br>
+                    <input type="text" name="nome-cadastro" class="cadastro-input nome"><br>
+                    E-mail:<br>
+                    <input type="email" name="email-cadastro" class="cadastro-input email"><br>
+                    Telefone:<br>
+                    <input type="tel" name="fone-cadastro" class="cadastro-input fone"><br>
+                </div>
+                <div id="right">
+                    Senha:<br>
+                    <input type="password" name="senha-cadastro" class="cadastro-input senha"><br>
+                    Confirme a senha:<br>
+                    <input type="password" name="senhaConfirm-cadastro" class="cadastro-input senhaConfirm"><br>
+                    Data de nascimento(opcional):<br>
+                    <input type="date" name="dataNasc-cadastro" class="cadastro-input dataNasc"><br>
+                </div>
                 <div id="content-bottom">
                     <input type="submit" name="cadastrar-botao" value="CADASTRAR" id="button">
                     <text class="bottom-text texto">já tem uma conta?</text>

@@ -86,8 +86,28 @@ body{
 #content{
     height: 100%;
     width: 100%;
-    background-color: blue;
+    background-color: rgb(75, 75, 141);
+    display: flex;
+    justify-content: center;
 }
+
+#left{
+    display: inline-block;
+    background-color: cornflowerblue;
+    width: 100%;
+}
+
+#right{
+    display: inline-block;
+    background-color: chartreuse;
+    width: 49%;
+}
+
+/* .cadastro-input{
+    border-radius: 12px;
+    height: 6%;
+    border-color: 1px solid black;
+} */
 
 /*********************** rodapé ***********************/
 
