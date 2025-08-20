@@ -1,11 +1,23 @@
+from dotenv import load_dotenv
+import os, json
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-from firebase_admin import auth
+from firebase_admin import credentials, firestore
 
-cred = credentials.Certificate("chaveAcesso/loja-face-a-face-firebase-adminsdk-fbsvc-6acafc7c88.json")
-app = firebase_admin.initialize_app(cred)
+load_dotenv()
+cred_json = os.getenv("FIREBASE_CREDENTIALS")
+cred_dict = json.loads(cred_json)
+
+if not firebase_admin._apps:
+    credential = credentials.Certificate(cred_dict)
+    app = firebase_admin.initialize_app(credential)
+else:
+    print("App inicializado!")
+
 db = firestore.client()
+
+""" cred = credentials.Certificate("chaveAcesso/loja-face-a-face-firebase-adminsdk-fbsvc-6acafc7c88.json")
+app = firebase_admin.initialize_app(cred)
+ """
 
 print("Banco conectado!")
 

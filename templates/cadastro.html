@@ -23,24 +23,24 @@
             <form name="form-cadastro" method="post" action="/cadastrar">
                 <div id="left">
                     Nome:<br>
-                    <input type="text" name="nome-cadastro" class="cadastro-input nome"><br>
+                    <input type="text" name="nome-cadastro" class="cadastro-input nome" required><br>
                     E-mail:<br>
-                    <input type="email" name="email-cadastro" class="cadastro-input email"><br>
+                    <input type="email" name="email-cadastro" class="cadastro-input email" required><br>
                     Telefone:<br>
                     <input type="tel" name="fone-cadastro" class="cadastro-input fone"><br>
                 </div>
                 <div id="right">
                     Senha:<br>
-                    <input type="password" name="senha-cadastro" class="cadastro-input senha"><br>
+                    <input type="password" name="senha-cadastro" class="cadastro-input senha" required><br>
                     Confirme a senha:<br>
-                    <input type="password" name="senhaConfirm-cadastro" class="cadastro-input senhaConfirm"><br>
+                    <input type="password" name="senhaConfirm-cadastro" class="cadastro-input senhaConfirm" required><br>
                     Data de nascimento(opcional):<br>
                     <input type="date" name="dataNasc-cadastro" class="cadastro-input dataNasc"><br>
                 </div>
                 <div id="content-bottom">
                     <input type="submit" name="cadastrar-botao" value="CADASTRAR" id="button">
                     <text class="bottom-text texto">já tem uma conta?</text>
-                    <a href="" class="bottom-text link">fazer log-in</a> 
+                    <a href="/login-render" class="bottom-text link">fazer login</a> 
                 </div>
                 
             </form>

@@ -1,14 +1,15 @@
-from flask import Flask, render_template, request, redirect
+from connect import db
+from flask import Flask, render_template, request, redirect, url_for
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
 from email_validator import validate_email, EmailNotValidError
-
-cred = credentials.Certificate("chaveAcesso/loja-face-a-face-firebase-adminsdk-fbsvc-6acafc7c88.json")
-firebase_admin.initialize_app(cred)
-db = firestore.client()
+import requests
 
 app = Flask(__name__) #__name__ é o nome do módulo atual
 
+FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
+
+# cadastro #
 def email_valido(email):
     try:
         validate_email(email, check_deliverability=True)
@@ -16,7 +17,7 @@ def email_valido(email):
     except EmailNotValidError:
         return False
     
-@app.route('/')
+@app.route('/cadastro-render')
 def cadastro():
     return render_template('cadastro.html')
 
@@ -52,7 +53,39 @@ def cadastrar_user():
         except Exception:
             return'Falha na criação do usuário!'
     except Exception:
-        return'Falha na criação do usuário!1'    
+        return'Falha na criação do usuário!1'
+    
+# log-in #
+@app.route('/login-render')
+def login():
+    return render_template('login.html')
 
-if __name__ == "__main__":
+@app.route('/login', methods=['POST'])
+def login_user():
+    email = request.form['email-login']
+    senha = request.form['senha-login']
+
+    url = f'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}'
+
+    payload = {
+        'email' : email,
+        'password' : senha,
+        'returnSecureToken' : True
+    }
+
+    response = requests.post(url, json=payload)
+    data = response.json()
+
+    if 'idToken' in data:
+        return "Log-in bem sucedido!"
+    else:
+        erro = data.get('error', {}).get('message', 'Erro desconhecido')
+        return f'Erro ao logar: {erro}', 401
+    
+# rota inicial #
+@app.route('/')
+def home():
+    return redirect('/cadastro-render')
+
+if __name__ == '__main__':
     app.run(debug=True)
