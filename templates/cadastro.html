@@ -3,7 +3,7 @@
         <title>cadastre-se</title>
         <link rel="stylesheet" href="static/estilo.css" type="text/css">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=1240,shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </HEAD>
     <BODY>
         <div id="header">
@@ -20,27 +20,43 @@
             <a href="" class="header-text faq">FAQ</a>
         </div>
         <div id="content">
-            <form name="form-cadastro" method="post" action="/cadastrar">
-                <div id="left">
-                    Nome:<br>
-                    <input type="text" name="nome-cadastro" class="cadastro-input nome" required><br>
-                    E-mail:<br>
-                    <input type="email" name="email-cadastro" class="cadastro-input email" required><br>
-                    Telefone:<br>
-                    <input type="tel" name="fone-cadastro" class="cadastro-input fone"><br>
+            <form name="form-cadastro" method="post" action="/cadastrar" id="form-cadastro">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input type="text" name="nome-cadastro" class="cadastro-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Senha:</label>
+                    <input type="password" name="senha-cadastro" class="cadastro-input senha" required>
+                    </div>
                 </div>
-                <div id="right">
-                    Senha:<br>
-                    <input type="password" name="senha-cadastro" class="cadastro-input senha" required><br>
-                    Confirme a senha:<br>
-                    <input type="password" name="senhaConfirm-cadastro" class="cadastro-input senhaConfirm" required><br>
-                    Data de nascimento(opcional):<br>
-                    <input type="date" name="dataNasc-cadastro" class="cadastro-input dataNasc"><br>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>E-mail:</label>
+                        <input type="email" name="email-cadastro" class="cadastro-input email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirme a senha:</label>
+                        <input type="password" name="senhaConfirm-cadastro" class="cadastro-input senhaConfirm" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefone:</label>
+                        <input type="tel" name="fone-cadastro" class="cadastro-input fone"><br>
+                    </div>
+                    <div class="form-group">
+                        <label>Data de nascimento(opcional):</label>
+                        <input type="date" name="dataNasc-cadastro" class="cadastro-input dataNasc"><br>
+                    </div>
                 </div>
                 <div id="content-bottom">
                     <input type="submit" name="cadastrar-botao" value="CADASTRAR" id="button">
-                    <text class="bottom-text texto">já tem uma conta?</text>
-                    <a href="/login-render" class="bottom-text link">fazer login</a> 
+                    <div class="bottom-text">
+                        <text class="bottom-text texto">já tem uma conta?</text>
+                        <a href="/login-render" class="bottom-text link">fazer login</a>
+                    </div> 
                 </div>
                 
             </form>
