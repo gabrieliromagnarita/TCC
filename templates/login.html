@@ -19,29 +19,28 @@
             <a href="" class="header-text home">HOME</a> 
             <a href="" class="header-text faq">FAQ</a>
         </div>
-        <div id="content">
-            <form name="form-login" method="post" action="/login" id="form-login"></form>
-                <div class="form-group">
-                    <label>E-mail:</label>
-                    <input type="email" name="email-login" class="login-input email" required>
-                </div>
-                <div class="form-group">
-                    <label>Senha:</label>
-                    <input type="password" name="senha-cadastro" class="cadastro-input senha" required>
+        <div id="content-login">
+            <form name="form-login" method="post" action="/login" id="form-login">
+                <div class="form-column-login">
+                    <div class="form-group-login">
+                        <label>E-mail:</label>
+                        <input type="email" name="email-login" class="login-input email" required>
+                    </div>
+                    <div class="form-group-login">
+                        <label>Senha:</label>
+                        <input type="password" name="senha-login" class="login-input senha" required>
+                        <a href="" class="recuperar-senha-login">esqueci minha senha</a>
+                    </div>
                 </div>
                 <div id="content-bottom">
                     <input type="submit" name="login-botao" value="ENTRAR" id="button">
                     <div class="bottom-details">
-                        <div class="line1">
-                            <hr>
-                        </div>
+                        <div class="line"><hr></div>
                         <div class="bottom-text">
                             <text class="bottom-text texto">já tem uma conta?</text>
                             <a href="/cadastro-render" class="bottom-text link">cadastre-se</a>
                         </div>
-                        <div class="line2">
-                            <hr>
-                       </div>
+                        <div class="line"><hr></div>
                     </div>
                 </div>
             </form>

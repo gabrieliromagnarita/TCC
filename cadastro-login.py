@@ -1,4 +1,4 @@
-from connect import db
+""" from connect import db """
 from flask import Flask, render_template, request, redirect, url_for
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
