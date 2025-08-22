@@ -73,8 +73,8 @@ body{
     left: 60%;
 }
 
-/*********************** corpo ***********************/
-#content{
+/*********************** corpo cadastro  ***********************/
+#content-cadastro{
     padding-top: 3%;
     display: flex;
     justify-content: center;
@@ -116,7 +116,124 @@ label{
     padding: 2%;
 }
 
-/*********************** rodapé ***********************/
+/*********************** rodapé cadastro ***********************/
+
+#content-bottom{
+    padding-top: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.line1{
+    width: 44%;
+    margin-right: 15px;
+    margin-top: 18px;
+}
+
+.line2{
+    width: 44%;
+    margin-left: 15px;
+    margin-top: 18px;
+}
+
+.line hr{
+    background-color: #686868;
+}
+
+.bottom-details{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.bottom-text{
+    padding-top: 1%;
+    display: flex;
+    flex-direction: column;
+    font-size: 100%;
+    text-align: center;
+
+}
+
+.bottom-text.texto{
+    color: #686868;
+}
+
+.bottom-text.link{
+    color: #33B1AE;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#button{
+    width: 20%;
+    height: 25%;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 13px;
+    font-size: 120%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#button input{
+    width: 20%;
+    height: 25%;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 13px;
+    font-size: 120%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+/*********************** corpo login ***********************/
+#content-login{
+    padding-top: 3%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+#form-login{
+    width: 100%;
+    min-height: 436px;
+}
+
+.form-group{
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+label{
+    font-size: 20px;
+    margin: 0;
+}
+
+.login-input{
+    border-radius: 18px;
+    height: 45px;
+    width: 100%;
+    border: 2px solid black;
+    font-size: 14px;
+    margin: 0;
+    padding: 2%;
+}
+
+/*********************** rodapé cadastro ***********************/
 
 #content-bottom{
     padding-top: 2%;
