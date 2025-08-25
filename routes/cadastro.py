@@ -1,15 +1,12 @@
 """ from connect import db """
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request
 import firebase_admin
-from firebase_admin import credentials, firestore, auth
+from firebase_admin import auth, firestore
 from email_validator import validate_email, EmailNotValidError
 import requests
 
-app = Flask(__name__) #__name__ é o nome do módulo atual
+cadastro_bp = Blueprint('cadastro', __name__)
 
-FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
-
-# cadastro #
 def email_valido(email):
     try:
         validate_email(email, check_deliverability=True)
@@ -17,11 +14,11 @@ def email_valido(email):
     except EmailNotValidError:
         return False
     
-@app.route('/cadastro-render')
+@cadastro_bp.route('/cadastro-render')
 def cadastro():
     return render_template('cadastro.html')
 
-@app.route('/cadastrar', methods=['POST'])
+@cadastro_bp.route('/cadastrar', methods=['POST'])
 def cadastrar_user():
     email = request.form['email-cadastro']
     senha = request.form['senha-cadastro']
@@ -54,38 +51,3 @@ def cadastrar_user():
             return'Falha na criação do usuário!'
     except Exception:
         return'Falha na criação do usuário!1'
-    
-# log-in #
-@app.route('/login-render')
-def login():
-    return render_template('login.html')
-
-@app.route('/login', methods=['POST'])
-def login_user():
-    email = request.form['email-login']
-    senha = request.form['senha-login']
-
-    url = f'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}'
-
-    payload = {
-        'email' : email,
-        'password' : senha,
-        'returnSecureToken' : True
-    }
-
-    response = requests.post(url, json=payload)
-    data = response.json()
-
-    if 'idToken' in data:
-        return "Log-in bem sucedido!"
-    else:
-        erro = data.get('error', {}).get('message', 'Erro desconhecido')
-        return f'Erro ao logar: {erro}', 401
-    
-# rota inicial #
-@app.route('/')
-def home():
-    return redirect('/cadastro-render')
-
-if __name__ == '__main__':
-    app.run(debug=True)
