@@ -278,16 +278,14 @@ label{
 
 /*********************** corpo adm  ***********************/
 #content-admin{
-    padding-top: 3%;
+    padding-top: 2%;
     display: flex;
     justify-content: center;
-    background-color: aqua;
 }
 
 #form-admin{
     width: 100%;
     min-height: 346px;
-    background-color: brown;
 }
 
 .form-row-admin{
@@ -304,7 +302,16 @@ label{
 
 .admin-input{
     height: 40px;
-    width: 40%;
+    width: 36%;
+    background-color: #D9D9D9;
+    font-size: 25px;
+    margin: 0;
+    border: none;
+}
+
+.admin-input2{
+    height: 40px;
+    width: 30%;
     background-color: #D9D9D9;
     font-size: 25px;
     margin: 0;
@@ -320,7 +327,7 @@ label{
 
 .admin-textarea{
     height: 170px;
-    width: 40%;
+    width: 36%;
     background-color: #D9D9D9;
     font-size: 25px;
     margin: 0;
@@ -329,24 +336,66 @@ label{
 }
 
 .files-admin{
-    width: 40%;
+    width: 30%;
     display: flex;
     flex-direction: row;
-    background-color: chartreuse;
     justify-content: space-between;
-    height: 170px;
+    height: 190px;
 }
 
 .file-upload{
     width: 40%;
+    height: 110%;
     display: flex;
     flex-direction: column;
-    background-color: cornflowerblue;
+    gap: 6%;
 }
 
 .admin-upload{
-    height: 100px;
-    background-color: darkblue;
+    height: 76%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+}
+
+.admin-upload:hover {
+    cursor: pointer;
+}
+
+.btn-confirmar{
+    width: 100%;
+    height: 20%;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 140%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-deletar{
+    width: 100%;
+    height: 20%;
+    background-color: #b13333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 140%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-input{
+    display: none;
 }
