@@ -37,19 +37,16 @@
                 </div>
                 <div class="form-row-admin2">
                     <textarea name="desc-admin" class="admin-textarea desc" placeholder="Descrição:"></textarea>
-                    <div class="file-upload">
-                        <label>Upload Imagem 1</label>
-                        <input type="file" name="foto-admin" accept="image/*">
+                    <div class="files-admin">
+                        <div class="file-upload">
+                            <input type="file" name="foto-admin" accept="image/*" class="admin-upload">
+                            <button type="submit" class="btn-confirmar">CONFIRMAR</button>
+                        </div>
+                        <div class="file-upload">
+                            <input type="file" name="foto-admin" accept="image/*" class="admin-upload">
+                            <button type="submit" formaction="/admin" name="acao-admin" value="deletar" class="btn-deletar">DELETAR</button>
+                        </div>
                     </div>
-                    <div class="file-upload">
-                        <label>Upload Imagem 2</label>
-                        <input type="file" name="foto-admin" accept="image/*">
-                    </div>
-                </div>
-                
-                <div class="actions">
-                    <button type="submit" class="btn-confirmar">CONFIRMAR</button>
-                    <button type="submit" formaction="/admin" name="acao-admin" value="deletar" class="btn-deletar">DELETAR</button>
                 </div>
             </form>
         </div>
