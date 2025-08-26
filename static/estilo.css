@@ -358,6 +358,7 @@ label{
     justify-content: center;
     align-items: center;
     background-color: #D9D9D9;
+    padding: 8%;
 }
 
 .admin-upload:hover {
