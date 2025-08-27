@@ -281,6 +281,8 @@ label{
     padding-top: 2%;
     display: flex;
     justify-content: center;
+    width: 100%;
+    height: auto;
 }
 
 #form-admin{
@@ -399,4 +401,38 @@ label{
 
 .file-input{
     display: none;
+}
+
+/*********************** corpo historia  ***********************/
+#content-historia{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkblue;
+    width: 100%;
+    height: 80%;
+}
+
+#map-div-historia{
+    width: 35%;
+    height: 100%;
+    background-color: #b13333;
+}
+
+#text-div-historia{
+    width: 65%;
+    height: 100%;
+    background-color: aqua;
+}
+
+#top-div-historia{
+    width: 100%;
+    height: 60%;
+    background-color: crimson;
+}
+
+#bottom-div-historia{
+    width: 100%;
+    height: 40%;
+    background-color: chartreuse;
 }
