@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
 import requests
+from connect import db
 
 login_bp = Blueprint('login', __name__)
 FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'

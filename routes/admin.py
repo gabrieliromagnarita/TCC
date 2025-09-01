@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-""" from connect import db """
+from connect import db
 import uuid
 import os
 
