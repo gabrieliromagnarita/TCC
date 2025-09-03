@@ -485,3 +485,22 @@ label{
     height: auto;
     width: 50px;
 }
+
+/*********************** corpo faq  ***********************/
+#content-faq{
+    height: auto;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+#form-faq{
+    height: 100%;
+    width: 90%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black;
+    padding: 2%;
+}
