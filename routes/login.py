@@ -28,6 +28,8 @@ def login_user():
     data = response.json()
 
     if 'idToken' in data:
+        if email == "gabihromagna@gmail.com":
+            return "ADM"
         return "Log-in bem sucedido!"
     else:
         erro = data.get('error', {}).get('message', 'Erro desconhecido')

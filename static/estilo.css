@@ -504,3 +504,25 @@ label{
     border-color: black;
     padding: 2%;
 }
+
+/*********************** corpo home  ***********************/
+#content-home{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 493px;
+    background-color: blue;
+}
+
+#home-left{
+    background-color: #33B1AE;
+    height: auto;
+    width: 22%;
+}
+
+#home-right{
+    background-color: brown;
+    height: auto;
+    width: 78%;
+}
