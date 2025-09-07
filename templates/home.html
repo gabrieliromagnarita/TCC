@@ -21,15 +21,25 @@
         </div>
         <div id="content-home">
             <div id="home-left">
-                <ul>
-                    <li><a href="">CABELOS</a></li>
-                    <li><a href="">UNHAS</a></li>
-                    <li><a href="">MAQUIAGEM</a></li>
-                    <li><a href="">SKINCARE</a></li>
-                    <li><a href="">CORPO</a></li>
-                    <li><a href="">DERMOCOSMÉTICOS</a></li>
-                    <li><a href="">ACESSÓRIOS</a></li>
-                </ul>
+                {% for categoria, subcategoria in categorias_dict.items() %}
+                <div class="categoria-home">
+                    <button class="btn-categoria" onclick="toggleSubcats('{{categoria}}')">
+                        <li><a href="">CABELOS</a></li>
+                        <li><a href="">UNHAS</a></li>
+                        <li><a href="">MAQUIAGEM</a></li>
+                        <li><a href="">SKINCARE</a></li>
+                        <li><a href="">CORPO</a></li>
+                        <li><a href="">DERMOCOSMÉTICOS</a></li>
+                        <li><a href="">ACESSÓRIOS</a></li>
+                    </button>
+                </div>
+                <div class="subcategoria-home" id="subcategoria-{{categoria}}" style="display: none;">
+                    {% for i in subcategoria %}
+                        <button class="btn-sub" onclick="filtrarProdutos('{{categoria}}', '{{sub}}')">
+                            {{ sub }}
+                        </button>
+                    {% endfor %}
+                </div>
             </div>
             <div id="home-right">
                 {% if produtos %}
