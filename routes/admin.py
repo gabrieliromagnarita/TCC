@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from connect import db
+""" from connect import db """
 import uuid
 import os
 
@@ -22,7 +22,8 @@ def admin_actions():
         marca = request.form.get('marca-admin')
         desc = request.form.get('desc-admin')
         preco = request.form.get('preco-admin')
-        categorias = request.form.getlist('categorias-admin')
+        categorias = request.form.get('categorias-admin', "").split(",")
+        categorias = [i.strip() for i in categorias if i.strip()]
         qtd = request.form.get('qtd-admin')
         foto1 = request.files.get('foto-admin1')
         foto2 = request.files.get('foto-admin2')
@@ -45,14 +46,15 @@ def admin_actions():
                     os.makedirs(PASTA_UPLOADS)
                 caminho_foto = os.path.join(PASTA_UPLOADS, foto1.filename)
                 foto1.save(caminho_foto)
-                produto['foto1'] = '/' + caminho_foto.replace('\\', '/')
+                produto['foto1'] = f"uploads/{foto1.filename}"
+                """ '/' + caminho_foto.replace('\\', '/') """
                 doc_ref.set(produto, merge=True)
             if foto2:
                 if not os.path.exists(PASTA_UPLOADS):
                     os.makedirs(PASTA_UPLOADS)
                 caminho_foto = os.path.join(PASTA_UPLOADS, foto2.filename)
                 foto2.save(caminho_foto)
-                produto['foto2'] = '/' + caminho_foto.replace('\\', '/')
+                produto['foto2'] = f"uploads/{foto2.filename}"
                 doc_ref.set(produto, merge=True)
 
         elif acao == 'deletar':

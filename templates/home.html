@@ -21,11 +21,29 @@
         </div>
         <div id="content-home">
             <div id="home-left">
-                
+                <ul>
+                    <li><a href="">CABELOS</a></li>
+                    <li><a href="">UNHAS</a></li>
+                    <li><a href="">MAQUIAGEM</a></li>
+                    <li><a href="">SKINCARE</a></li>
+                    <li><a href="">CORPO</a></li>
+                    <li><a href="">DERMOCOSMÉTICOS</a></li>
+                    <li><a href="">ACESSÓRIOS</a></li>
+                </ul>
             </div>
             <div id="home-right">
-                bbbb
+                {% if produtos %}
+                    <div class="produtos-grid">
+                        <img src="{{url_for('static', filename=i[foto]) id i.foto else url_for('static', filename='imagens/placeholder.png')}}" class="produto.img">
+                        <p class="produto-nome">{{i.nome}}</p>
+                        <p class="produto-preco">R${{ "%.2f"|format(i.preco) if i.preco else "0,00"}}</p>
+                        <button class="btn-comprar-home">COMPRAR</button>
+                    </div>
+                {% endfor %}
             </div>
+        {% else %}
+            <p>Nenhum produto encontrado.</p>
+        {% endif %}
         </div>
     </BODY>
 </HTML>
