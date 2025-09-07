@@ -57,3 +57,17 @@
         </div>
     </BODY>
 </HTML>
+
+<script>
+    function toggleSubcats(categoria){
+        let el = document.getElementById("subcategoria-"+categoria);
+        el.style.display = (el.style.display === "none" ? "block": "none");
+    }
+    function filtrarProdutos(categoria, subcategoria){
+        fetch(/home-render?categoria=${categoria}&subcategoria=${subcategoria})
+        .then(res => res.text())
+        .then(htmll => {
+            document.getElementById("home-right").innerHTML= html;
+        });
+    }
+</script>
