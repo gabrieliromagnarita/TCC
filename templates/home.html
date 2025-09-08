@@ -21,7 +21,7 @@
         </div>
         <div id="content-home">
             <div id="home-left">
-                {% for categoria, subcategoria in categorias_dict.items() %}
+                {% for categoria, subcategorias in categorias_dict.items() %}
                 <div class="categoria-home">
                     <button class="btn-categoria" onclick="toggleSubcats('{{categoria}}')">
                         <li><a href="">CABELOS</a></li>
@@ -40,20 +40,22 @@
                         </button>
                     {% endfor %}
                 </div>
+                {% endfor %}
             </div>
             <div id="home-right">
                 {% if produtos %}
-                    <div class="produtos-grid">
-                        <img src="{{url_for('static', filename=i[foto]) id i.foto else url_for('static', filename='imagens/placeholder.png')}}" class="produto.img">
-                        <p class="produto-nome">{{i.nome}}</p>
-                        <p class="produto-preco">R${{ "%.2f"|format(i.preco) if i.preco else "0,00"}}</p>
-                        <button class="btn-comprar-home">COMPRAR</button>
-                    </div>
-                {% endfor %}
+                    {% for i in produtos %}
+                        <div class="produtos-grid">
+                            <img src="{% if i.foto %}{{ url_for('static', filename=i.foto) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img">
+                            <p class="produto-nome">{{ i.nome }}</p>
+                            <p class="produto-preco">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
+                            <button class="btn-comprar-home">COMPRAR</button>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nenhum produto encontrado.</p>
+                {% endif %}
             </div>
-        {% else %}
-            <p>Nenhum produto encontrado.</p>
-        {% endif %}
         </div>
     </BODY>
 </HTML>
@@ -64,7 +66,7 @@
         el.style.display = (el.style.display === "none" ? "block": "none");
     }
     function filtrarProdutos(categoria, subcategoria){
-        fetch(/home-render?categoria=${categoria}&subcategoria=${subcategoria})
+        fetch(`/home-render?categoria=${encodeURIComponent(categoria)}&subcategoria=${encodeURIComponent(subcategoria)}`)
         .then(res => res.text())
         .then(htmll => {
             document.getElementById("home-right").innerHTML= html;
