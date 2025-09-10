@@ -21,32 +21,52 @@
         </div>
         <div id="content-home">
             <div id="home-left">
-                {% for categoria, subcategorias in categorias_dict.items() %}
-                <div class="categoria-home">
-                    <button class="btn-categoria" onclick="toggleSubcats('{{categoria}}')">
-                        <li><a href="">CABELOS</a></li>
-                        <li><a href="">UNHAS</a></li>
-                        <li><a href="">MAQUIAGEM</a></li>
-                        <li><a href="">SKINCARE</a></li>
-                        <li><a href="">CORPO</a></li>
-                        <li><a href="">DERMOCOSMÉTICOS</a></li>
-                        <li><a href="">ACESSÓRIOS</a></li>
-                    </button>
-                </div>
-                <div class="subcategoria-home" id="subcategoria-{{categoria}}" style="display: none;">
-                    {% for i in subcategoria %}
-                        <button class="btn-sub" onclick="filtrarProdutos('{{categoria}}', '{{sub}}')">
-                            {{ sub }}
-                        </button>
-                    {% endfor %}
-                </div>
-                {% endfor %}
+                <details>
+                    <summary><a href="">CABELOS</a></summary>
+                    <p><a href="">a</a></p>
+                    <p><a href="">a</a></p>
+                </details>
+                <details>
+                    <summary><a href="">UNHAS</a></summary>
+                    <p><a href="">a</a></p>
+                    <p><a href="">a</a></p>
+                </details>
+                <details>
+                    <summary><a href="/home-render?categoria=maquiagem">MAQUIAGEM</a></summary>
+                    <p><a href="">BATONS</a></p>
+                    <p><a href="">BASES</a></p>
+                    <p><a href="">CORRETIVOS</a></p>
+                    <p><a href="">SOMBRAS</a></p>
+                    <p><a href="">PÓ</a></p>
+                    <p><a href="">LÁPIS</a></p>
+                    <p><a href="">RÍMEL</a></p>
+                </details>
+                <details>
+                    <summary><a href="">SKINCARE</a></summary>
+                    <p><a href="">a</a></p>
+                    <p><a href="">a</a></p>
+                </details>
+                <details>
+                    <summary><a href="">CORPO</a></summary>
+                    <p><a href="">a</a></p>
+                    <p><a href="">a</a></p>
+                </details>
+                <details>
+                    <summary><a href="">DERMOCOSMÉTICOS</a></summary>
+                    <p><a href="">a</a></p>
+                    <p><a href="">a</a></p>
+                </details>
+                <details>
+                    <summary><a href="">ACESSÓRIOS</a></summary>
+                    <p><a href="">a</a></p>
+                    <p><a href="">a</a></p>
+                </details>
             </div>
             <div id="home-right">
                 {% if produtos %}
                     {% for i in produtos %}
                         <div class="produtos-grid">
-                            <img src="{% if i.foto %}{{ url_for('static', filename=i.foto) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img">
+                            <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img">
                             <p class="produto-nome">{{ i.nome }}</p>
                             <p class="produto-preco">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
                             <button class="btn-comprar-home">COMPRAR</button>
@@ -60,16 +80,3 @@
     </BODY>
 </HTML>
 
-<script>
-    function toggleSubcats(categoria){
-        let el = document.getElementById("subcategoria-"+categoria);
-        el.style.display = (el.style.display === "none" ? "block": "none");
-    }
-    function filtrarProdutos(categoria, subcategoria){
-        fetch(`/home-render?categoria=${encodeURIComponent(categoria)}&subcategoria=${encodeURIComponent(subcategoria)}`)
-        .then(res => res.text())
-        .then(htmll => {
-            document.getElementById("home-right").innerHTML= html;
-        });
-    }
-</script>
