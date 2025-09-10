@@ -20,57 +20,65 @@
             <a href="/faq-render" class="header-text faq">FAQ</a>
         </div>
         <div id="content-home">
-            <div id="home-left">
+            <div id="left-column-home">
                 <details>
-                    <summary data-categoria="cabelos">CABELOS</summary>
-                    <p><a href="#"  data-categoria="a">a</a></p>
-                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <summary data-categoria="cabelos" class="home-filter-cat">CABELOS</summary>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
                 </details>
                 <details>
-                    <summary data-categoria="unhas">UNHAS</summary>
-                    <p><a href="#"  data-categoria="b">a</a></p>
-                    <p><a href="#"  data-categoria="b">a</a></p>
+                    <summary data-categoria="unhas" class="home-filter-cat">UNHAS</summary>
+                    <p><a href="#"  data-categoria="esmalte" class="home-filter-subcat">ESMALTE</a></p>
+                    <p><a href="#"  data-categoria="b" class="home-filter-subcat">a</a></p>
                 </details>
                 <details>
-                    <summary data-categoria="maquiagem">MAQUIAGEM</summary>
-                    <p><a href="#"  data-categoria="batom">BATONS</a></p>
-                    <p><a href="#" data-categoria="bases">BASES</a></p>
-                    <p><a href="#" data-categoria="corretivos">CORRETIVOS</a></p>
-                    <p><a href="#" data-categoria="sombras">SOMBRAS</a></p>
-                    <p><a href="#" data-categoria="pó">PÓ</a></p>
-                    <p><a href="#" data-categoria="lápis">LÁPIS</a></p>
-                    <p><a href="#" data-categoria="rímel">RÍMEL</a></p>
+                    <summary data-categoria="maquiagem" class="home-filter-cat">MAQUIAGEM</summary>
+                    <p><a href="#"  data-categoria="batom" class="home-filter-subcat">BATOM</a></p>
+                    <p><a href="#" data-categoria="base" class="home-filter-subcat">BASE</a></p>
+                    <p><a href="#" data-categoria="corretivo" class="home-filter-subcat">CORRETIVO</a></p>
+                    <p><a href="#" data-categoria="sombra" class="home-filter-subcat">SOMBRA</a></p>
+                    <p><a href="#" data-categoria="pó" class="home-filter-subcat">PÓ</a></p>
+                    <p><a href="#" data-categoria="lápis" class="home-filter-subcat">LÁPIS</a></p>
+                    <p><a href="#" data-categoria="rímel" class="home-filter-subcat">RÍMEL</a></p>
                 </details>
                 <details>
-                    <summary data-categoria="skincare">SKINCARE</summary>
-                    <p><a href="#"  data-categoria="a">a</a></p>
-                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <summary data-categoria="skincare" class="home-filter-cat">SKINCARE</summary>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
                 </details>
                 <details>
-                    <summary data-categoria="corpo">CORPO</summary>
-                    <p><a href="#"  data-categoria="a">a</a></p>
-                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <summary data-categoria="corpo" class="home-filter-cat">CORPO</summary>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
                 </details>
                 <details>
-                    <summary data-categoria="dermocosméticos">DERMOCOSMÉTICOS</summary>
-                    <p><a href="#"  data-categoria="a">a</a></p>
-                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <summary data-categoria="dermocosméticos" class="home-filter-cat">DERMOCOSMÉTICOS</summary>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
                 </details>
                 <details>
-                    <summary data-categoria="acessórios">ACESSÓRIOS</summary>
-                    <p><a href="#"  data-categoria="a">a</a></p>
-                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <summary data-categoria="acessórios" class="home-filter-cat">ACESSÓRIOS</summary>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
+                    <p><a href="#"  data-categoria="a" class="home-filter-subcat">a</a></p>
                 </details>
             </div>
-            <div id="home-right">
+            <div id="right-column-home">
                 {% if produtos %}
                     {% for i in produtos %}
-                        <div class="produtos-grid">
-                            <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img">
-                            <p class="produto-nome">{{ i.nome }}</p>
-                            <p class="produto-preco">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
+                        <div class="produtos-grid-home">
+                            <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img-home">
+                            <p class="produto-details-home">{{ i.nome }}</p>
+                            <p class="produto-details-home">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
+                            
                             <button class="btn-comprar-home">COMPRAR</button>
                         </div>
+                    {% endfor %}
+                    {% set num_colunas = 5 %}
+                    {% set produtos_cont = produtos|length %}
+                    {% set resto = produtos_cont % num_colunas %}
+                    {% set fillers = (num_colunas - resto) if resto != 0 else 0%}
+                    {% for _ in range(fillers) %}
+                        <div class="produtos-grid-home empty-slot"></div>
                     {% endfor %}
                 {% else %}
                     <p>Nenhum produto encontrado.</p>
@@ -126,4 +134,3 @@
         </script>
     </BODY>
 </HTML>
-
