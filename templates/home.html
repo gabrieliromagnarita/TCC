@@ -22,44 +22,44 @@
         <div id="content-home">
             <div id="home-left">
                 <details>
-                    <summary><a href="">CABELOS</a></summary>
-                    <p><a href="">a</a></p>
-                    <p><a href="">a</a></p>
+                    <summary data-categoria="cabelos">CABELOS</summary>
+                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <p><a href="#"  data-categoria="a">a</a></p>
                 </details>
                 <details>
-                    <summary><a href="">UNHAS</a></summary>
-                    <p><a href="">a</a></p>
-                    <p><a href="">a</a></p>
+                    <summary data-categoria="unhas">UNHAS</summary>
+                    <p><a href="#"  data-categoria="b">a</a></p>
+                    <p><a href="#"  data-categoria="b">a</a></p>
                 </details>
                 <details>
-                    <summary><a href="/home-render?categoria=maquiagem">MAQUIAGEM</a></summary>
-                    <p><a href="">BATONS</a></p>
-                    <p><a href="">BASES</a></p>
-                    <p><a href="">CORRETIVOS</a></p>
-                    <p><a href="">SOMBRAS</a></p>
-                    <p><a href="">PÓ</a></p>
-                    <p><a href="">LÁPIS</a></p>
-                    <p><a href="">RÍMEL</a></p>
+                    <summary data-categoria="maquiagem">MAQUIAGEM</summary>
+                    <p><a href="#"  data-categoria="batom">BATONS</a></p>
+                    <p><a href="#" data-categoria="bases">BASES</a></p>
+                    <p><a href="#" data-categoria="corretivos">CORRETIVOS</a></p>
+                    <p><a href="#" data-categoria="sombras">SOMBRAS</a></p>
+                    <p><a href="#" data-categoria="pó">PÓ</a></p>
+                    <p><a href="#" data-categoria="lápis">LÁPIS</a></p>
+                    <p><a href="#" data-categoria="rímel">RÍMEL</a></p>
                 </details>
                 <details>
-                    <summary><a href="">SKINCARE</a></summary>
-                    <p><a href="">a</a></p>
-                    <p><a href="">a</a></p>
+                    <summary data-categoria="skincare">SKINCARE</summary>
+                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <p><a href="#"  data-categoria="a">a</a></p>
                 </details>
                 <details>
-                    <summary><a href="">CORPO</a></summary>
-                    <p><a href="">a</a></p>
-                    <p><a href="">a</a></p>
+                    <summary data-categoria="corpo">CORPO</summary>
+                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <p><a href="#"  data-categoria="a">a</a></p>
                 </details>
                 <details>
-                    <summary><a href="">DERMOCOSMÉTICOS</a></summary>
-                    <p><a href="">a</a></p>
-                    <p><a href="">a</a></p>
+                    <summary data-categoria="dermocosméticos">DERMOCOSMÉTICOS</summary>
+                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <p><a href="#"  data-categoria="a">a</a></p>
                 </details>
                 <details>
-                    <summary><a href="">ACESSÓRIOS</a></summary>
-                    <p><a href="">a</a></p>
-                    <p><a href="">a</a></p>
+                    <summary data-categoria="acessórios">ACESSÓRIOS</summary>
+                    <p><a href="#"  data-categoria="a">a</a></p>
+                    <p><a href="#"  data-categoria="a">a</a></p>
                 </details>
             </div>
             <div id="home-right">
@@ -77,6 +77,53 @@
                 {% endif %}
             </div>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                const allDetails = document.querySelectorAll("details")
+        
+                allDetails.forEach((detail) => {
+                    const summary = detail.querySelector("summary");
+                    summary.addEventListener("click", e => {
+                        e.preventDefault();
+        
+                        allDetails.forEach(d => {if (d !== detail) d.removeAttribute("open");});
+                        detail.setAttribute("open", "");
+        
+                        const cat = summary.getAttribute("data-categoria");
+                        if (cat) {
+                            window.location.href = `/home-render?categoria=${encodeURIComponent(cat)}`;
+                        }
+                    });
+                    detail.querySelectorAll("a[data-categoria]").forEach(link => {
+                        link.addEventListener("click", e => {
+                            e.preventDefault();
+        
+                            const sub = link.getAttribute("data-categoria");
+                            if (sub){
+                                window.location.href = `/home-render?categoria=${encodeURIComponent(sub)}`;
+                            }
+                        });
+                    });
+                });
+                const urlParams = new URLSearchParams(window.location.search);
+                const catAtual = urlParams.get("categoria");
+                allDetails.forEach(detail => {
+                    const sum = detail.querySelector("summary");
+                    const sumCat = sum ? sum.getAttribute("data-categoria"): null;
+                    if (sumCat === catAtual){
+                        detail.setAttribute("open", "");
+                    }
+                    else{
+                        const links = detail.querySelectorAll("a[data-categoria]");
+                        links.forEach(link => {
+                            if (link.getAttribute("data-categoria") === catAtual){
+                                detail.setAttribute("open", "")
+                            }
+                        })
+                    }
+                });
+            });
+        </script>
     </BODY>
 </HTML>
 
