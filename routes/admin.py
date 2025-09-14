@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 import uuid
 import os
 
-admin_bp = Blueprint('admin', __name__)
+admin_bp = Blueprint('admin', __name__) #cria um blueprint para guardar as rotas da tela
 
 PASTA_UPLOADS = 'TCC/static/uploads'
 
@@ -29,7 +29,7 @@ def admin_actions():
         foto2 = request.files.get('foto-admin2')
 
         if not codigo and acao == 'adicionar':
-            codigo = str(uuid.uuid4())[:8]
+            codigo = str(uuid.uuid4())[:8] #gera um código aleatório
 
         doc_ref = db.collection('produtos').document(codigo)
 
@@ -43,12 +43,12 @@ def admin_actions():
             if qtd: produto['quantidade'] = qtd
             if foto1:
                 if not os.path.exists(PASTA_UPLOADS):
-                    os.makedirs(PASTA_UPLOADS)
+                    os.makedirs(PASTA_UPLOADS) #cria pasta se não existir
                 caminho_foto = os.path.join(PASTA_UPLOADS, foto1.filename)
                 foto1.save(caminho_foto)
                 produto['foto1'] = f"uploads/{foto1.filename}"
                 """ '/' + caminho_foto.replace('\\', '/') """
-                doc_ref.set(produto, merge=True)
+                doc_ref.set(produto, merge=True) #salva no firebase
             if foto2:
                 if not os.path.exists(PASTA_UPLOADS):
                     os.makedirs(PASTA_UPLOADS)
