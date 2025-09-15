@@ -603,10 +603,17 @@ details > summary::marker {
 
 .home-filter-subcat{
     display: block;
-    padding: 6px 20px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
+    margin-left: 2%;
+    margin-right: 2%;
     color: white;
     text-decoration: none;
     text-align: left;
+    background-color: #ffffff42;
+    cursor: pointer;
+}
+
+.home-filter-subcat:hover{
+    font-weight: bold;
 }
