@@ -522,7 +522,6 @@ label{
 }
 
 #right-column-home{
-    /* background-color: brown; */
     height: auto;
     width: 78%;
     display: flex;
@@ -533,6 +532,7 @@ label{
 }
 
 .produtos-grid-home{
+    /* background-color: blue; */
     margin-top: 3%;
     height: 260px;
     width: 18%;
@@ -541,6 +541,18 @@ label{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 2px 5px grey;
+    border-radius: 8px;
+    padding-bottom: 1%;
+    cursor: pointer;
+}
+
+.produtos-grid-home:hover{
+    border: 2px solid #33B1AE;
+}
+
+p{
+    word-break: break-all;
 }
 
 .produto-img-home{
