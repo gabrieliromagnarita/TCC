@@ -522,7 +522,6 @@ label{
 }
 
 #right-column-home{
-    /* background-color: brown; */
     height: auto;
     width: 78%;
     display: flex;
@@ -533,6 +532,7 @@ label{
 }
 
 .produtos-grid-home{
+    /* background-color: blue; */
     margin-top: 3%;
     height: 260px;
     width: 18%;
@@ -541,11 +541,26 @@ label{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 2px 5px grey;
+    border-radius: 8px;
+    padding-bottom: 1%;
+    cursor: pointer;
+}
+
+.produtos-grid-home:hover{
+    border: 2px solid #33B1AE;
+}
+
+p{
+    word-break: break-all;
 }
 
 .produto-img-home{
     width: 100%;
     height: 74%;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .produto-details-home{
@@ -605,11 +620,20 @@ details > summary::marker {
     display: none;
 }
 
+details > p{
+    background-color: #ffffff42;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 5px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
 .home-filter-cat{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 140%;
     color: white;
-    padding: 12px;
+    padding-top: 10%;
     text-align: center;
     cursor: pointer;
 }
@@ -621,13 +645,10 @@ details > summary::marker {
 .home-filter-subcat{
     display: block;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    margin-left: 2%;
-    margin-right: 2%;
+    font-size: 100%;
     color: white;
     text-decoration: none;
     text-align: left;
-    background-color: #ffffff42;
     cursor: pointer;
 }
 
