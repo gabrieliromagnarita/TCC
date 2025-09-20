@@ -28,9 +28,32 @@ def login_user():
     data = response.json()
 
     if 'idToken' in data:
-        if email == "gabihromagna@gmail.com":
-            return "ADM"
+        session['user'] = email
         return "Log-in bem sucedido!"
     else:
         erro = data.get('error', {}).get('message', 'Erro desconhecido')
         return f'Erro ao logar: {erro}', 401
+    
+@login_bp.route('/recuperar-senha', methods=['POST'])
+def recuperar_senha():
+    data = request.get_json()
+    email = data.get('email')
+
+    if not email:
+        return 'E-mail não informado', 400
+    
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key={FIREBASE_API_KEY}"
+
+    payload = {
+        "requestType": "PASSWORD_RESET",
+        "email": email
+    }
+
+    response = requests.post(url, json=payload)
+    res_data = response.json()
+
+    if 'email' in res_data:
+        return "E-mail de recuperação enviado com sucesso!"
+    else:
+        erro = res_data.get("error", {}).get("message", "Erro desconhecido")
+        return f"Erro ao enviar e-mail de recuperação: {erro}", 400

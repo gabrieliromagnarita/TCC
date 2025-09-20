@@ -9,6 +9,8 @@ PASTA_UPLOADS = 'TCC/static/uploads'
 
 @admin_bp.route('/admin-render')
 def admin():
+    if session.get('user') != 'gabihromagna@gmail.com':
+        abort(403)
     return render_template('admin.html')
 
 @admin_bp.route('/admin', methods=['GET', 'POST'])
@@ -16,7 +18,9 @@ def admin_actions():
     print("[DEBUG] Rota /admin acessada.")
     if request.method == 'POST':
         print("[DEBUG] Requisição POST recebida.")
-        acao = request.form['acao-admin']
+        """ novo """
+        #acao = request.form['acao-admin']
+        acao = request.form.get('acao-admin')
         codigo = request.form['codigo-admin'].strip()
         nome = request.form.get('nome-admin')
         marca = request.form.get('marca-admin')

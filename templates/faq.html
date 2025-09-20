@@ -18,6 +18,9 @@
             <a href="/historia-render" class="header-text historia">HISTÓRIA</a> 
             <a href="/home-render" class="header-text home">HOME</a> 
             <a href="/faq-render" class="header-text faq">FAQ</a>
+            {% if session.get('user') == 'gabihromagna@gmail.com' %}
+                <a href="/admin-render" class="header-text-adm admin">ADM</a>
+            {% endif %}
         </div>
         <div id="content-faq">
             <div id="form-faq">

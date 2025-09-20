@@ -18,6 +18,9 @@
             <a href="/historia-render" class="header-text historia">HISTÓRIA</a> 
             <a href="/home-render" class="header-text home">HOME</a> 
             <a href="/faq-render" class="header-text faq">FAQ</a>
+            {% if session.get('user') == 'gabihromagna@gmail.com' %}
+                <a href="/admin-render" class="header-text-adm admin">ADM</a>
+            {% endif %}
         </div>
         <div id="content-login">
             <form name="form-login" method="post" action="/login" id="form-login">
@@ -29,7 +32,7 @@
                     <div class="form-group-login">
                         <label>Senha:</label>
                         <input type="password" name="senha-login" class="login-input senha" required>
-                        <a href="" class="recuperar-senha-login">esqueci minha senha</a>
+                        <a href="#" class="recuperar-senha-login" onclick="recuperarSenha()">esqueci minha senha</a>
                     </div>
                 </div>
                 <div id="content-bottom">
@@ -47,3 +50,30 @@
         </div>
     </BODY>
 </HTML>
+
+<script>
+function recuperarSenha() {
+    const email = document.querySelector('input[name="email-login"]').value;
+
+    if (!email) {
+        alert("Por favor, preencha o e-mail antes de recuperar a senha.");
+        return;
+    }
+
+    fetch("/recuperar-senha", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email })
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data);
+    })
+    .catch(error => {
+        console.error("Erro ao enviar e-mail de recuperação:", error);
+        alert("Erro ao enviar e-mail de recuperação. Tente novamente.");
+    });
+}
+</script>
