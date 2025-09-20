@@ -88,6 +88,7 @@
             <div id="right-column-home">
                 {% if produtos %}
                     {% for i in produtos %}
+                    <a href="/produto/{{ i.id }}" class="produto-link">
                         <div class="produtos-grid-home">
                             <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img-home">
                             <p class="produto-details-home">{{ i.nome }}</p>
@@ -95,6 +96,7 @@
                             
                             <button class="btn-comprar-home">COMPRAR</button>
                         </div>
+                    </a>
                     {% endfor %}
                     {% set num_colunas = 5 %}
                     {% set produtos_cont = produtos|length %}

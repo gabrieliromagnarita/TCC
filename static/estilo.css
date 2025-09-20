@@ -655,3 +655,9 @@ details > p{
 .home-filter-subcat:hover{
     font-weight: bold;
 }
+
+.produto-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
