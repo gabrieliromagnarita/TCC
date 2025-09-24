@@ -1,27 +1,8 @@
-<HTML lang="pt-br">
-    <HEAD>
-        <title>log-in</title>
-        <link rel="stylesheet" href="static/estilo.css" type="text/css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=1240,shrink-to-fit=no">
-    </HEAD>
-    <BODY>
-        <div id="header">
-            <img src="static/imagens/logo-face-a-face.png" id="logo-face-a-face">
-            <div id="icons">
-                <img src="static/imagens/search-bar-icon.png" id="search-bar-icon">
-                <a href="/cadastro-render"><img src="static/imagens/user-icon.png" id="user-icon"></a>
-                <a href=""><img src="static/imagens/shopping-cart-icon.png" id="shopping-cart-icon"></a>
-            </div>
-        </div>
-        <div id="sub-header">
-            <a href="/historia-render" class="header-text historia">HISTÓRIA</a> 
-            <a href="/home-render" class="header-text home">HOME</a> 
-            <a href="/faq-render" class="header-text faq">FAQ</a>
-            {% if session.get('user') == 'gabihromagna@gmail.com' %}
-                <a href="/admin-render" class="header-text-adm admin">ADM</a>
-            {% endif %}
-        </div>
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
         <div id="content-login">
             <form name="form-login" method="post" action="/login" id="form-login">
                 <div class="form-column-login">
@@ -48,32 +29,32 @@
                 </div>
             </form>
         </div>
-    </BODY>
-</HTML>
+{% endblock %}
+{% block scripts %}
+    <script>
+    function recuperarSenha() {
+        const email = document.querySelector('input[name="email-login"]').value;
 
-<script>
-function recuperarSenha() {
-    const email = document.querySelector('input[name="email-login"]').value;
+        if (!email) {
+            alert("Por favor, preencha o e-mail antes de recuperar a senha.");
+            return;
+        }
 
-    if (!email) {
-        alert("Por favor, preencha o e-mail antes de recuperar a senha.");
-        return;
+        fetch("/recuperar-senha", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: email })
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+        })
+        .catch(error => {
+            console.error("Erro ao enviar e-mail de recuperação:", error);
+            alert("Erro ao enviar e-mail de recuperação. Tente novamente.");
+        });
     }
-
-    fetch("/recuperar-senha", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: email })
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert(data);
-    })
-    .catch(error => {
-        console.error("Erro ao enviar e-mail de recuperação:", error);
-        alert("Erro ao enviar e-mail de recuperação. Tente novamente.");
-    });
-}
-</script>
+    </script>
+{% endblock %}

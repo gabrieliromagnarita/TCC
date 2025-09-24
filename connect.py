@@ -15,9 +15,5 @@ else:
 
 db = firestore.client()
 
-""" cred = credentials.Certificate("chaveAcesso/loja-face-a-face-firebase-adminsdk-fbsvc-6acafc7c88.json")
-app = firebase_admin.initialize_app(cred)
- """
-
 print("Banco conectado!")
 

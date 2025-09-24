@@ -1,5 +1,5 @@
 from connect import db
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session, abort
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
 import requests
@@ -29,7 +29,10 @@ def login_user():
 
     if 'idToken' in data:
         session['user'] = email
-        return "Log-in bem sucedido!"
+        if email == 'gabihromagna@gmail.com':
+            return redirect(url_for('admin.admin'))
+        else:
+            return redirect(url_for('home.home'))
     else:
         erro = data.get('error', {}).get('message', 'Erro desconhecido')
         return f'Erro ao logar: {erro}', 401

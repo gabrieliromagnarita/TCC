@@ -1,27 +1,8 @@
-<HTML lang="pt-br">
-    <HEAD>
-        <title>cadastre-se</title>
-        <link rel="stylesheet" href="static/estilo.css" type="text/css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </HEAD>
-    <BODY>
-        <div id="header">
-            <img src="static/imagens/logo-face-a-face.png" id="logo-face-a-face">
-            <div id="icons">
-                <img src="static/imagens/search-bar-icon.png" id="search-bar-icon">
-                <a href="/cadastro-render"><img src="static/imagens/user-icon.png" id="user-icon"></a>
-                <a href=""><img src="static/imagens/shopping-cart-icon.png" id="shopping-cart-icon"></a>
-            </div>
-        </div>
-        <div id="sub-header">
-            <a href="/historia-render" class="header-text historia">HISTÓRIA</a> 
-            <a href="/home-render" class="header-text home">HOME</a> 
-            <a href="/faq-render" class="header-text faq">FAQ</a>
-            {% if session.get('user') == 'gabihromagna@gmail.com' %}
-                <a href="/admin-render" class="header-text-adm admin">ADM</a>
-            {% endif %}
-        </div>
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
         <div id="content-cadastro">
             <form name="form-cadastro" method="post" action="/cadastrar" id="form-cadastro">
                 <div class="form-row-cadastro">
@@ -72,5 +53,4 @@
                 
             </form>
         </div>
-    </BODY>
-</HTML>
+{% endblock %}

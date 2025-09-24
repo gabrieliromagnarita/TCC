@@ -1,161 +1,143 @@
-<HTML lang="pt-br">
-    <HEAD>
-        <title>home</title>
-        <link rel="stylesheet" href="static/estilo.css" type="text/css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=1240,shrink-to-fit=no">
-    </HEAD>
-    <BODY>
-        <div id="header">
-            <img src="static/imagens/logo-face-a-face.png" id="logo-face-a-face">
-            <div id="icons">
-                <img src="static/imagens/search-bar-icon.png" id="search-bar-icon">
-                <a href="/cadastro-render"><img src="static/imagens/user-icon.png" id="user-icon"></a>
-                <a href=""><img src="static/imagens/shopping-cart-icon.png" id="shopping-cart-icon"></a>
-            </div>
-        </div>
-        <div id="sub-header">
-            <a href="/historia-render" class="header-text historia">HISTÓRIA</a> 
-            <a href="/home-render" class="header-text home">HOME</a> 
-            <a href="/faq-render" class="header-text faq">FAQ</a>
-            {% if session.get('user') == 'gabihromagna@gmail.com' %}
-                <a href="/admin-render" class="header-text-adm admin">ADM</a>
-            {% endif %}
-        </div>
-        <div id="content-home">
-            <div id="left-column-home">
-                <details>
-                    <summary data-categoria="cabelos" class="home-filter-cat">CABELOS</summary>
-                    <p><a href="#"  data-categoria="cachos" class="home-filter-subcat">CABELOS CACHEADOS</a></p>
-                    <p><a href="#"  data-categoria="lisos" class="home-filter-subcat">CABELOS LISOS</a></p>
-                    <p><a href="#"  data-categoria="vitamina" class="home-filter-subcat">VITAMINA</a></p>
-                    <p><a href="#"  data-categoria="shampoo" class="home-filter-subcat">SHAMPOO</a></p>
-                    <p><a href="#"  data-categoria="condicionador" class="home-filter-subcat">CONDICIONADOR</a></p>
-                    <p><a href="#"  data-categoria="óleo" class="home-filter-subcat">ÓLEO</a></p>
-                    <p><a href="#"  data-categoria="máscara" class="home-filter-subcat">MÁSCARA</a></p>
-                </details>
-                <details>
-                    <summary data-categoria="unhas" class="home-filter-cat">UNHAS</summary>
-                    <p><a href="#"  data-categoria="esmalte" class="home-filter-subcat">ESMALTE</a></p>
-                    <p><a href="#"  data-categoria="ferramentas" class="home-filter-subcat">FERRAMENTAS</a></p>
-                    <p><a href="#"  data-categoria="fortificante" class="home-filter-subcat">FORTIFICANTE</a></p>
-                    <p><a href="#"  data-categoria="amolecedor" class="home-filter-subcat">AMOLECEDOR DE CUTÍCULA</a></p>
-                    <p><a href="#"  data-categoria="removedor" class="home-filter-subcat">REMOVEDOR</a></p>
-                    <p><a href="#"  data-categoria="postiça" class="home-filter-subcat">UNHA POSTIÇA</a></p>
-                    <p><a href="#"  data-categoria="unha gel" class="home-filter-subcat">GEL</a></p>
-                </details>
-                <details>
-                    <summary data-categoria="maquiagem" class="home-filter-cat">MAQUIAGEM</summary>
-                    <p><a href="#"  data-categoria="batom" class="home-filter-subcat">BATOM</a></p>
-                    <p><a href="#" data-categoria="base" class="home-filter-subcat">BASE</a></p>
-                    <p><a href="#" data-categoria="corretivo" class="home-filter-subcat">CORRETIVO</a></p>
-                    <p><a href="#" data-categoria="sombra" class="home-filter-subcat">SOMBRA</a></p>
-                    <p><a href="#" data-categoria="pó" class="home-filter-subcat">PÓ</a></p>
-                    <p><a href="#" data-categoria="lápis" class="home-filter-subcat">LÁPIS/DELINEADORES</a></p>
-                    <p><a href="#" data-categoria="rímel" class="home-filter-subcat">RÍMEL</a></p>
-                    <p><a href="#" data-categoria="blush" class="home-filter-subcat">BLUSH</a></p>
-                    <p><a href="#" data-categoria="demaquilante" class="home-filter-subcat">DEMAQUILANTE</a></p>
-                    <p><a href="#" data-categoria="pincel" class="home-filter-subcat">PINCEL</a></p>
-                </details>
-                <details>
-                    <summary data-categoria="skincare" class="home-filter-cat">SKINCARE</summary>
-                    <p><a href="#"  data-categoria="hidratante facial" class="home-filter-subcat">HIDRATANTE FACIAL</a></p>
-                    <p><a href="#"  data-categoria="antiacne" class="home-filter-subcat">ANTIACNE</a></p>
-                    <p><a href="#"  data-categoria="clareamento" class="home-filter-subcat">CLAREAMENTO</a></p>
-                    <p><a href="#"  data-categoria="esfoliante facial" class="home-filter-subcat">ESFOLIANTE FACIAL</a></p>
-                    <p><a href="#"  data-categoria="gel facial" class="home-filter-subcat">GEL FACIAL</a></p>
-                    <p><a href="#"  data-categoria="lip care" class="home-filter-subcat">LIP CARE</a></p>
-                    <p><a href="#"  data-categoria="sabonete facial" class="home-filter-subcat">SABONETE FACIAL</a></p>
-                    <p><a href="#"  data-categoria="protetor solar facial" class="home-filter-subcat">PROTETOR SOLAR FACIAL</a></p>
-                </details>
-                <details>
-                    <summary data-categoria="corpo" class="home-filter-cat">CORPO</summary>
-                    <p><a href="#"  data-categoria="hidratante corporal" class="home-filter-subcat">HIDRATANTE</a></p>
-                    <p><a href="#"  data-categoria="esfoliante corporal" class="home-filter-subcat">ESFOLIANTE</a></p>
-                    <p><a href="#"  data-categoria="bronzeador" class="home-filter-subcat">AUTO-BRONZEADOR</a></p>
-                    <p><a href="#"  data-categoria="perfume" class="home-filter-subcat">PERFUMES</a></p>
-                    <p><a href="#"  data-categoria="protetor solar corporal" class="home-filter-subcat">PROTETOR SOLAR</a></p>
-                    <p><a href="#"  data-categoria="sabonete corporal" class="home-filter-subcat">SABONETE</a></p>
-                </details>
-                <details>
-                    <summary data-categoria="acessórios" class="home-filter-cat">ACESSÓRIOS</summary>
-                    <p><a href="#"  data-categoria="necessaire" class="home-filter-subcat">NECESSAIRE</a></p>
-                    <p><a href="#"  data-categoria="pote" class="home-filter-subcat">POTE</a></p>
-                    <p><a href="#"  data-categoria="touca" class="home-filter-subcat">TOUCA</a></p>
-                    <p><a href="#"  data-categoria="kit" class="home-filter-subcat">KIT</a></p>
-                </details>
-            </div>
-            <div id="right-column-home">
-                {% if produtos %}
-                    {% for i in produtos %}
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div id="content-home">
+    <div id="left-column-home">
+        <details>
+            <summary data-categoria="cabelos" class="home-filter-cat">CABELOS</summary>
+            <p><a href="#"  data-categoria="cachos" class="home-filter-subcat">CABELOS CACHEADOS</a></p>
+            <p><a href="#"  data-categoria="lisos" class="home-filter-subcat">CABELOS LISOS</a></p>
+            <p><a href="#"  data-categoria="vitamina" class="home-filter-subcat">VITAMINA</a></p>
+            <p><a href="#"  data-categoria="shampoo" class="home-filter-subcat">SHAMPOO</a></p>
+            <p><a href="#"  data-categoria="condicionador" class="home-filter-subcat">CONDICIONADOR</a></p>
+            <p><a href="#"  data-categoria="óleo" class="home-filter-subcat">ÓLEO</a></p>
+            <p><a href="#"  data-categoria="máscara" class="home-filter-subcat">MÁSCARA</a></p>
+        </details>
+        <details>
+            <summary data-categoria="unhas" class="home-filter-cat">UNHAS</summary>
+            <p><a href="#"  data-categoria="esmalte" class="home-filter-subcat">ESMALTE</a></p>
+            <p><a href="#"  data-categoria="ferramentas" class="home-filter-subcat">FERRAMENTAS</a></p>
+            <p><a href="#"  data-categoria="fortificante" class="home-filter-subcat">FORTIFICANTE</a></p>
+            <p><a href="#"  data-categoria="amolecedor" class="home-filter-subcat">AMOLECEDOR DE CUTÍCULA</a></p>
+            <p><a href="#"  data-categoria="removedor" class="home-filter-subcat">REMOVEDOR</a></p>
+            <p><a href="#"  data-categoria="postiça" class="home-filter-subcat">UNHA POSTIÇA</a></p>
+            <p><a href="#"  data-categoria="unha gel" class="home-filter-subcat">GEL</a></p>
+        </details>
+        <details>
+            <summary data-categoria="maquiagem" class="home-filter-cat">MAQUIAGEM</summary>
+            <p><a href="#"  data-categoria="batom" class="home-filter-subcat">BATOM</a></p>
+            <p><a href="#" data-categoria="base" class="home-filter-subcat">BASE</a></p>
+            <p><a href="#" data-categoria="corretivo" class="home-filter-subcat">CORRETIVO</a></p>
+            <p><a href="#" data-categoria="sombra" class="home-filter-subcat">SOMBRA</a></p>
+            <p><a href="#" data-categoria="pó" class="home-filter-subcat">PÓ</a></p>
+            <p><a href="#" data-categoria="lápis" class="home-filter-subcat">LÁPIS/DELINEADORES</a></p>
+            <p><a href="#" data-categoria="rímel" class="home-filter-subcat">RÍMEL</a></p>
+            <p><a href="#" data-categoria="blush" class="home-filter-subcat">BLUSH</a></p>
+            <p><a href="#" data-categoria="demaquilante" class="home-filter-subcat">DEMAQUILANTE</a></p>
+            <p><a href="#" data-categoria="pincel" class="home-filter-subcat">PINCEL</a></p>
+        </details>
+        <details>
+            <summary data-categoria="skincare" class="home-filter-cat">SKINCARE</summary>
+            <p><a href="#"  data-categoria="hidratante facial" class="home-filter-subcat">HIDRATANTE FACIAL</a></p>
+            <p><a href="#"  data-categoria="antiacne" class="home-filter-subcat">ANTIACNE</a></p>
+            <p><a href="#"  data-categoria="clareamento" class="home-filter-subcat">CLAREAMENTO</a></p>
+            <p><a href="#"  data-categoria="esfoliante facial" class="home-filter-subcat">ESFOLIANTE FACIAL</a></p>
+            <p><a href="#"  data-categoria="gel facial" class="home-filter-subcat">GEL FACIAL</a></p>
+            <p><a href="#"  data-categoria="lip care" class="home-filter-subcat">LIP CARE</a></p>
+            <p><a href="#"  data-categoria="sabonete facial" class="home-filter-subcat">SABONETE FACIAL</a></p>
+            <p><a href="#"  data-categoria="protetor solar facial" class="home-filter-subcat">PROTETOR SOLAR FACIAL</a></p>
+        </details>
+        <details>
+            <summary data-categoria="corpo" class="home-filter-cat">CORPO</summary>
+            <p><a href="#"  data-categoria="hidratante corporal" class="home-filter-subcat">HIDRATANTE</a></p>
+            <p><a href="#"  data-categoria="esfoliante corporal" class="home-filter-subcat">ESFOLIANTE</a></p>
+            <p><a href="#"  data-categoria="bronzeador" class="home-filter-subcat">AUTO-BRONZEADOR</a></p>
+            <p><a href="#"  data-categoria="perfume" class="home-filter-subcat">PERFUMES</a></p>
+            <p><a href="#"  data-categoria="protetor solar corporal" class="home-filter-subcat">PROTETOR SOLAR</a></p>
+            <p><a href="#"  data-categoria="sabonete corporal" class="home-filter-subcat">SABONETE</a></p>
+        </details>
+        <details>
+            <summary data-categoria="acessórios" class="home-filter-cat">ACESSÓRIOS</summary>
+            <p><a href="#"  data-categoria="necessaire" class="home-filter-subcat">NECESSAIRE</a></p>
+            <p><a href="#"  data-categoria="pote" class="home-filter-subcat">POTE</a></p>
+            <p><a href="#"  data-categoria="touca" class="home-filter-subcat">TOUCA</a></p>
+            <p><a href="#"  data-categoria="kit" class="home-filter-subcat">KIT</a></p>
+        </details>
+    </div>
+    <div id="right-column-home">
+        {% if produtos %}
+            {% for i in produtos %}
+                <div class="produtos-grid-home">
                     <a href="/produto/{{ i.id }}" class="produto-link">
-                        <div class="produtos-grid-home">
-                            <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img-home">
-                            <p class="produto-details-home">{{ i.nome }}</p>
-                            <p class="produto-details-home">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
-                            
-                            <button class="btn-comprar-home">COMPRAR</button>
-                        </div>
+                        <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img-home">
+                        <p class="produto-details-home">{{ i.nome }}</p>
+                        <p class="produto-details-home">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
+                        
+                        <button class="btn-comprar-home">COMPRAR</button>
                     </a>
-                    {% endfor %}
-                    {% set num_colunas = 5 %}
-                    {% set produtos_cont = produtos|length %}
-                    {% set resto = produtos_cont % num_colunas %}
-                    {% set fillers = (num_colunas - resto) if resto != 0 else 0%}
-                    {% for _ in range(fillers) %}
-                        <div class="produtos-grid-home empty-slot"></div>
-                    {% endfor %}
-                {% else %}
-                    <p>Nenhum produto encontrado.</p>
-                {% endif %}
-            </div>
-        </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(){
-                const allDetails = document.querySelectorAll("details")
-        
-                allDetails.forEach((detail) => {
-                    const summary = detail.querySelector("summary");
-                    summary.addEventListener("click", e => {
+                </div>
+            {% endfor %}
+            {% set num_colunas = 5 %}
+            {% set produtos_cont = produtos|length %}
+            {% set resto = produtos_cont % num_colunas %}
+            {% set fillers = (num_colunas - resto) if resto != 0 else 0%}
+            {% for _ in range(fillers) %}
+                <div class="produtos-grid-home empty-slot"></div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum produto encontrado.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const allDetails = document.querySelectorAll("details")
+
+            allDetails.forEach((detail) => {
+                const summary = detail.querySelector("summary");
+                summary.addEventListener("click", e => {
+                    e.preventDefault();
+
+                    allDetails.forEach(d => {if (d !== detail) d.removeAttribute("open");});
+                    detail.setAttribute("open", "");
+
+                    const cat = summary.getAttribute("data-categoria");
+                    if (cat) {
+                        window.location.href = `/home-render?categoria=${encodeURIComponent(cat)}`;
+                    }
+                });
+                detail.querySelectorAll("a[data-categoria]").forEach(link => {
+                    link.addEventListener("click", e => {
                         e.preventDefault();
-        
-                        allDetails.forEach(d => {if (d !== detail) d.removeAttribute("open");});
-                        detail.setAttribute("open", "");
-        
-                        const cat = summary.getAttribute("data-categoria");
-                        if (cat) {
-                            window.location.href = `/home-render?categoria=${encodeURIComponent(cat)}`;
+
+                        const sub = link.getAttribute("data-categoria");
+                        if (sub){
+                            window.location.href = `/home-render?categoria=${encodeURIComponent(sub)}`;
                         }
                     });
-                    detail.querySelectorAll("a[data-categoria]").forEach(link => {
-                        link.addEventListener("click", e => {
-                            e.preventDefault();
-        
-                            const sub = link.getAttribute("data-categoria");
-                            if (sub){
-                                window.location.href = `/home-render?categoria=${encodeURIComponent(sub)}`;
-                            }
-                        });
-                    });
-                });
-                const urlParams = new URLSearchParams(window.location.search);
-                const catAtual = urlParams.get("categoria");
-                allDetails.forEach(detail => {
-                    const sum = detail.querySelector("summary");
-                    const sumCat = sum ? sum.getAttribute("data-categoria"): null;
-                    if (sumCat === catAtual){
-                        detail.setAttribute("open", "");
-                    }
-                    else{
-                        const links = detail.querySelectorAll("a[data-categoria]");
-                        links.forEach(link => {
-                            if (link.getAttribute("data-categoria") === catAtual){
-                                detail.setAttribute("open", "")
-                            }
-                        })
-                    }
                 });
             });
-        </script>
-    </BODY>
-</HTML>
+            const urlParams = new URLSearchParams(window.location.search);
+            const catAtual = urlParams.get("categoria");
+            allDetails.forEach(detail => {
+                const sum = detail.querySelector("summary");
+                const sumCat = sum ? sum.getAttribute("data-categoria"): null;
+                if (sumCat === catAtual){
+                    detail.setAttribute("open", "");
+                }
+                else{
+                    const links = detail.querySelectorAll("a[data-categoria]");
+                    links.forEach(link => {
+                        if (link.getAttribute("data-categoria") === catAtual){
+                            detail.setAttribute("open", "")
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+{% endblock %}

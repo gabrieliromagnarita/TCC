@@ -6,8 +6,13 @@ from routes.rotas import rotas_bp
 from routes.historia import historia_bp
 from routes.faq import faq_bp
 from routes.home import home_bp
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 app.register_blueprint(cadastro_bp)
 app.register_blueprint(login_bp)

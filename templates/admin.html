@@ -1,27 +1,8 @@
-<HTML lang="pt-br">
-    <HEAD>
-        <title>administrador</title>
-        <link rel="stylesheet" href="static/estilo.css" type="text/css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=1240,shrink-to-fit=no">
-    </HEAD>
-    <BODY>
-        <div id="header">
-            <img src="static/imagens/logo-face-a-face.png" id="logo-face-a-face">
-            <div id="icons">
-                <img src="static/imagens/search-bar-icon.png" id="search-bar-icon">
-                <a href="/cadastro-render"><img src="static/imagens/user-icon.png" id="user-icon"></a>
-                <a href=""><img src="static/imagens/shopping-cart-icon.png" id="shopping-cart-icon"></a>
-            </div>
-        </div>
-        <div id="sub-header">
-            <a href="/historia-render" class="header-text-adm historia">HISTÓRIA</a> 
-            <a href="/home-render" class="header-text-adm home">HOME</a> 
-            <a href="/faq-render" class="header-text-adm faq">FAQ</a>
-            {% if session.get('user') == 'gabihromagna@gmail.com' %}
-                <a href="/admin-render" class="header-text-adm admin">ADM</a>
-            {% endif %}
-        </div>
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
         <div id="content-admin">
             <form name="form-admin" method="post" action="/admin" id="form-admin" enctype="multipart/form-data">
                 
@@ -59,29 +40,39 @@
             </form>
         </div>
     </BODY>
-</HTML>
+{% endblock %}
 
+
+{% block scripts %}
 <script>
-function previewImage(input, previewId) {
-    const preview = document.getElementById(previewId);
-    const file = input.files[0];
-    const reader = new FileReader();
+    // Definindo no escopo global diretamente
+    function previewImage(input, previewId) {
+        const preview = document.getElementById(previewId);
+        const file = input.files[0];
 
-    reader.onload = function (e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-    };
+        if (!file) return;
 
-    if (file) {
-        reader.readAsDataURL(file);
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+
+        if (file.type.startsWith('image/')) {
+            reader.readAsDataURL(file);
+        } else {
+            alert("Por favor, selecione um arquivo de imagem válido.");
+        }
     }
-}
 
-function confirmarDelete(){
-    const codigo = document.getElementById('codigo-admin').value.trim();
-    if(!codigo){
-        return false;
+    function confirmarDelete() {
+        const codigo = document.getElementById('codigo-admin').value.trim();
+        if (!codigo) {
+            alert("Informe o código para deletar.");
+            return false;
+        }
+        return confirm("Deseja deletar esse produto?");
     }
-    return confirm("Deseja deletar esse produto?")
-}
 </script>
+{% endblock %}
