@@ -11,9 +11,19 @@ def home():
 
     if categoria:
         produtos_ref = db.collection('produtos')
-        produtos = [doc.to_dict() for doc in produtos_ref.where('categorias', 'array_contains', categoria.lower()).stream()]
+        for doc in produtos_ref.where('categorias', 'array_contains', categoria.lower()).stream():
+            produto = doc.to_dict()
+            produto['id'] = doc.id
+            produtos.append(produto)
+
+        """ produtos = [doc.to_dict() for doc in produtos_ref.where('categorias', 'array_contains', categoria.lower()).stream()] """
     else:
-        produtos = [doc.to_dict() for doc in db.collection('produtos').stream()]
+        for doc in db.collection('produtos').stream():
+            produto = doc.to_dict()
+            produto['id'] = doc.id
+            produtos.append(produto)
+
+        """ produtos = [doc.to_dict() for doc in db.collection('produtos').stream()] """
     return render_template('home.html', produtos=produtos, categoria_atual=categoria)
 
 @home_bp.route('/produto/<id>')

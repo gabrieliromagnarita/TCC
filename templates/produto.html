@@ -3,11 +3,13 @@
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
-        <div id="content-produto">
-            <img src="{{ url_for('static', filename=produto.foto1) }}" style="width: 300px; height: auto;">
-            <h1>{{ produto.nome }}</h1>
-            <p><strong>Preço:</strong> R$ {{ "%.2f"|format(produto.preco) }}</p>
-            <p><strong>Descrição:</strong></p>
-            <p>{{ produto.descricao }}</p>
-        </div>
+<div id="content-produto">
+    <img src="{{ url_for('static', filename=produto.foto1) }}" style="width: 300px; height: auto;">
+    <h1>{{ produto.nome }}</h1>
+    <p><strong>Preço:</strong> R$ {{ "%.2f"|format(produto.preco) }}</p>
+    <p><strong>Descrição:</strong></p>
+    <p>{{ produto.descricao }}</p>
+
+    
+</div>
 {% endblock %}
