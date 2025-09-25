@@ -651,3 +651,61 @@ details > p{
 .home-filter-subcat:hover{
     font-weight: bold;
 }
+
+/*********************** corpo produtos  ***********************/
+#content-produto{
+    /* padding-top: 2%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    background-color: aqua;
+}
+
+#div-top-produto{
+    background-color: #b13333;
+    height: 10%;
+    width: 100%;
+    display: flex;
+}
+
+#div-bottom-produto{
+    background-color: #4cb133;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-div-produto{
+    background-color: blueviolet;
+    width: 40%;
+    height: 100%;
+}
+
+.infos-div-produto{
+    background-color: rgb(43, 205, 226);
+    height: 100%;
+    width: 40%;
+}
+
+.offer-div-produto{
+    background-color: rgb(226, 141, 43);
+    height: 80%;
+    width: 20%;
+}
+
+.desc-div-produto{
+    background-color: rgb(159, 43, 226);
+}
+
+.rec-div-produto{
+    background-color: rgb(46, 43, 226);
+    display: flex;
+}
+
+.img-produto{
+    height: 100%;
+    width: 100%;
+}

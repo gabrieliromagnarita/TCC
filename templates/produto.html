@@ -4,12 +4,42 @@
 
 {% block content %}
 <div id="content-produto">
-    <img src="{{ url_for('static', filename=produto.foto1) }}" style="width: 300px; height: auto;">
-    <h1>{{ produto.nome }}</h1>
-    <p><strong>Preço:</strong> R$ {{ "%.2f"|format(produto.preco) }}</p>
-    <p><strong>Descrição:</strong></p>
-    <p>{{ produto.descricao }}</p>
+    <div id="div-top-produto">
+        <div class="img-div-produto">
+            <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto">
+        </div>
+        <div class="infos-div-produto">
+            <h1>{{ produto.nome }}</h1>
+            <p><strong>Preço:</strong> R$ {{ "%.2f"|format(produto.preco) }}</p>
+            <p><strong>Descrição:</strong></p>
+            <button class="btn-comprar-home">COMPRAR</button>
+        </div>
+        <div class="offer-div-produto">
+            <h2>Mais vendidos</h2>
+            {% for mv in mais_vendidos %}
+                <a href="{{ url_for('produto.produto', id=mv.id) }}">
+                    <img src="{{ url_for('static', filename=mv.foto1) }}">
+                    <p>{{ mv.nome }}</p>
+                    <p>R$ {{ "%.2f"|format(mv.preco) }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="div-bottom-produto">
+        <div class="desc-div-produto">
+            <p>{{ produto.descricao }}</p>
+        </div>
 
-    
+        <div class="rec-div-produto">
+        {% for rec in recomendados %}
+            <a href="{{ url_for('produto.produto', id=rec.id) }}">
+                <img src="{{ url_for('static', filename=rec.foto1) }}">
+                <p>{{ rec.nome }}</p>
+                <p>R$ {{ "%.2f"|format(rec.preco) }}</p>
+            </a>
+        {% endfor %}
+        </div>
+         
+    </div> 
 </div>
 {% endblock %}
