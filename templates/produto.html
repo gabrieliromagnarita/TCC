@@ -9,10 +9,9 @@
             <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto">
         </div>
         <div class="infos-div-produto">
-            <h1>{{ produto.nome }}</h1>
-            <p><strong>Preço:</strong> R$ {{ "%.2f"|format(produto.preco) }}</p>
-            <p><strong>Descrição:</strong></p>
-            <button class="btn-comprar-home">COMPRAR</button>
+            <p class="nome-produto">{{ produto.nome }}</p>
+            <p class="preco-produto">R$ {{ "%.2f"|format(produto.preco) }}</p>
+            <button class="btn-comprar-produto">COMPRAR</button>
         </div>
         <div class="offer-div-produto">
             <h2>Mais vendidos</h2>
