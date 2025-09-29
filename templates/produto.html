@@ -6,13 +6,15 @@
 <div id="content-produto">
     <div id="div-top-produto">
         <div class="img-div-produto">
-            <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto">
+            <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto" id="main-produto">
         </div>
         <div class="infos-div-produto">
             <div class="infos-div-left">
                 <p class="nome-produto">{{ produto.nome }}</p>
                 <p class="preco-produto">R$ {{ "%.2f"|format(produto.preco) }}</p>
                 <button class="btn-comprar-produto">COMPRAR</button>
+                <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto-view">
+                <img src="{{ url_for('static', filename=produto.foto2) }}" class="img-produto-view">
             </div>
             <div class="infos-div-right">
                 <img src="{{ url_for('static', filename='imagens/shopping-cart-add-icon.png') }}" class="shopping-cart-add">
@@ -24,7 +26,7 @@
             </div>
             {% for mv in mais_vendidos %}
                 <a href="{{ url_for('produto.produto', id=mv.id) }}">
-                    <img src="{{ url_for('static', filename=mv.foto1) }}">
+                    <img src="{{ url_for('static', filename=mv.foto1) }}" class="img-offer">
                     <p>{{ mv.nome }}</p>
                     <p>R$ {{ "%.2f"|format(mv.preco) }}</p>
                 </a>
@@ -38,14 +40,72 @@
 
         <div class="rec-div-produto">
         {% for rec in recomendados %}
-            <a href="{{ url_for('produto.produto', id=rec.id) }}">
-                <img src="{{ url_for('static', filename=rec.foto1) }}">
-                <p>{{ rec.nome }}</p>
-                <p>R$ {{ "%.2f"|format(rec.preco) }}</p>
+            <a href="{{ url_for('produto.produto', id=rec.id) }}" class="produto-link-rec">
+                <img src="{{ url_for('static', filename=rec.foto1) }}" class="img-rec">
+                <p class="produto-details-rec">{{ rec.nome }}</p>
+                <p class="produto-details-rec">R$ {{ "%.2f"|format(rec.preco) }}</p>
             </a>
         {% endfor %}
         </div>
-         
-    </div> 
+    </div>
+    <!-- novo -->
+    <div id="img-produto-popup" class="img-produto-pop-up">
+        <span class="close">&times;</span>
+        <img class="pop-up-img" id="pop-up-img">
+        <div class="pop-up-btns">
+            <button id="ant-btn">&#10094;</button>
+            <button id="prox-btn">&#10095;</button>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const mainImg = document.getElementById("main-produto");
+        const replacements = document.querySelectorAll(".img-produto-view");
+        const popup = document.getElementById("img-produto-popup");
+        const popupImg = document.getElementById("pop-up-img");
+        const closeBtn = document.querySelector(".close");
+        const antBtn = document.getElementById("ant-btn");
+        const proxBtn = document.getElementById("prox-btn");
+
+        let images = [];
+        const updateImages = () => {
+            images = [mainImg.src, ...Array.from(replacements).map(t => t.src)];
+        };
+        updateImages();
+
+        let currentIndex = 0;
+
+        replacements.forEach(replacement => {
+            replacement.addEventListener("click", () =>{
+                mainImg.src = replacement.src;
+            });
+        });
+
+        mainImg.addEventListener("click", () => {
+            currentIndex = images.indexOf(mainImg.src);
+            popup.style.display = "block";
+            popupImg.src = images[currentIndex];
+        });
+
+        closeBtn.addEventListener("click", () => {
+            popup.style.display = "none";
+        });
+
+        antBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            popupImg.src = images[currentIndex];
+        });
+
+        proxBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            popupImg.src = images[currentIndex];
+        });
+
+        popup.addEventListener("click", (e) => {
+            if (e.target === popup) popup.style.display = "none";
+        });
+    });
+</script>
 {% endblock %}
