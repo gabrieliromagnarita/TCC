@@ -9,12 +9,19 @@
             <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto">
         </div>
         <div class="infos-div-produto">
-            <p class="nome-produto">{{ produto.nome }}</p>
-            <p class="preco-produto">R$ {{ "%.2f"|format(produto.preco) }}</p>
-            <button class="btn-comprar-produto">COMPRAR</button>
+            <div class="infos-div-left">
+                <p class="nome-produto">{{ produto.nome }}</p>
+                <p class="preco-produto">R$ {{ "%.2f"|format(produto.preco) }}</p>
+                <button class="btn-comprar-produto">COMPRAR</button>
+            </div>
+            <div class="infos-div-right">
+                <img src="{{ url_for('static', filename='imagens/shopping-cart-add-icon.png') }}" class="shopping-cart-add">
+            </div>
         </div>
         <div class="offer-div-produto">
-            <h2>Mais vendidos</h2>
+            <div class="offer-div-top">
+                <h2>MAIS VENDIDOS:</h2>
+            </div>
             {% for mv in mais_vendidos %}
                 <a href="{{ url_for('produto.produto', id=mv.id) }}">
                     <img src="{{ url_for('static', filename=mv.foto1) }}">

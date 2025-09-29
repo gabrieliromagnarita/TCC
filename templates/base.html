@@ -7,11 +7,11 @@
     </HEAD>
     <BODY>
         <div id="header">
-            <img src="static/imagens/logo-face-a-face.png" id="logo-face-a-face">
+            <img src="{{ url_for('static',  filename='imagens/logo-face-a-face.png')}}" id="logo-face-a-face">
             <div id="icons">
-                <img src="static/imagens/search-bar-icon.png" id="search-bar-icon">
-                <a href="/cadastro-render"><img src="static/imagens/user-icon.png" id="user-icon"></a>
-                <a href=""><img src="static/imagens/shopping-cart-icon.png" id="shopping-cart-icon"></a>
+                <img src="{{ url_for('static',  filename='imagens/search-bar-icon.png')}}" id="search-bar-icon">
+                <a href="/cadastro-render"><img src="{{ url_for('static',  filename='imagens/user-icon.png')}}" id="user-icon"></a>
+                <a href=""><img src="{{ url_for('static',  filename='imagens/shopping-cart-icon.png')}}" id="shopping-cart-icon"></a>
             </div>
         </div>
         <div id="sub-header">
