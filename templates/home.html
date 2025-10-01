@@ -75,7 +75,7 @@
                         <p class="produto-details-home">{{ i.nome }}</p>
                         <p class="produto-details-home">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
                         
-                        <button class="btn-comprar-home">COMPRAR</button>
+                        <button class="btn-comprar-home" onclick="add_carrinho()">COMPRAR</button>
                     </a>
                 </div>
             {% endfor %}

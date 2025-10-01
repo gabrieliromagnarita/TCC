@@ -17,7 +17,7 @@
                 <img src="{{ url_for('static', filename=produto.foto2) }}" class="img-produto-view">
             </div>
             <div class="infos-div-right">
-                <img src="{{ url_for('static', filename='imagens/shopping-cart-add-icon.png') }}" class="shopping-cart-add">
+                <a href="{{ url_for('carrinho.carrinho', produto_id=produto.id) }}"><img src="{{ url_for('static', filename='imagens/shopping-cart-add-icon.png') }}" class="shopping-cart-add"></a>
             </div>
         </div>
         <div class="offer-div-produto">

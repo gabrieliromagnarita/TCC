@@ -7,6 +7,7 @@ from routes.historia import historia_bp
 from routes.faq import faq_bp
 from routes.home import home_bp
 from routes.produto import produto_bp
+from routes.carrinho import carrinho_bp
 import os
 from dotenv import load_dotenv
 
@@ -23,6 +24,7 @@ app.register_blueprint(historia_bp)
 app.register_blueprint(faq_bp)
 app.register_blueprint(home_bp)
 app.register_blueprint(produto_bp)
+app.register_blueprint(carrinho_bp)
 
 if __name__ == "__main__":
     app.run(debug=True)

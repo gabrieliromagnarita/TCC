@@ -907,3 +907,24 @@ details > p{
     font-size: 40px;
     cursor: pointer;
 }
+
+/*********************** corpo carrinho  ***********************/
+#content-carrinho{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#carrinho-left-div{
+    background-color: #b13333;
+    height: 100%;
+    width: 50%;
+}
+
+#carrinho-right-div{
+    background-color: #8933b1;
+    height: 100%;
+    width: 50%;
+}
