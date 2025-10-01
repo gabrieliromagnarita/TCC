@@ -27,4 +27,16 @@ def carrinho():
 def remove_carrinho(produto_id):
     if carrinho in session and produto_id in session['carrinho']:
         session['carrinho'].remove(produto_id)
+        session.modified = True
     return(redirect(url_for('carrinho.carrinho')))
+
+@carrinho_bp.route('/add_carrinho/<produto_id>')
+def add_carrinho(produto_id):
+    if 'carrinho' not in session:
+        session['carrinho'] = []
+
+    session['carrinho'].append(produto_id)
+    session.modified = True
+
+    # volta para a página anterior (em vez de ir para o carrinho)
+    return redirect(request.referrer)
