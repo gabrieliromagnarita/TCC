@@ -675,7 +675,6 @@ details > p{
     color: white;
     text-decoration: none;
     text-align: left;
-    background-color: #ffffff42;
     cursor: pointer;
 }
 
@@ -818,7 +817,13 @@ details > p{
 }
 
 .desc-div-produto{
-    background-color: rgb(159, 43, 226);
+    height: auto;
+    width: 100%;
+}
+
+.desc-produto-details{
+    font-size: 100%;
+    padding: 0;
 }
 
 .rec-div-produto{
@@ -832,7 +837,6 @@ details > p{
     height: 250px;
     width: 250px;
     object-fit: cover;
-    padding-left: 16px;
 }
 
 .produto-link-rec{
@@ -840,6 +844,9 @@ details > p{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 16px;
+    width: 250px;
+    background-color: #33B1AE;
 }
 
 .produto-details-rec{
