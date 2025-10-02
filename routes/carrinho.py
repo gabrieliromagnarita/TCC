@@ -22,10 +22,11 @@ def carrinho():
         produto = doc.to_dict()
         produto["id"] = produto_id
         produto["quantidade"] = qtd
+        produto["subtotal"] = produto.get("preco", 0) * qtd
         produtos_carrinho.append(produto)
-        total += produto.get("preco", 0)
+        total += produto["subtotal"]
     
-    return render_template('carrinho.html', produtos = produtos_carrinho, total = total)
+    return render_template('carrinho.html', produtos=produtos_carrinho, total=total)
 
 @carrinho_bp.route('/remove_carrinho/<produto_id>', methods=['POST','GET'])
 def remove_carrinho(produto_id):
