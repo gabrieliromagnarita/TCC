@@ -74,9 +74,8 @@
                         <img src="{% if i.foto1 %}{{ url_for('static', filename=i.foto1) }}{% else %}{{ url_for('static', filename='imagens/placeholder.png') }}{% endif %}" class="produto-img-home">
                         <p class="produto-details-home">{{ i.nome }}</p>
                         <p class="produto-details-home">R${{ "%.2f"|format(i.preco) if i.preco else "0,00" }}</p>
-                        
-                        <button class="btn-comprar-home" onclick="add_carrinho()">COMPRAR</button>
                     </a>
+                    <button class="btn-comprar-home" onclick="addCarrinho(event, '{{ i.id }}')">COMPRAR</button>
                 </div>
             {% endfor %}
             {% set num_colunas = 5 %}
@@ -139,5 +138,22 @@
                 }
             });
         });
+
+        async function addCarrinho(event, produtoId) {
+            event.stopPropagation
+            event.preventDefault
+
+            try{
+                const response = await fetch(`/add_carrinho/${produtoId}`);
+                if (response.ok){
+                    alert("Produto adicionado ao carrinho 🛒");
+                } else {
+                    alert("Erro ao adicionar produto ao carrinho.");
+                }
+            } catch (err) {
+                console.error("Erro:", err);
+                alert("Erro de conexão com o servidor.");
+            }
+        }
     </script>
 {% endblock %}

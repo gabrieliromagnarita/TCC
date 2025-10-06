@@ -11,7 +11,7 @@ FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
 @carrinho_bp.route('/carrinho-render')
 def carrinho():
     carrinho_ids = session.get('carrinho', [])
-    contagem = Counter.carrinho_ids()
+    contagem = Counter(carrinho_ids)
     produtos_carrinho = []
     total = 0.0
 
