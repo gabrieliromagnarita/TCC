@@ -92,6 +92,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
+{{ super() }}
     <script>
         document.addEventListener("DOMContentLoaded", function(){
             const allDetails = document.querySelectorAll("details")

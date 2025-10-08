@@ -10,7 +10,7 @@
             <img src="{{ url_for('static',  filename='imagens/logo-face-a-face.png')}}" id="logo-face-a-face">
             <div id="icons">
                 <img src="{{ url_for('static',  filename='imagens/search-bar-icon.png')}}" id="search-bar-icon">
-                <a href="/cadastro-render"><img src="{{ url_for('static',  filename='imagens/user-icon.png')}}" id="user-icon"></a>
+                <img src="{{ url_for('static',  filename='imagens/user-icon.png')}}" id="user-icon">
                 <a href="/carrinho-render"><img src="{{ url_for('static',  filename='imagens/shopping-cart-icon.png')}}" id="shopping-cart-icon"></a>
             </div>
         </div>
@@ -23,6 +23,45 @@
             {% endif %}
         </div>
         {% block content %}{% endblock %}
-        {% block scripts %}{% endblock %}
+        <!-- modal -->
+        <div id="account-modal" class="modal-user">
+            <div class="modal-content-user">
+                <span class="close-user">&times;</span>
+                {% if session.get('user') %}
+                    {% if session.get('user') == 'gabihromagna@gmail.com' %}
+                        <p>Administrador</p>
+                    {% endif %}
+                    <p>{{ session.get('user').get('nome', '') }}</p>
+                    <p>{{ session.get('user').get('email', '') }}</p>
+                    <p>{{ session.get('user').get('telefone', '') }}</p>
+                    <p>{{ session.get('user').get('nascimento', '') }}</p>
+                    <a href="{{ url_for('login.logout') }}">Sair</a>
+                {% else %}
+                    <p>Você não está logado.</p>
+                    <a href="{{ url_for('login.login') }}">Entrar</a>
+                {% endif %}
+            </div>
+        </div>
+        {% block scripts %}
+        <script>
+            const modal = document.getElementById('account-modal');
+            const btn = document.getElementById('user-icon');
+            const span = document.getElementsByClassName('close-user')[0];
+            
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+            
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            </script>
+        {% endblock %}
     </body>
 </html>

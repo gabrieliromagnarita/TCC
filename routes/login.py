@@ -28,14 +28,22 @@ def login_user():
     data = response.json()
 
     if 'idToken' in data:
-        session['user'] = email
-        if email == 'gabihromagna@gmail.com':
-            return redirect(url_for('admin.admin'))
+        users_ref = db.collection('usuarios')
+        query = users_ref.where('email', '==', email).stream()
+        user_data = None
+        for doc in query:
+            user_data = doc.to_dict()
+            break
+
+        if user_data:
+            session['user'] = user_data
         else:
-            return redirect(url_for('home.home'))
-    else:
-        erro = data.get('error', {}).get('message', 'Erro desconhecido')
-        return f'Erro ao logar: {erro}', 401
+            session['user'] = {'email': email}
+
+        if email == 'gabihromagna@gmail.com':
+            return(redirect(url_for('admin.admin')))
+        else:
+            return(redirect(url_for('home.home')))
     
 @login_bp.route('/recuperar-senha', methods=['POST'])
 def recuperar_senha():
@@ -60,3 +68,8 @@ def recuperar_senha():
     else:
         erro = res_data.get("error", {}).get("message", "Erro desconhecido")
         return f"Erro ao enviar e-mail de recuperação: {erro}", 400
+    
+@login_bp.route('/logout')
+def logout():
+    session.pop('user', None)  # remove o usuário da sessão
+    return redirect(url_for('home.home'))
