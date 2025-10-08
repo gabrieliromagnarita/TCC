@@ -13,7 +13,7 @@
                     <img src="{{ url_for('static', filename=p.foto1) }}" 
                          alt="{{ p.nome }}" 
                          style="width: 80px; height: 80px;">
-                    <strong>{{ p.nome }}</strong> - R$ {{ "%.2f"|format(p.preco) }}
+                    <strong>{{ p.nome }}</strong> - R$ {{ "%.2f"|format(p.preco) }} - {{ p.quantidade }}
                     <a href="{{ url_for('carrinho.remove_carrinho', produto_id=p.id) }}">❌ Remover</a>
                 </li>
                 {% endfor %}
@@ -25,7 +25,9 @@
     <div id="carrinho-right-div">
         <h2>Resumo</h2>
         <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
-        <button class="btn-finalizar">Finalizar Compra</button>
+        <form action="{{ url_for('carrinho.finalizar_compra')}}" method="post">
+            <button class="btn-finalizar">Finalizar Compra</button>
+        </form>
     </div>
 </div>
 {% endblock %}

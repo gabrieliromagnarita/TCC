@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div id="content-compra">
+    <div class="div-left-compra">
+        {% if produtos %}
+            <ul>
+                {% for p in produtos %}
+                <li style="margin-bottom: 20px;">
+                    <strong>{{ p.nome }}</strong> - R$ {{ "%.2f"|format(p.preco) }} {{ p.quantidade }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>erro: carrinho vazio</p>
+        {% endif %}
+        <div class="div-radio-compra">
+            <input type="radio" id="1" name="1" value="1">
+            <label for="1">AAA</label>
+    
+            <input type="radio" id="1" name="1" value="1">
+            <label for="1">AAA</label>
+    
+            <input type="radio" id="1" name="1" value="1">
+            <label for="1">AAA</label>
+    
+            <input type="radio" id="1" name="1" value="1">
+            <label for="1">AAA</label>
+        </div>
+    
+        <input type="text" name="cep-compra" class="compra-input-cep" placeholder="CEP:" required>
+        <input type="text" name="desconto-compra" class="compra-input-desconto" placeholder="Cupom de desconto:">
+        <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
+        <button class="btn-comprar-compra" onclick="">COMPRAR</button>
+    </div>
+    <div class="div-right-compra">
+
+    </div>
+</div>
+{% endblock %}
