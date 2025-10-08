@@ -5,8 +5,8 @@
 {% block content %}
 <div id="content-carrinho">
     <div id="carrinho-left-div">
-        <h2>Seu Carrinho</h2>
         {% if produtos %}
+            <h2>Carrinho({{ total_itens }})</h2>
             <ul>
                 {% for p in produtos %}
                 <li style="margin-bottom: 20px;">

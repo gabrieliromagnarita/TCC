@@ -936,17 +936,17 @@ details > p{
     width: 50%;
 }
 
-
+/*********************** corpo user  ***********************/
 .modal-user {
-    display: none;          /* começa escondido */
-    position: fixed;        /* fixa na tela */
-    z-index: 1000;          /* fica acima de outros elementos */
-    right: 20px;            /* canto direito */
-    top: 60px;              /* abaixo do header */
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    right: 20px;
+    top: 60px;
     width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0 2px 10px black;
 }
 
 .modal-content-user {
@@ -961,3 +961,5 @@ details > p{
     font-size: 20px;
     cursor: pointer;
 }
+
+/*********************** corpo compra  ***********************/

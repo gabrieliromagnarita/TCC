@@ -14,6 +14,7 @@ def carrinho():
     contagem = Counter(carrinho_ids)
     produtos_carrinho = []
     total = 0.0
+    total_itens = 0
 
     for produto_id, qtd in contagem.items():
         doc = db.collection("produtos").document(produto_id).get()
@@ -25,8 +26,9 @@ def carrinho():
         produto["subtotal"] = produto.get("preco", 0) * qtd
         produtos_carrinho.append(produto)
         total += produto["subtotal"]
+        total_itens += qtd
     
-    return render_template('carrinho.html', produtos=produtos_carrinho, total=total)
+    return render_template('carrinho.html', produtos=produtos_carrinho, total=total, total_itens=total_itens)
 
 @carrinho_bp.route('/remove_carrinho/<produto_id>', methods=['POST','GET'])
 def remove_carrinho(produto_id):
@@ -56,6 +58,7 @@ def finalizar_compra():
     contagem = Counter(carrinho_ids)
     produtos_carrinho = []
     total = 0.0
+    total_itens = 0
 
     for produto_id, qtd in contagem.items():
         doc = db.collection("produtos").document(produto_id).get()
