@@ -18,8 +18,9 @@
             <a href="/historia-render" class="header-text historia">HISTÓRIA</a> 
             <a href="/home-render" class="header-text home">HOME</a> 
             <a href="/faq-render" class="header-text faq">FAQ</a>
-            {% if session.get('user') == 'gabihromagna@gmail.com' %}
-                <a href="/admin-render" class="header-text-adm admin">ADM</a>
+            {% set u = session.get('user') %}
+            {% if u and u.get('email') == 'gabihromagna@gmail.com' %}
+                <a href="{{ url_for('admin.admin') }}" class="header-text-adm admin">ADM</a>
             {% endif %}
         </div>
         {% block content %}{% endblock %}
@@ -27,14 +28,15 @@
         <div id="account-modal" class="modal-user">
             <div class="modal-content-user">
                 <span class="close-user">&times;</span>
-                {% if session.get('user') %}
-                    {% if session.get('user') == 'gabihromagna@gmail.com' %}
+                {% set u = session.get('user') %}
+                {% if u and u is mapping %}
+                    {% if u.get('email') == 'gabihromagna@gmail.com' %}
                         <p>Administrador</p>
                     {% endif %}
-                    <p>{{ session.get('user').get('nome', '') }}</p>
-                    <p>{{ session.get('user').get('email', '') }}</p>
-                    <p>{{ session.get('user').get('telefone', '') }}</p>
-                    <p>{{ session.get('user').get('nascimento', '') }}</p>
+                    <p><strong>Nome:</strong> {{ u.get('nome', '') }}</p>
+                    <p><strong>Email:</strong> {{ u.get('email', '') }}</p>
+                    <p><strong>Telefone:</strong> {{ u.get('telefone', '') }}</p>
+                    <p><strong>Nascimento:</strong> {{ u.get('nascimento', '') }}</p>
                     <a href="{{ url_for('login.logout') }}">Sair</a>
                 {% else %}
                     <p>Você não está logado.</p>

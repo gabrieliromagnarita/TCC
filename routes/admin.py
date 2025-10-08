@@ -11,7 +11,8 @@ PASTA_UPLOADS = 'TCC/static/uploads'
 def admin():
     print("[DEBUG] Entrou na rota /admin-render")
     print("[DEBUG] session =", session) 
-    if session.get('user') != 'gabihromagna@gmail.com':
+    user = session.get('user', {})
+    if not isinstance(user, dict) or user.get('email') != 'gabihromagna@gmail.com':
         abort(403)
     return render_template('admin.html')
 
