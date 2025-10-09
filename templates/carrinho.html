@@ -6,22 +6,34 @@
 <div id="content-carrinho">
     <div id="carrinho-left-div">
         {% if produtos %}
-            <h2>Carrinho({{ total_itens }})</h2>
-            <ul>
-                {% for p in produtos %}
-                <li style="margin-bottom: 20px;">
-                    <img src="{{ url_for('static', filename=p.foto1) }}" 
-                         alt="{{ p.nome }}" 
-                         style="width: 80px; height: 80px;">
-                    <strong>{{ p.nome }}</strong> - R$ {{ "%.2f"|format(p.preco) }} - {{ p.quantidade }}
-                    <a href="{{ url_for('carrinho.remove_carrinho', produto_id=p.id) }}">❌ Remover</a>
-                </li>
+        <div class="top-carrinho">
+            <p class="title-carrinho">Carrinho({{ total_itens }}):</p>
+            <input type="checkbox" id="select-all-carrinho" class="select-all-carrinho-checkbox">
+            <label for="select-all-carrinho" class="select-all-carrinho-label">Selecionar todos</label>
+        </div>
+
+        <div class="checkbox-carrinho">
+            <form action="/submit-selection" method="post">
+                {% for item in produtos %}
+                    <input type="checkbox" name="produto-carrinho-checkbox" id="produto-{{ item.id }}">
+                    {% if item.is_checked %}checked{% endif %}
+                    <label for="produto-{{ item.id }}">
+                        <img src="{{ url_for('static', filename=item.foto1) }}" alt="{{ item.nome }}" class="img-produtos-carrinho">
+                        <p>{{ item.nome }}</p>
+                        <p>R$ {{ "%.2f"|format(item.preco) }}</p>
+                        <p>{{ item.quantidade }}</p>
+                        <a href="{{ url_for('carrinho.remove_carrinho', produto_id=item.id) }}">❌ Remover</a>
+                    </label>
                 {% endfor %}
-            </ul>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
         {% else %}
             <p>Seu carrinho está vazio 😢</p>
+            <button class="btn-redirect" onclick="">IR ÀS COMPRAS</button>
         {% endif %}
     </div>
+    <div class="divisoria-vertical-carrinho"></div>
     <div id="carrinho-right-div">
         <h2>Resumo</h2>
         <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
@@ -30,4 +42,27 @@
         </form>
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const selectAllCarrinho = document.getElementById('select-all-carrinho');
+        const produtoCarrinhoCheckbox = document.querySelectorAll('input[name="produto-carrinho-checkbox"]');
+
+        selectAllCarrinho.addEventListener('change', function() {
+            const selecionado = selectAllCarrinho.checked;
+            produtoCarrinhoCheckbox.forEach(function(checkbox){
+                checkbox.checked = selecionado;
+            });
+        });
+
+        produtoCarrinhoCheckbox.forEach(function(checkbox){
+            checkbox.addEventListener('change', function(){
+                const todosProdutosSelecionados = Array.from(produtoCarrinhoCheckbox).every(produto => produto.checked);
+                selectAllCarrinho.checked = todosProdutosSelecionados;
+            });
+        });
+    });
+</script>
 {% endblock %}

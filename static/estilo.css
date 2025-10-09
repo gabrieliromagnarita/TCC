@@ -918,7 +918,6 @@ details > p{
 /*********************** corpo carrinho  ***********************/
 #content-carrinho{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     width: 100%;
     height: 100%;
@@ -927,13 +926,43 @@ details > p{
 #carrinho-left-div{
     background-color: #b13333;
     height: 100%;
-    width: 50%;
+    width: 65%;
 }
 
 #carrinho-right-div{
     background-color: #8933b1;
     height: 100%;
-    width: 50%;
+    width: 35%;
+}
+
+.divisoria-vertical-carrinho{
+    border-left: 1px solid #686868;
+    height: auto;
+}
+
+.top-carrinho{
+    height: 10%;
+    width: 100%;
+    background-color: chartreuse;
+}
+
+.title-carrinho{
+    background-color: antiquewhite;
+}
+
+.select-all-carrinho-label{
+    background-color: cadetblue;
+}
+
+.checkbox-carrinho{
+    height: auto;
+    width: 100%;
+    background-color: darkgreen;
+}
+
+.img-produtos-carrinho{
+    height: 100px;
+    width: 100px;
 }
 
 /*********************** corpo user  ***********************/
