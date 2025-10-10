@@ -2,11 +2,11 @@ from connect import db
 from flask import Blueprint, render_template, request, redirect, url_for, session, abort, Flask
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
-import requests
+#import requests
 from collections import Counter
 
 carrinho_bp = Blueprint('carrinho', __name__)
-FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
+#FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
 
 @carrinho_bp.route('/carrinho-render')
 def carrinho():

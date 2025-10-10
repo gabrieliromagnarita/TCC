@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request
 import firebase_admin
 from firebase_admin import auth, firestore
 from email_validator import validate_email, EmailNotValidError
-import requests
+#import requests
 
 cadastro_bp = Blueprint('cadastro', __name__)
 

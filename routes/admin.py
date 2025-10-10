@@ -107,6 +107,7 @@ def admin_actions():
             return redirect(url_for('admin.admin'))
 
         return redirect(url_for('admin.admin'))
-
+    
+    #parte para ver a lista de produtos
     produtos = [doc.to_dict() for doc in db.collection('produtos').stream()]
     return render_template('admin.html', produtos=produtos)

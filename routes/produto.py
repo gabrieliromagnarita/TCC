@@ -33,9 +33,11 @@ def produto(id):
 
     # Se não houver recomendados, pega aleatórios
     if not recomendados:
-        recomendados = random.sample(todos, min(6, len(todos)))
+        #recomendados = random.sample(todos, min(6, len(todos)))
+        recomendados = random.sample(todos)
     else:
-        recomendados = recomendados[:6]
+        #recomendados = recomendados[:6]
+        recomendados = todos
 
     print(">>> Qtd recomendados:", len(recomendados))
     for r in recomendados:
