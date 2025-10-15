@@ -941,17 +941,19 @@ details > p{
 }
 
 .top-carrinho{
-    height: 10%;
+    height: auto;
     width: 100%;
     background-color: chartreuse;
 }
 
-.title-carrinho{
-    background-color: antiquewhite;
+.select-all-carrinho-label{
+    font-size: 100%;
 }
 
-.select-all-carrinho-label{
-    background-color: cadetblue;
+.title-carrinho{
+    font-size: 150%;
+    background-color: #8933b1;
+    margin: 0;
 }
 
 .checkbox-carrinho{
