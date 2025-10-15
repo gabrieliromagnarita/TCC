@@ -919,52 +919,102 @@ details > p{
 #content-carrinho{
     display: flex;
     justify-content: center;
+    align-items: stretch;
     width: 100%;
-    height: 100%;
+    padding: 0;
+    min-height: 77.9vh;
+    overflow: hidden;
 }
 
 #carrinho-left-div{
-    background-color: #b13333;
-    height: 100%;
+    /* background-color: #b13333; */
     width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 4%;
+    height: auto;
 }
 
 #carrinho-right-div{
     background-color: #8933b1;
-    height: 100%;
+    height: auto;
     width: 35%;
+    flex-shrink: 0;
 }
 
 .divisoria-vertical-carrinho{
     border-left: 1px solid #686868;
     height: auto;
+    align-self: stretch;
 }
 
 .top-carrinho{
-    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 15px;
     width: 100%;
-    background-color: chartreuse;
+    padding-left: 10%;
 }
 
-.select-all-carrinho-label{
-    font-size: 100%;
+.select-all-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .title-carrinho{
     font-size: 150%;
-    background-color: #8933b1;
     margin: 0;
+    font-weight: bold;
 }
 
 .checkbox-carrinho{
-    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* background-color: darkgreen; */
+    padding-left: 10%;
+}
+
+.card-produto-carrinho{
+    /* background-color: #b13333; */
+    height: 30%;
     width: 100%;
-    background-color: darkgreen;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .img-produtos-carrinho{
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+
+}
+
+.card-carrinho-infos{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* background-color: aquamarine; */
+}
+
+.nome-carrinho{
+    margin: 0;
+}
+
+.preco-carrinho{
+    font-weight: bold;
+    margin: 0;
+}
+
+.qtd-carrinho{
+    margin: 0;
+}
+
+.remover-produto-carrinho{
+    text-decoration: none;
 }
 
 /*********************** corpo user  ***********************/

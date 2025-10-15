@@ -8,32 +8,35 @@
         {% if produtos %}
         <div class="top-carrinho">
             <p class="title-carrinho">Carrinho({{ total_itens }}):</p>
-            <input type="checkbox" id="select-all-carrinho" class="select-all-carrinho-checkbox">
-            <label for="select-all-carrinho" class="select-all-carrinho-label">Selecionar todos</label>
+            <div class="select-all-container">
+                <input type="checkbox" id="select-all-carrinho" class="select-all-carrinho-checkbox">
+                <label for="select-all-carrinho" class="select-all-carrinho-label">Selecionar todos</label>
+            </div>
         </div>
 
-        <div class="checkbox-carrinho">
-            <form action="/submit-selection" method="post">
-                {% for item in produtos %}
-                    <input type="checkbox" name="produto-carrinho-checkbox" id="produto-{{ item.id }}">
-                    {% if item.is_checked %}checked{% endif %}
-                    <label for="produto-{{ item.id }}">
-                        <img src="{{ url_for('static', filename=item.foto1) }}" alt="{{ item.nome }}" class="img-produtos-carrinho">
-                        <p>{{ item.nome }}</p>
-                        <p>R$ {{ "%.2f"|format(item.preco) }}</p>
-                        <p>{{ item.quantidade }}</p>
-                        <a href="{{ url_for('carrinho.remove_carrinho', produto_id=item.id) }}">❌ Remover</a>
-                    </label>
-                {% endfor %}
-                <input type="submit" value="Submit">
-            </form>
-        </div>
+        <form action="/submit-selection" method="post" class="checkbox-carrinho">
+            {% for item in produtos %}
+            <div class="card-produto-carrinho">
+                <input type="checkbox" name="produto-carrinho-checkbox" id="produto-{{ item.id }}">
+                <img src="{{ url_for('static', filename=item.foto1) }}" alt="{{ item.nome }}" class="img-produtos-carrinho">
+                <div class="card-carrinho-infos">
+                    <p class="nome-carrinho">{{ item.nome }}</p>
+                    <p class="preco-carrinho">R$ {{ "%.2f"|format(item.preco) }}</p>
+                    <p class="qtd-carrinho">{{ item.quantidade }}</p>
+                    <a href="{{ url_for('carrinho.remove_carrinho', produto_id=item.id) }}" class="remover-produto-carrinho">❌ Remover</a>
+                </div>
+            </div>
+            {% endfor %}
+            <input type="submit" value="Submit" hidden>
+        </form>
         {% else %}
             <p>Seu carrinho está vazio 😢</p>
             <button class="btn-redirect" onclick="">IR ÀS COMPRAS</button>
         {% endif %}
     </div>
+
     <div class="divisoria-vertical-carrinho"></div>
+
     <div id="carrinho-right-div">
         <h2>Resumo</h2>
         <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
