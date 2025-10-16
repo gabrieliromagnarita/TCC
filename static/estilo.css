@@ -935,19 +935,6 @@ details > p{
     height: auto;
 }
 
-#carrinho-right-div{
-    background-color: #8933b1;
-    height: auto;
-    width: 35%;
-    flex-shrink: 0;
-}
-
-.divisoria-vertical-carrinho{
-    border-left: 1px solid #686868;
-    height: auto;
-    align-self: stretch;
-}
-
 .top-carrinho{
     display: flex;
     flex-direction: column;
@@ -1016,6 +1003,54 @@ details > p{
 .remover-produto-carrinho{
     text-decoration: none;
     color: #b13333;
+}
+
+.divisoria-vertical-carrinho{
+    border-left: 1px solid #686868;
+    height: auto;
+    align-self: stretch;
+}
+
+#carrinho-right-div{
+    background-color: #8933b1;
+    height: auto;
+    width: 35%;
+    flex-shrink: 0;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.carrinho-right-infos{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nome-carrinho-right{
+    line-height: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 0 5%;
+}
+
+.preco-carrinho-right{
+    margin: 0 5%;
+    line-height: 2;
+}
+
+.total-carrinho-right{
+    margin: 0 0 0 5%;
+}
+
+.text-carrinho-right{
+    font-weight: bold;
+    align-self: center;
+    margin: 0;
+}
+
+.line-horizontal hr{
+    background-color: #686868;
 }
 
 /*********************** corpo user  ***********************/

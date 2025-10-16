@@ -22,7 +22,7 @@
                 <div class="card-carrinho-infos">
                     <p class="nome-carrinho">{{ item.nome }}</p>
                     <p class="preco-carrinho">R$ {{ "%.2f"|format(item.preco) }}</p>
-                    <p class="qtd-carrinho">{{ item.quantidade }}</p>
+                    <p class="qtd-carrinho">QUANTIDADE: {{ item.quantidade }}</p>
                     <a href="{{ url_for('carrinho.remove_carrinho', produto_id=item.id) }}" class="remover-produto-carrinho">REMOVER</a>
                 </div>
             </div>
@@ -39,14 +39,19 @@
 
     <div id="carrinho-right-div">
         {% for item in produtos %}
+        <div class="carrinho-right-infos">
             <p class="nome-carrinho-right">{{ item.nome }}</p>
             <p class="preco-carrinho-right">R$ {{ "%.2f"|format(item.preco) }}</p>
+        </div>
         {% endfor %}
         <p class="total-carrinho-right"><strong>TOTAL:</strong> R$ {{ "%.2f"|format(total) }}</p>
-        <p class="tet-carrinho-right">+ posível acrescimo devido ao frete</p>
+        <p class="text-carrinho-right">+ posível acrescimo devido ao frete</p>
         <form action="{{ url_for('carrinho.finalizar_compra')}}" method="post">
             <button class="btn-finalizar">Finalizar Compra</button>
         </form>
+        <div class="line-horizontal">
+            <hr>
+        </div>
     </div>
 </div>
 {% endblock %}
