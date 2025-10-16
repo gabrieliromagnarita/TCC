@@ -1094,20 +1094,24 @@ details > p{
     display: none;
     position: fixed;
     z-index: 1000;
-    right: 20px;
+    right: 60px;
     top: 60px;
     width: 300px;
     background-color: white;
-    border: 1px solid black;
-    box-shadow: 0 2px 10px black;
+    border: 2px solid #33B1AE;
+    border-radius: 4px;
 }
 
-.modal-content-user {
-    padding: 20px;
+.content-modal-user {
+    padding: 10px;
     position: relative;
 }
 
-.close-user {
+.nome-modal-user{
+    
+}
+
+.fechar-user {
     position: absolute;
     top: 10px;
     right: 10px;

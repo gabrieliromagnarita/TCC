@@ -24,16 +24,17 @@
             {% endif %}
         </div>
         {% block content %}{% endblock %}
+
         <!-- modal -->
         <div id="account-modal" class="modal-user">
-            <div class="modal-content-user">
-                <span class="close-user">&times;</span>
+            <div class="content-modal-user">
+                <span class="fechar-user">&times;</span>
                 {% set u = session.get('user') %}
                 {% if u and u is mapping %}
+                    <p class="nome-modal-user">{{ u.get('nome', '') }}</p>
                     {% if u.get('email') == 'gabihromagna@gmail.com' %}
                         <p>Administrador</p>
                     {% endif %}
-                    <p><strong>Nome:</strong> {{ u.get('nome', '') }}</p>
                     <p><strong>Email:</strong> {{ u.get('email', '') }}</p>
                     <p><strong>Telefone:</strong> {{ u.get('telefone', '') }}</p>
                     <p><strong>Nascimento:</strong> {{ u.get('nascimento', '') }}</p>
@@ -48,7 +49,7 @@
         <script>
             const modal = document.getElementById('account-modal');
             const btn = document.getElementById('user-icon');
-            const span = document.getElementsByClassName('close-user')[0];
+            const span = document.getElementsByClassName('fechar-user')[0];
             
             btn.onclick = function() {
                 modal.style.display = 'block';
