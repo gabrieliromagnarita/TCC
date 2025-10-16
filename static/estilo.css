@@ -979,7 +979,7 @@ details > p{
 
 .card-produto-carrinho{
     /* background-color: #b13333; */
-    height: 30%;
+    height: 100px;
     width: 100%;
     display: flex;
     align-items: center;
