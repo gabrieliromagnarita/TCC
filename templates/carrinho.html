@@ -30,8 +30,10 @@
             <input type="submit" value="Submit" hidden>
         </form>
         {% else %}
-            <p>Seu carrinho está vazio 😢</p>
-            <button class="btn-redirect" onclick="">IR ÀS COMPRAS</button>
+        <div  class="carrinho-vazio">
+            <p class="mensagem-carrinho-vazio">Seu carrinho está vazio</p>
+            <input type="submit" name="btn-redirect" value="IR ÀS COMPRAS" class="btn-redirect">
+        </div>
         {% endif %}
     </div>
 
@@ -45,9 +47,9 @@
         </div>
         {% endfor %}
         <p class="total-carrinho-right"><strong>TOTAL:</strong> R$ {{ "%.2f"|format(total) }}</p>
-        <p class="text-carrinho-right">+ posível acrescimo devido ao frete</p>
-        <form action="{{ url_for('carrinho.finalizar_compra')}}" method="post">
-            <button class="btn-finalizar">Finalizar Compra</button>
+        <p class="text-carrinho-right">+ posível acréscimo devido ao frete</p>
+        <form action="{{ url_for('carrinho.finalizar_compra')}}" method="post" class="carrinho-btn">
+            <input type="submit" name="btn-finalizar" value="PROSSEGUIR" class="btn-finalizar">
         </form>
         <div class="line-horizontal">
             <hr>

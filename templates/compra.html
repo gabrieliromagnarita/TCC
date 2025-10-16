@@ -4,7 +4,6 @@
 
 {% block content %}
 <div id="content-compra">
-    <div class="div-left-compra">
         {% if produtos %}
             <ul>
                 {% for p in produtos %}
@@ -35,8 +34,11 @@
         <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
         <button class="btn-comprar-compra" onclick="">COMPRAR</button>
     </div>
-    <div class="div-right-compra">
 
+    <div class="divisoria-vertical-compra"></div>
+
+    <div class="div-right-compra">
+        <p>QR Code</p>
     </div>
 </div>
 {% endblock %}

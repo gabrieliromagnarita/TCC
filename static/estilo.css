@@ -927,7 +927,6 @@ details > p{
 }
 
 #carrinho-left-div{
-    /* background-color: #b13333; */
     width: 65%;
     display: flex;
     flex-direction: column;
@@ -960,12 +959,10 @@ details > p{
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* background-color: darkgreen; */
     padding-left: 10%;
 }
 
 .card-produto-carrinho{
-    /* background-color: #b13333; */
     height: 100px;
     width: 100%;
     display: flex;
@@ -984,7 +981,6 @@ details > p{
     display: flex;
     flex-direction: column;
     gap: 4px;
-    /* background-color: aquamarine; */
 }
 
 .nome-carrinho{
@@ -1012,7 +1008,6 @@ details > p{
 }
 
 #carrinho-right-div{
-    background-color: #8933b1;
     height: auto;
     width: 35%;
     flex-shrink: 0;
@@ -1040,17 +1035,58 @@ details > p{
 }
 
 .total-carrinho-right{
-    margin: 0 0 0 5%;
+    margin: 3% 0 0 5%;
 }
 
 .text-carrinho-right{
     font-weight: bold;
     align-self: center;
-    margin: 0;
+    margin: 1% 0 2% 0;
+}
+
+.carrinho-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-finalizar{
+    width: 40%;
+    height: 100%;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 13px;
+    font-size: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .line-horizontal hr{
     background-color: #686868;
+}
+
+.carrinho-vazio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-redirect{
+    width: 40%;
+    height: 100%;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 13px;
+    font-size: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
 }
 
 /*********************** corpo user  ***********************/
