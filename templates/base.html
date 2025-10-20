@@ -33,12 +33,13 @@
                 {% if u and u is mapping %}
                     <p class="nome-modal-user">{{ u.get('nome', '') }}</p>
                     {% if u.get('email') == 'gabihromagna@gmail.com' %}
-                        <p>Administrador</p>
+                        <p class="admin-tag-modal-user">ADMINISTRADOR</p>
                     {% endif %}
-                    <p><strong>Email:</strong> {{ u.get('email', '') }}</p>
-                    <p><strong>Telefone:</strong> {{ u.get('telefone', '') }}</p>
-                    <p><strong>Nascimento:</strong> {{ u.get('nascimento', '') }}</p>
-                    <a href="{{ url_for('login.logout') }}">Sair</a>
+                    <p class="email-modal-user"><strong>Email:</strong> {{ u.get('email', '') }}</p>
+                    <p class="fone-modal-user"><strong>Telefone:</strong> {{ u.get('telefone', '') }}</p>
+                    <p class="nasc-modal-user"><strong>Nascimento:</strong> {{ u.get('nascimento', '') }}</p>
+                    <a href="{{ url_for('login.logout') }}" class="botao-logout">SAIR DA CONTA</a>
+                    <a href="" class="botao-delete">EXCLUIR CONTA</a>
                 {% else %}
                     <p>Você não está logado.</p>
                     <a href="{{ url_for('login.login') }}">Entrar</a>

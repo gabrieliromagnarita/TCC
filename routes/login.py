@@ -44,6 +44,9 @@ def login_user():
             return(redirect(url_for('admin.admin')))
         else:
             return(redirect(url_for('home.home')))
+        
+    erro = data.get("error", {}).get("message", "Erro desconhecido")
+    return render_template('login.html', erro="E-mail ou senha inválidos.")
     
 @login_bp.route('/recuperar-senha', methods=['POST'])
 def recuperar_senha():
