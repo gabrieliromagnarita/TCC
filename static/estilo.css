@@ -1157,12 +1157,16 @@ details > p{
     font-size: 100%;
     cursor: pointer;
     font-weight: bold;
+    align-self: center;
+    display: flex;
+    justify-content: center;
 }
 
 .botao-delete{
     color: #33B1AE;
     text-decoration: none;
     font-size: 100%;
+    align-self: center;
 }
 
 .fechar-user {
