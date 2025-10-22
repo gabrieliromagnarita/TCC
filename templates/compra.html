@@ -28,16 +28,20 @@
                 <p>Código pix:</p>
                 <pre>{{ pag_info.qrcode }}</pre>
                 <img src="data:image/png;base64,{{ pag_info.qrcode_img }}" alt="QR Code Pix">
-            {% elif pag_info.tipo == "cedito" %}
+
+            {% elif pag_info.tipo == "credito" %}
+                <!-- comentario -->
 
             {% elif pag_info.tipo == "debito" %}
+                <!-- comentario -->
 
             {% elif pag_info.tipo == "boleto" %}
                 <p>Vencimento: {{ pag_info.vencimento }}</p>
                 <p>Código:</p>
                 <pre>{{ pag_info.cod_barras }}</pre>
                 <img src="data:image/png;base64,{{ pag_info.cod_barras_img }}" alt="Código de Barras Boleto">
-    
+            {% endif %}
+        {% endif %}
         <input type="text" name="cep-compra" class="compra-input-cep" placeholder="CEP:" required>
         <input type="text" name="desconto-compra" class="compra-input-desconto" placeholder="Cupom de desconto:">
         <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
