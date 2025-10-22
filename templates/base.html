@@ -71,30 +71,36 @@
                 const inputData = document.querySelector('.dataNasc');
 
                 // mask do telefone
-                inputFone.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    if (value.length > 11) value = value.slice(0, 11);
-                    if (value.length > 6) {
-                        e.target.value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
-                    } else if (value.length > 2) {
-                        e.target.value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
-                    } else {
-                        e.target.value = value.replace(/^(\d*)/, '($1');
-                    }
-                });
+                if(inputFone){
+                    inputFone.addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length > 11) value = value.slice(0, 11);
+                        if (value.length > 6) {
+                            e.target.value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+                        } else if (value.length > 2) {
+                            e.target.value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+                        } else {
+                            e.target.value = value.replace(/^(\d*)/, '($1');
+                        }
+                    });
+                }
+                
 
                 // mask da data
-                inputData.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    if (value.length > 8) value = value.slice(0, 8);
-                    if (value.length > 4) {
-                        e.target.value = value.replace(/^(\d{2})(\d{2})(\d{0,4}).*/, '$1/$2/$3');
-                    } else if (value.length > 2) {
-                        e.target.value = value.replace(/^(\d{2})(\d{0,2})/, '$1/$2');
-                    } else {
-                        e.target.value = value;
-                    }
-                });
+                if(inputData){
+                    inputData.addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length > 8) value = value.slice(0, 8);
+                        if (value.length > 4) {
+                            e.target.value = value.replace(/^(\d{2})(\d{2})(\d{0,4}).*/, '$1/$2/$3');
+                        } else if (value.length > 2) {
+                            e.target.value = value.replace(/^(\d{2})(\d{0,2})/, '$1/$2');
+                        } else {
+                            e.target.value = value;
+                        }
+                    });
+                }
+                
             })
         </script>
         {% endblock %}

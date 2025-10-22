@@ -65,6 +65,7 @@ def recuperar_senha():
 
     response = requests.post(url, json=payload)
     res_data = response.json()
+    print("Resposta Firebase:", res_data)
 
     if 'email' in res_data:
         return "E-mail de recuperação enviado com sucesso!"
