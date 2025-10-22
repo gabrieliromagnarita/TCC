@@ -14,10 +14,10 @@
             </div>
         </div>
 
-        <form action="/submit-selection" method="post" class="checkbox-carrinho">
+        <form action="{{ url_for('carrinho.checkbox_precos') }}" method="post" class="checkbox-carrinho" id="form-checkbox-carrinho">
             {% for item in produtos %}
             <div class="card-produto-carrinho">
-                <input type="checkbox" name="produto-carrinho-checkbox" id="produto-{{ item.id }}">
+                <input type="checkbox" name="produto-carrinho-ids" value="{{ item.id}}" id="produto-{{ item.id }}">
                 <img src="{{ url_for('static', filename=item.foto1) }}" alt="{{ item.nome }}" class="img-produtos-carrinho">
                 <div class="card-carrinho-infos">
                     <p class="nome-carrinho">{{ item.nome }}</p>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             {% endfor %}
-            <input type="submit" value="Submit" hidden>
+            <input type="submit" value="Atualizar total" class="btn-atualizar">
         </form>
         {% else %}
         <div  class="carrinho-vazio">
@@ -62,18 +62,35 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         const selectAllCarrinho = document.getElementById('select-all-carrinho');
-        const produtoCarrinhoCheckbox = document.querySelectorAll('input[name="produto-carrinho-checkbox"]');
+        const produtoCarrinhoIds = document.querySelectorAll('input[name="produto-carrinho-ids"]');
+        const totalPreco = document.querySelector('.total-carrinho-right')
+
+        function atualizarTotal(){
+            let total = 0;
+            produtoCarrinhoIds.forEach(function(check){
+                if(check.checked){
+                    const card = check.closest('.card-produto-carrinho');
+                    const preco = parseFloat(card.querySelector('.preco-carrinho').dataset.preco);
+                    const qtd = parseInt(card.querySelector('.qtd-carrinho').textContent.replace("QUANTIDADE: ",""));
+                    total += preco * qtd;
+                }
+            });
+            totalPreco.textContent = 'R$ ' + total.toFixed(2);
+        }
+
+        produtoCarrinhoIds.forEach(cb => cb.addEventListener('change', atualizarTotal));
+        atualizarTotal();
 
         selectAllCarrinho.addEventListener('change', function() {
             const selecionado = selectAllCarrinho.checked;
-            produtoCarrinhoCheckbox.forEach(function(checkbox){
+            produtoCarrinhoIds.forEach(function(checkbox){
                 checkbox.checked = selecionado;
             });
         });
 
-        produtoCarrinhoCheckbox.forEach(function(checkbox){
+        produtoCarrinhoIds.forEach(function(checkbox){
             checkbox.addEventListener('change', function(){
-                const todosProdutosSelecionados = Array.from(produtoCarrinhoCheckbox).every(produto => produto.checked);
+                const todosProdutosSelecionados = Array.from(produtoCarrinhoIds).every(produto => produto.checked);
                 selectAllCarrinho.checked = todosProdutosSelecionados;
             });
         });

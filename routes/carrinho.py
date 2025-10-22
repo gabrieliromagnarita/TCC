@@ -2,11 +2,9 @@ from connect import db
 from flask import Blueprint, render_template, request, redirect, url_for, session, abort, Flask
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
-#import requests
 from collections import Counter
 
 carrinho_bp = Blueprint('carrinho', __name__)
-#FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
 
 @carrinho_bp.route('/carrinho-render')
 def carrinho():
@@ -58,7 +56,6 @@ def finalizar_compra():
     contagem = Counter(carrinho_ids)
     produtos_carrinho = []
     total = 0.0
-    total_itens = 0
 
     for produto_id, qtd in contagem.items():
         doc = db.collection("produtos").document(produto_id).get()
@@ -78,3 +75,25 @@ def finalizar_compra():
     }
 
     return(redirect(url_for('compra.compra')))
+
+@carrinho_bp.route('/checkbox_precos', methods=['POST'])
+def checkbox_precos():
+    selecionados = request.form.getlist('produto-carrinho-ids')
+    carrinho_ids = session.get('carrinho', [])
+    contagem = Counter(carrinho_ids)
+    produtos_carrinho = []
+    total = 0.0
+    total_itens = 0
+
+    for produto_carrinho_id, qtd in contagem.items():
+        if produto_carrinho_id not in selecionados:
+            continue
+        doc = db.collection("produtos").document(produto_carrinho_id).get()
+        if doc.exists:
+            produto = doc.to_dict()
+            produto["id"] = produto_carrinho_id
+            produto["quantidade"] = qtd
+            produto["subtotal"] = produto.get("preco", 0) * qtd
+            produtos_carrinho.append(produto)
+            total += produto["subtotal"]
+    return render_template('carrinho.html', produtos = produtos_carrinho, total= total, total_itens=total_itens)
