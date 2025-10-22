@@ -15,19 +15,28 @@
         {% else %}
             <p>erro: carrinho vazio</p>
         {% endif %}
-        <div class="div-radio-compra">
-            <input type="radio" id="1" name="1" value="1">
-            <label for="1">AAA</label>
-    
-            <input type="radio" id="1" name="1" value="1">
-            <label for="1">AAA</label>
-    
-            <input type="radio" id="1" name="1" value="1">
-            <label for="1">AAA</label>
-    
-            <input type="radio" id="1" name="1" value="1">
-            <label for="1">AAA</label>
-        </div>
+        <form method="post" class="div-radio-compra" action="{{ url_for('compra.comprar')}}">
+            <label>Método de pagamento:</label>
+            <input type="radio" id="pix" name="tipo-pag" value="pix">Pix
+            <input type="radio" id="credito" name="tipo-pag" value="credito">Cartão de crédito
+            <input type="radio" id="debito" name="tipo-pag" value="debito">Cartão de débito
+            <input type="radio" id="boleto" name="tipo-pag" value="boleto">Boleto
+        </form>
+        {% if pag_info %}
+            {% if pag_info.tipo == "pix" %}
+                <p>Chave pix: {{ pag_info.chave }}</p>
+                <p>Código pix:</p>
+                <pre>{{ pag_info.qrcode }}</pre>
+                <img src="data:image/png;base64,{{ pag_info.qrcode_img }}" alt="QR Code Pix">
+            {% elif pag_info.tipo == "cedito" %}
+
+            {% elif pag_info.tipo == "debito" %}
+
+            {% elif pag_info.tipo == "boleto" %}
+                <p>Vencimento: {{ pag_info.vencimento }}</p>
+                <p>Código:</p>
+                <pre>{{ pag_info.cod_barras }}</pre>
+                <img src="data:image/png;base64,{{ pag_info.cod_barras_img }}" alt="Código de Barras Boleto">
     
         <input type="text" name="cep-compra" class="compra-input-cep" placeholder="CEP:" required>
         <input type="text" name="desconto-compra" class="compra-input-desconto" placeholder="Cupom de desconto:">
