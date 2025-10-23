@@ -46,7 +46,6 @@
 
     <div id="carrinho-right-div">
         {% for item in produtos %}
-            {% if item  %}
         <div class="carrinho-right-infos">
             <p class="nome-carrinho-right">{{ item.nome }}</p>
             <p class="preco-carrinho-right">R$ {{ "%.2f"|format(item.preco) }}</p>
