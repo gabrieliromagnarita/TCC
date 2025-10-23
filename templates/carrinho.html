@@ -21,18 +21,23 @@
                 <img src="{{ url_for('static', filename=item.foto1) }}" alt="{{ item.nome }}" class="img-produtos-carrinho">
                 <div class="card-carrinho-infos">
                     <p class="nome-carrinho">{{ item.nome }}</p>
-                    <p class="preco-carrinho">R$ {{ "%.2f"|format(item.preco) }}</p>
+                    <p class="preco-carrinho" data-preco="{{item.preco}}">R$ {{ "%.2f"|format(item.preco) }}</p>
                     <p class="qtd-carrinho">QUANTIDADE: {{ item.quantidade }}</p>
                     <a href="{{ url_for('carrinho.remove_carrinho', produto_id=item.id) }}" class="remover-produto-carrinho">REMOVER</a>
                 </div>
             </div>
             {% endfor %}
-            <input type="submit" value="Atualizar total" class="btn-atualizar">
+            <input type="submit" value="Atualizar" class="btn-atualizar" hidden>
         </form>
         {% else %}
         <div  class="carrinho-vazio">
             <p class="mensagem-carrinho-vazio">Seu carrinho está vazio</p>
-            <input type="button" name="btn-redirect" value="IR ÀS COMPRAS" class="btn-redirect" onclick="window.location.href='{{ url_for('home.home') }}'">
+            <input type="button" name="btn-redirect" value="IR ÀS COMPRAS" class="btn-redirect">
+            <script>
+                document.getElementById('btn-redirect').addEventListener('click', () => {
+                    window.location.href="{{url_for('home.home')}}";
+                })
+            </script>
         </div>
         {% endif %}
     </div>
@@ -41,6 +46,7 @@
 
     <div id="carrinho-right-div">
         {% for item in produtos %}
+            {% if item  %}
         <div class="carrinho-right-infos">
             <p class="nome-carrinho-right">{{ item.nome }}</p>
             <p class="preco-carrinho-right">R$ {{ "%.2f"|format(item.preco) }}</p>
@@ -86,6 +92,7 @@
             produtoCarrinhoIds.forEach(function(checkbox){
                 checkbox.checked = selecionado;
             });
+            atualizarTotal();
         });
 
         produtoCarrinhoIds.forEach(function(checkbox){
