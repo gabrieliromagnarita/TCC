@@ -48,16 +48,17 @@ def add_carrinho(produto_id):
 
 @carrinho_bp.route('/finalizar_compra', methods=['POST'])
 def finalizar_compra():
-    carrinho_ids = session.get('carrinho', [])
-    if not carrinho_ids:
+    selecionados = request.form.getlist('produto-carrinho-ids')
+    if not selecionados:
         return(redirect(url_for('carrinho.carrinho')))
     
-    from collections import Counter
+    carrinho_ids = session.get('carrinho', [])
     contagem = Counter(carrinho_ids)
     produtos_carrinho = []
     total = 0.0
 
-    for produto_id, qtd in contagem.items():
+    for produto_id in selecionados:
+        qtd = contagem.get(produto_id, 1)
         doc = db.collection("produtos").document(produto_id).get()
         if not doc.exists:
             continue
@@ -74,7 +75,7 @@ def finalizar_compra():
         'total': total
     }
 
-    return(redirect(url_for('compra.compra')))
+    return redirect(url_for('compra.compra'))
 
 @carrinho_bp.route('/checkbox_precos', methods=['POST'])
 def checkbox_precos():
