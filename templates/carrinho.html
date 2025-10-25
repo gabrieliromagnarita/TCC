@@ -48,7 +48,7 @@
         <div id="produtos-selecionados"></div>
 
         <div class="carrinho-right-infos">
-            <p class="total-carrinho-right">TOTAL: <!-- R$ {{ "%.2f"|format(total) }} --></p>
+            <p class="total-carrinho-right"></p>
             <p class="text-carrinho-right">+ posível acréscimo devido ao frete</p>
         </div>
         
@@ -87,16 +87,16 @@
                     total += preco * qtd;
 
                     const itemDiv = document.createElement('div');
-                    itemDiv.className = 'carrinho-right-infos';
+                    itemDiv.className = 'produto-selecionado'; //esse era o problema?
                     itemDiv.innerHTML = `<p class="nome-carrinho-right">${nome} x${qtd}</p><p class="preco-carrinho-right">R$ ${ (preco*qtd).toFixed(2) }</p>`;
                     listaSelecionados.appendChild(itemDiv);
                 }
             });
-
-            document.querySelector('.total-carrinho-right').textContent = `TOTAL: R$ ${total.toFixed(2)}`;
+            
+            document.querySelector('.total-carrinho-right').innerHTML = `<strong>TOTAL:</strong> R$ ${total.toFixed(2)}`;
 
             if(total === 0) {
-                listaSelecionados.innerHTML = '<p class="total-carrinho-right"><em>Nenhum produto selecionado</em></p>';
+                listaSelecionados.innerHTML = '<p class="aviso-nenhum-carrinho-right"><em>Nenhum produto selecionado</em></p>';
             }
         }
 

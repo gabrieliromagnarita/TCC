@@ -1027,6 +1027,12 @@ details > p{
     width: 100%;
 }
 
+.produto-selecionado{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .carrinho-right-infos{
     display: flex;
     flex-direction: column; /* o problema tá aqui */
@@ -1054,8 +1060,7 @@ details > p{
 
 .total-carrinho-right{
     margin: 3% 0 0 5%;
-    text-align: center;
-    margin: 10px 0 5px 0;
+    /* margin: 10px 0 5px 0; */
     width: 100%;
     /* text-align: center;
     margin: 5px 0; */
@@ -1078,6 +1083,12 @@ details > p{
     width: 100%;
     text-align: center;
     margin: 5px 0;
+}
+
+.aviso-nenhum-carrinho-right{
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .btn-finalizar{
