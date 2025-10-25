@@ -15,7 +15,7 @@
         </div>
 
         <form action="{{ url_for('carrinho.checkbox_precos') }}" method="post" class="checkbox-carrinho" id="form-checkbox-carrinho">
-            {% for item in produtos %}form-checkbox-carrinho
+            {% for item in produtos %}
             <div class="card-produto-carrinho">
                 <input type="checkbox" name="produto-carrinho-ids" value="{{ item.id}}" id="produto-{{ item.id }}">
                 <img src="{{ url_for('static', filename=item.foto1) }}" alt="{{ item.nome }}" class="img-produtos-carrinho">
@@ -45,10 +45,9 @@
     <div class="divisoria-vertical-carrinho"></div>
 
     <div id="carrinho-right-div">
-        <div class="carrinho-right-infos">
-            <div id="produtos-selecionados"></div>
+        <div id="produtos-selecionados"></div>
 
-            
+        <div class="carrinho-right-infos">
             <p class="total-carrinho-right"><strong>TOTAL:</strong> R$ {{ "%.2f"|format(total) }}</p>
             <p class="text-carrinho-right">+ posível acréscimo devido ao frete</p>
         </div>
@@ -56,6 +55,7 @@
         <form action="{{ url_for('carrinho.finalizar_compra')}}" method="post" class="carrinho-btn" id="form-finalizar-compra">
             <input type="submit" name="btn-finalizar" value="PROSSEGUIR" class="btn-finalizar">
         </form>
+
         <div class="line-horizontal">
             <hr>
         </div>
@@ -72,6 +72,44 @@
         /* const formCheckbox = document.getElementById('form-checkbox-carrinho') */
         const formFinalizar = document.getElementById('form-finalizar-compra');
         const listaSelecionados = document.getElementById('produtos-selecionados');
+
+        function atualizarTotal() {
+            let total = 0;
+            const listaSelecionados = document.getElementById('produtos-selecionados');
+            listaSelecionados.innerHTML = '';
+
+            produtoCarrinhoIds.forEach(check => {
+                if (check.checked) {
+                    const card = check.closest('.card-produto-carrinho');
+                    const preco = parseFloat(card.querySelector('.preco-carrinho').dataset.preco);
+                    const qtd = parseInt(card.querySelector('.qtd-carrinho').textContent.replace("QUANTIDADE: ",""));
+                    const nome = card.querySelector('.nome-carrinho').textContent;
+                    total += preco * qtd;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'carrinho-right-infos';
+                    itemDiv.innerHTML = `<p class="nome-carrinho-right">${nome} x${qtd}</p>
+                                        <p class="preco-carrinho-right">R$ ${ (preco*qtd).toFixed(2) }</p>`;
+                    listaSelecionados.appendChild(itemDiv);
+                }
+            });
+
+            document.querySelector('.total-carrinho-right').textContent = `TOTAL: R$ ${total.toFixed(2)}`;
+
+            if(total === 0) {
+                listaSelecionados.innerHTML = '<p class="total-carrinho-right"><em>Nenhum produto selecionado</em></p>';
+            }
+        }
+
+        selectAllCarrinho.addEventListener('change', function() {
+            const selecionado = selectAllCarrinho.checked;
+            produtoCarrinhoIds.forEach(function(checkbox){ //precisa da função?
+                checkbox.checked = selecionado;
+            });
+            atualizarTotal();
+        });
+
+        produtoCarrinhoIds.forEach(cb => cb.addEventListener('change', atualizarTotal));
 
         formFinalizar.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -92,45 +130,8 @@
             });
             formFinalizar.submit();
         });
-
-        function atualizarTotal(){
-            let total = 0;
-            let nomesSelecionados = [];
-            listaSelecionados.innerHTML = '';
-
-            produtoCarrinhoIds.forEach(function(check){
-                if(check.checked){
-                    const card = check.closest('.card-produto-carrinho');
-                    const preco = parseFloat(card.querySelector('.preco-carrinho').dataset.preco);
-                    const qtd = parseInt(card.querySelector('.qtd-carrinho').textContent.replace("QUANTIDADE: ",""));
-                    const nome = card.querySelector('.nome-carrinho').textContent;
-                    total += preco * qtd;
-
-                    for(let i = 0; i < qtd; i++){
-                        nomesSelecionados.push(nome);
-                    }
-                }
-            });
-            totalPreco.textContent = 'R$ ' + total.toFixed(2);
-
-            if(nomesSelecionados.length > 0){
-                listaSelecionados.innerHTML = `<p><strong>Selecionados:</strong></p><ul>${nomesSelecionados.map(n => `<li>%{n}</li>`).join('')}</ul>`;
-            }
-            else{
-                listaSelecionados.innerHTML = '<p><em>Nenhum produto selecionado</em></p>';
-            }
-        }
-
-        produtoCarrinhoIds.forEach(cb => cb.addEventListener('change', atualizarTotal));
+        
         atualizarTotal();
-
-        selectAllCarrinho.addEventListener('change', function() {
-            const selecionado = selectAllCarrinho.checked;
-            produtoCarrinhoIds.forEach(function(checkbox){
-                checkbox.checked = selecionado;
-            });
-            atualizarTotal();
-        });
 
         produtoCarrinhoIds.forEach(function(checkbox){
             checkbox.addEventListener('change', function(){
