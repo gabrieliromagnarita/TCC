@@ -48,7 +48,7 @@
         <div id="produtos-selecionados"></div>
 
         <div class="carrinho-right-infos">
-            <p class="total-carrinho-right"><strong>TOTAL:</strong> R$ {{ "%.2f"|format(total) }}</p>
+            <p class="total-carrinho-right">TOTAL: <!-- R$ {{ "%.2f"|format(total) }} --></p>
             <p class="text-carrinho-right">+ posível acréscimo devido ao frete</p>
         </div>
         
@@ -88,8 +88,7 @@
 
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'carrinho-right-infos';
-                    itemDiv.innerHTML = `<p class="nome-carrinho-right">${nome} x${qtd}</p>
-                                        <p class="preco-carrinho-right">R$ ${ (preco*qtd).toFixed(2) }</p>`;
+                    itemDiv.innerHTML = `<p class="nome-carrinho-right">${nome} x${qtd}</p><p class="preco-carrinho-right">R$ ${ (preco*qtd).toFixed(2) }</p>`;
                     listaSelecionados.appendChild(itemDiv);
                 }
             });

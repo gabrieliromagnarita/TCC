@@ -1023,61 +1023,61 @@ details > p{
 #produtos-selecionados{
     display: flex;
     justify-content: space-between;
-    margin: 5px 5%;
-    width: 90%;
+    flex-direction: column;
+    width: 95%;
 }
 
 .carrinho-right-infos{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
     margin: 5px 0;
 }
 
 .nome-carrinho-right{
-    /* line-height: 2; */
-    /* white-space: nowrap;
+    line-height: 2;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; */
-    /* margin: 0 0 0 5%; */
-    margin: 0;
+    text-overflow: ellipsis;
+    margin: 0 0 0 5%;
 }
 
 .preco-carrinho-right{
-    /* margin: 0 5%;
-    line-height: 2; */
-    /* white-space: nowrap;
+    margin: 0 5%;
+    line-height: 2;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; */
-    margin: 0;
+    text-overflow: ellipsis;
+    /* margin: 0; */
 }
 
 .total-carrinho-right{
-    /* margin: 3% 0 0 5%; */
-   /*  text-align: center;
-    margin: 10px 0 5px 0; */
-    width: 100%;
+    margin: 3% 0 0 5%;
     text-align: center;
-    margin: 5px 0;
+    margin: 10px 0 5px 0;
+    /* width: 100%;
+    text-align: center;
+    margin: 5px 0; */
 }
 
 .text-carrinho-right{
-    /* font-weight: bold;
-    align-self: center; */
-    /* margin: 1% 0 2% 0; */
-    /* margin-bottom: 10px; */
-    width: 100%;
+    font-weight: bold;
+    align-self: center;
+    margin: 1% 0 2% 0;
+    margin-bottom: 10px;
+    /* width: 100%;
     text-align: center;
-    margin: 5px 0;
+    margin: 5px 0; */
 }
 
 .carrinho-btn{
-    /* display: flex; */
-    /* justify-content: center; */
-    /* margin-bottom: 10px; */
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    /* width: 100%;
     text-align: center;
-    margin: 5px 0;
+    margin: 5px 0; */
 }
 
 .btn-finalizar{
