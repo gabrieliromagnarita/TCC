@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, session, redirect, url_for, reques
 import uuid, datetime, qrcode, base64, barcode
 from io import BytesIO
 from barcode.writer import ImageWriter
+from pixqrcode import Payload
 
 compra_bp = Blueprint('compra', __name__)
 
@@ -31,11 +32,22 @@ def comprar():
     pag_info = None
 
     if tipo == "pix":
-        chave = '@gmail.com'
-        qr_code = ''
+        chave = 'faceafaceloja@gmail.com'
+        nome = "Face a Face Loja"
+        cod = pedido_cod
+
+        payload = Payload(
+            chave=chave,
+            nome=nome,
+            valor=total,
+            cod=cod
+        )
+
+        qr_code = payload.export_pix_cod()
+        
         qrcode_img = qrcode.make(qr_code)
-        buffer = BytesIO() #
-        qrcode_img.save(buffer, format="png") #
+        buffer = BytesIO()
+        qrcode_img.save(buffer, format="png")
         img_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
 
