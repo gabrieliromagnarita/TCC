@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, session, redirect, url_for, reques
 import uuid, datetime, qrcode, base64, barcode
 from io import BytesIO
 from barcode.writer import ImageWriter
-from pixqrcode import Payload
 
 compra_bp = Blueprint('compra', __name__)
 
@@ -36,7 +35,7 @@ def comprar():
         nome = "Face a Face Loja"
         cod = pedido_cod
 
-        payload = Payload(
+        payload = payload(
             chave=chave,
             nome=nome,
             valor=total,
