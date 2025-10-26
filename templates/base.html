@@ -25,13 +25,12 @@
         </div>
         {% block content %}{% endblock %}
 
-        <!-- modal user -->
+        <!-- modal -->
         <div id="account-modal" class="modal-user">
             <div class="content-modal-user">
                 <span class="fechar-user">&times;</span>
                 {% set u = session.get('user') %}
                 {% if u and u is mapping %}
-                    <img src="{{ url_for('static',  filename='imagens/alterar-info-icon.png')}}" id="alterar-info-icon">
                     <p class="nome-modal-user">{{ u.get('nome', '') }}</p>
                     {% if u.get('email') == 'gabihromagna@gmail.com' %}
                         <p class="admin-tag-modal-user">ADMINISTRADOR</p>
@@ -47,59 +46,29 @@
                 {% endif %}
             </div>
         </div>
-
-        <!-- modal alterar -->
-        <div id="update-account-modal" class="update-modal-user">
-            <div class="content-modal-update">
-                <span class="fechar-update">&times;</span>
-                
-                <label>E-mail:</label>
-                <input type="email" name="email-modal-update" class="modal-update-input email" value="{{ u.get('email','') }}" readonly>
-                <a href="#" class="btn-mudar-senha">ALTERAR SENHA</a>
-
-                <label>Nome:</label>
-                <input type="text" name="nome-modal-update" class="modal-update-input nome" value="{{ u.get('nome','') }}" readonly>
-                
-                <label>Telefone:</label>
-                <input type="tel" name="fone-modal-update" class="modal-update-input fone" value="{{ u.get('tel','') }}" readonly>
-                <label>Data de nascimento:</label>
-                <input type="text" name="dataNasc-modal-update" class="modal-update-input dataNasc" placeholder="DD/MM/AAAA" maxlength="10" value="{{ u.get('dataNasc','') }}" readonly>
-            </div>
-        </div>
         {% block scripts %}
         <script>
+            const modal = document.getElementById('account-modal');
+            const btn = document.getElementById('user-icon');
+            const span = document.getElementsByClassName('fechar-user')[0];
+            
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+            
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', function(){
                 const inputFone = document.querySelector('.fone');
                 const inputData = document.querySelector('.dataNasc');
-
-                const modal = document.getElementById('account-modal');
-                const btn = document.getElementById('user-icon');
-                const span = document.getElementsByClassName('fechar-user')[0];
-
-                const modal_update = document.getElementById('update-account-modal');
-                const btn_update = document.getElementById('alterar-info-icon');
-                const span_update = document.getElementsByClassName('fechar-update')[0];
-                
-                if (btn) {
-                    btn.onclick = () => modal.style.display = 'block';
-                }
-
-                if (span) {
-                    span.onclick = () => modal.style.display = 'none';
-                }
-
-                if (btn_update) {
-                    btn_update.onclick = () => modal_update.style.display = 'block';
-                }
-
-                if (span_update) {
-                    span_update.onclick = () => modal_update.style.display = 'none';
-                }
-                
-                window.onclick = function(event) {
-                    if (event.target == modal) modal.style.display = 'none';
-                    if (event.target == modal_update) modal_update.style.display = 'none';
-                }
 
                 // mask do telefone
                 if(inputFone){
@@ -116,6 +85,7 @@
                     });
                 }
                 
+
                 // mask da data
                 if(inputData){
                     inputData.addEventListener('input', function(e) {
@@ -129,53 +99,9 @@
                             e.target.value = value;
                         }
                     });
-                }  
+                }
+                
             })
-
-            document.querySelectorAll('.modal-update-input').forEach(input => {
-                input.addEventListener('click', () => {
-                    input.removeAttribute('readonly');
-                    input.focus();
-
-                    if(!input.nextElementSibling || !input.nextElementSibling.classList.contains('btn-salvar')){
-                        const salvarBtn = document.createElement('button');
-                        salvarBtn.textContent = 'SALVAR MUDANÇAS';
-                        salvarBtn.className = 'btn-salvar';
-                        input.after(salvarBtn);
-
-                        salvarBtn.addEventListener('click', async () => {
-                            const campo = input.classList[1];
-                            const valor = input.value.trim();
-
-                            const res = await fetch(`/update-user/${campo}`, {method: 'post', headers: {'Content-Type':'application/json'}, body: JSON.stringify({valor})});
-
-                            const data = await res.json();
-                            if(data.success){alert(`${field} atualizado com sucesso`);
-                                input.setAttribute('readonly', true);
-                                salvarBtn.remove();
-                            }else alert('Erro' + data.error);
-                        });
-                    }
-                });
-            });
-
-            //terminar de assistir o vídeo
-            document.querySelectorAll('.btn-update-senha').addEventListener('click', () => {
-                const senhaInput = document.createElement('input');
-                senhaInput.type = 'password';
-                senhaInput.className = 'modal-update-input senha';
-                senhaInput.placeholder = 'Nova senha';
-
-                const confirmaBtn = document.createElement('button');
-                confirmaBtn.textContent = 'Salvar senha';
-
-                confirmaBtn.addEventListener('click', async () => {
-                    const valor = senhaInput.value.trim();
-                    if(!valor) return alert('Informe a senha')
-                })
-
-            
-            });
         </script>
         {% endblock %}
     </body>
