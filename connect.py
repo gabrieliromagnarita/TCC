@@ -17,3 +17,8 @@ db = firestore.client()
 
 print("Banco conectado!")
 
+mercado_pago_key = os.getenv("MERCADO_PAGO_KEY")
+if not mercado_pago_key:
+    raise ValueError("ERRO na conexão com o Mercado Pago")
+
+print("Conectado")

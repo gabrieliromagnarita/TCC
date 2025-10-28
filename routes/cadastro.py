@@ -25,7 +25,7 @@ def cadastrar_user():
     senhaConfirm = request.form['senhaConfirm-cadastro']
     nome = request.form['nome-cadastro']
     telefone = request.form['fone-cadastro']
-    nascimento = request.form['dataNasc-cadastro']
+    cpf = request.form['cpf-cadastro']
 
     if email_valido(email) == False:
         return "Email inválido!"
@@ -43,7 +43,7 @@ def cadastrar_user():
                 'email': email,
                 'nome': nome,
                 'telefone': telefone,
-                'nascimento': nascimento,
+                'cpf': cpf,
             }
             db.collection('usuarios').add(user_info)
             return'Usuário criado com sucesso!'
