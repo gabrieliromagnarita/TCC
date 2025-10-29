@@ -1220,3 +1220,8 @@ details > p{
 }
 
 /*********************** corpo compra  ***********************/
+
+.img-pix-compra{
+    height: 500px;
+    width: auto;
+}

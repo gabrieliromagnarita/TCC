@@ -33,10 +33,12 @@
         </form>
         {% if pag_info %}
             {% if pag_info.tipo == "pix" %}
-                <p>Chave pix: {{ pag_info.chave }}</p>
-                <p>Código pix:</p>
-                <pre>{{ pag_info.qrcode }}</pre>
-                <img src="data:image/png;base64,{{ pag_info.qrcode_img }}" alt="QR Code Pix">
+                <div class="pix-pagamento">
+                    <h3>Escaneie o QR Code para pagar:</h3>
+                    <img src="data:image/png;base64,{{ pag_info.qr_code_img }}" alt="QR Code PIX">
+                    <p><strong>Ou copie a chave PIX:</strong></p>
+                    <textarea readonly style="width:100%;height:100px;">{{ pag_info.chave }}</textarea>
+                </div>
 
             {% elif pag_info.tipo == "credito" %}
                 <!-- comentario -->
@@ -50,6 +52,7 @@
                 <p>Vencimento: {{ pag_info.vencimento }}</p>
                 <a href="{{ pag_info.boleto_url }}" target="_blank">Baixar boleto (PDF)</a>
             {% endif %}
+
         {% endif %}
         
     </div>
