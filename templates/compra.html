@@ -64,3 +64,25 @@
     </div>
 </div>
 {% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+    document.querySelector('input[name="cep-compra"]').addEventListener('blur', function(){
+        const cep = this.value.replace(/\D/g, '');
+        if (cep.lenght() === 8) {
+            fetch("{{ url_for('compra.calculo_frete')}}", {
+                method: 'post',
+                headers: {'Content-Trype': 'application/x-www-form-urlencoded'},
+                body: new URLSearchParams({cep})
+            })
+            .then(res => res.json()).then(data => {
+                data.forEach(frete => {
+                    const el = document.createElement('p');
+                    el.innerHTML = `<strong>${frete.servico}:</strong> R$ ${frete.valor.toFixed(2)} — ${frete.prazo} dias úteis`;
+                    freteDiv.appendChild(el);
+                });
+            }).catch(() => alert("ERRO DE CONEXÃO CORREIOS"));
+        }
+    })
+</script>
+{% endblock %}

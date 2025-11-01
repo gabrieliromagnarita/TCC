@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request, flash
-import uuid, datetime, qrcode, base64, barcode,mercadopago, random
+from flask import Blueprint, render_template, session, redirect, url_for, request, flash, jsonify
+import uuid, datetime, qrcode, base64, barcode,mercadopago, random, requests
 from io import BytesIO
 from barcode.writer import ImageWriter
 from barcode import EAN13
 import qrcode.constants
 from connect import mercado_pago_key
+from xml.etree import ElementTree as ET
 
 compra_bp = Blueprint('compra', __name__)
 
@@ -25,6 +26,51 @@ def compra():
     total = compra_data.get('total', 0.0)
 
     return render_template('compra.html', produtos=produtos, total=total)
+
+@compra_bp.route('/calculo_frete', methods=['post'])
+def calculo_frete():
+    cep_destino = request.form.get('cep-compra')
+    if not cep_destino or not cep_destino.isdigit():
+        return ("ERRO CEP INVALIDO"), 400
+    
+    cep_origem = "35430970"
+
+    peso = "1"
+    comprimento = "20"
+    altura = "10"
+    largura = "15"
+
+    codigos_servicos = ["04510", "04014"]
+
+    resultados = []
+
+    for servico in codigos_servicos:
+        url = (
+            "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx"
+            f"?nCdEmpresa=&sDsSenha=&nCdServico={servico}"
+            f"&sCepOrigem={cep_origem}&sCepDestino={cep_destino}"
+            f"&nVlPeso={peso}&nCdFormato=1&nVlComprimento={comprimento}"
+            f"&nVlAltura={altura}&nVlLargura={largura}&nVlDiametro=0"
+            "&sCdMaoPropria=N&nVlValorDeclarado=0&sCdAvisoRecebimento=N&StrRetorno=xml"
+        )
+
+        response = requests.get(url)
+        resposta_xml = ET.fromstring(response.text)
+        
+        servico_nome = "PAC" if servico == "04510" else "SEDEX"
+        valor = resposta_xml.find(".//Valor").text.replace(",",".")
+        prazo = resposta_xml.find(".//PrazoEntrega").text
+        
+        resultados.append = ({
+            "servico": servico_nome,
+            "valor": float(valor),
+            "prazo": prazo
+        })
+
+        if not resultados:
+            return("ERRO")
+        
+        return jsonify(resultados)
 
 @compra_bp.route('/comprar', methods=['post'])
 def comprar():
@@ -53,13 +99,11 @@ def comprar():
         pag_info = payment_response["response"]
         print("DEBUG - pag_info:", pag_info)
 
-        poi = pag_info.get("point_of_interaction", {}) or pag_info.get("transaction_details") or {}
-        print("DEBUG - poi:", poi)
+        poi = pag_info.get("point_of_interaction", {}).get("transaction_data")
 
         chave_pix = poi.get("qr_code")
-        print("DEBUG - chave_pix:", chave_pix)
-        qr_base64 = poi.get("qr_base64")
-        print("DEBUG - qr_base64:", qr_base64)
+        qr_base64 = poi.get("qr_code_base64")
+        print("DEBUG - transaction_data:", poi)
 
         pag_info = {
             "tipo": "pix",
@@ -70,7 +114,7 @@ def comprar():
 
         return render_template('compra.html', produtos=produtos, total=total, pag_info=pag_info)
 
-    elif tipo == "boleto":
+    """ elif tipo == "boleto":
         print("DEBUG - Mercado Pago Key:", mercado_pago_key[:10])
         payment_data = {
             "transaction_amount": float(total),
@@ -107,4 +151,4 @@ def comprar():
         filename = ean.save(f'codigo_de_barras{codigo_boleto}')
         print(f'codigo de barras salvo como: {filename}')
 
-        return render_template('compra.html', produtos=produtos, total=total, pag_info=pag_info, )
+        return render_template('compra.html', produtos=produtos, total=total, pag_info=pag_info, ) """
