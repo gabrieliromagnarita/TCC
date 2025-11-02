@@ -61,16 +61,17 @@ def calculo_frete():
         valor = resposta_xml.find(".//Valor").text.replace(",",".")
         prazo = resposta_xml.find(".//PrazoEntrega").text
         
-        resultados.append = ({
+        resultados.append({
             "servico": servico_nome,
             "valor": float(valor),
             "prazo": prazo
         })
+        print(resultados)
 
-        if not resultados:
-            return("ERRO")
+    if not resultados:
+        return("ERRO")
         
-        return jsonify(resultados)
+    return jsonify(resultados)
 
 @compra_bp.route('/comprar', methods=['post'])
 def comprar():

@@ -19,16 +19,11 @@
             <label>Método de pagamento:</label>
             <input type="radio" id="pix" name="tipo-pag" value="pix">
             <label for="pix">Pix</label>
-            <input type="radio" id="credito" name="tipo-pag" value="credito">
-            <label for="pix">Cartão de crédito</label>
-            <input type="radio" id="debito" name="tipo-pag" value="debito">
-            <label for="pix">Cartão de débito</label>
-            <input type="radio" id="boleto" name="tipo-pag" value="boleto">
-            <label for="pix">Boleto</label>
 
             <input type="text" name="cep-compra" class="compra-input-cep" placeholder="CEP:" required>
             <input type="text" name="desconto-compra" class="compra-input-desconto" placeholder="Cupom de desconto:">
-            <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
+            <p id="frete-info"></p>
+            <p class="total-compra"><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
             <button type="submit" class="btn-comprar-compra">COMPRAR</button>
         </form>
         {% if pag_info %}
@@ -39,20 +34,6 @@
                     <p><strong>Ou copie a chave PIX:</strong></p>
                     <textarea readonly style="width:100%;height:100px;">{{ pag_info.chave }}</textarea>
                 </div>
-
-            {% elif pag_info.tipo == "credito" %}
-                <!-- comentario -->
-
-            {% elif pag_info.tipo == "debito" %}
-                <!-- comentario -->
-
-            {% elif pag_info.tipo == "boleto" %}
-                <p><strong>Código de barras:</strong> {{ pag_info.cod_barras }}</p>
-                <img src="data:image/png;base64,{{ pag_info.cod_barras_img }}" alt="Código de Barras Boleto">
-                <p>Vencimento: {{ pag_info.vencimento }}</p>
-                <a href="{{ pag_info.boleto_url }}" target="_blank">Baixar boleto (PDF)</a>
-            {% endif %}
-
         {% endif %}
         
     </div>
@@ -67,22 +48,34 @@
 {% block scripts %}
 {{ super() }}
 <script>
-    document.querySelector('input[name="cep-compra"]').addEventListener('blur', function(){
-        const cep = this.value.replace(/\D/g, '');
-        if (cep.lenght() === 8) {
-            fetch("{{ url_for('compra.calculo_frete')}}", {
-                method: 'post',
-                headers: {'Content-Trype': 'application/x-www-form-urlencoded'},
-                body: new URLSearchParams({cep})
-            })
-            .then(res => res.json()).then(data => {
-                data.forEach(frete => {
-                    const el = document.createElement('p');
-                    el.innerHTML = `<strong>${frete.servico}:</strong> R$ ${frete.valor.toFixed(2)} — ${frete.prazo} dias úteis`;
-                    freteDiv.appendChild(el);
-                });
-            }).catch(() => alert("ERRO DE CONEXÃO CORREIOS"));
-        }
-    })
+    document.addEventListener('DOMContentLoaded', function(){
+        const cep = document.querySelector('input[name="cep-compra"]');
+        const totalFrete = document.querySelector('input[class="total-compra"]');
+        const form = document.querySelector('form.div-radio-compra');
+
+        const freteDiv = document.createElement('div');
+        form.insertBefore(freteDiv, totalFrete.parentElement);
+
+        let totalBase = parseFloat("{{ total }}");
+        let valorFrete = 0;
+
+        cep.addEventListener('blur', function(){
+            if (cep.value.length() === 8) {
+                fetch("{{ url_for('compra.calculo_frete')}}", {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: new URLSearchParams({cep})
+                }).then(res => res.json()).then(data => {
+                    const frete = data[0];
+                    const totalComFrete = totalBase + frete.valor;
+
+                    //a # significa id assim como o . significa class
+                    document.querySelector('#total').innerText = `R$ ${totalComFrete.toFixed(2)}`;
+
+                    document.querySelector('#frete-info').innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
+                }).catch(() => alert("ERRO DE CONEXÃO CORREIOS"));
+            }
+        });
+    });
 </script>
 {% endblock %}
