@@ -81,7 +81,7 @@ def comprar():
     if not compra_data:
         return redirect(url_for('carrinho.carrinho'))
     
-    total = compra_data.get('total', 0.0)
+    total = float(request.form.get('total-final', 0.0))
     produtos = compra_data.get('produtos', [])
 
     pag_info = None

@@ -23,14 +23,17 @@
             <input type="text" name="cep-compra" class="compra-input-cep" placeholder="CEP:" required>
             <input type="text" name="desconto-compra" class="compra-input-desconto" placeholder="Cupom de desconto:">
             <p id="frete-info"></p>
-            <p id="total-compra"><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
+            <p id="total-compra"><strong>Total:</strong> R$ <span id="valor-total">{{ "%.2f"|format(total) }}</span></p>
+            
+            <input type="hidden" name="total-final" id="total-final" value="{{ '%.2f'|format(total) }}">
+            
             <button type="submit" class="btn-comprar-compra">COMPRAR</button>
         </form>
         {% if pag_info %}
             {% if pag_info.tipo == "pix" %}
                 <div class="pix-pagamento">
                     <h3>Escaneie o QR Code para pagar:</h3>
-                    <img src="data:image/png;base64,{{ pag_info.qr_code_img }}" alt="QR Code PIX" class="qr-pix-compra"
+                    <img src="data:image/png;base64,{{ pag_info.qr_code_img }}" alt="QR Code PIX" class="qr-pix-compra">
                     <p><strong>Ou copie a chave PIX:</strong></p>
                     <textarea readonly style="width:100%;height:100px;">{{ pag_info.chave }}</textarea>
                 </div>
@@ -51,11 +54,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         const cep = document.querySelector('input[name="cep-compra"]');
-        const totalFrete = document.querySelector('input[id="total-compra"]');
+        const totalFrete = document.querySelector('#total-compra');
         const form = document.querySelector('form.div-radio-compra');
-
-        const freteDiv = document.createElement('div');
-        form.insertBefore(freteDiv, totalFrete.parentElement);
 
         let totalBase = parseFloat("{{ total }}");
         let valorFrete = 0;
@@ -65,13 +65,13 @@
                 fetch("{{ url_for('compra.calculo_frete')}}", {
                     method: 'post',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: new URLSearchParams({cep})
+                    body: new URLSearchParams({ 'cep-compra': cep.value })
                 }).then(res => res.json()).then(data => {
                     const frete = data[0];
                     const totalComFrete = totalBase + frete.valor;
 
                     //a # significa id assim como o . significa class
-                    document.querySelector('#total').innerText = `R$ ${totalComFrete.toFixed(2)}`;
+                    document.querySelector('#valor-total').innerText = totalComFrete.toFixed(2);
 
                     document.querySelector('#frete-info').innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
                 }).catch(() => alert("ERRO DE CONEXÃO CORREIOS"));
