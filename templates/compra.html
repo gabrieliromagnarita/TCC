@@ -4,6 +4,7 @@
 
 {% block content %}
 <div id="content-compra">
+    <div class="div-left-compra">
         {% if produtos %}
             <ul>
                 {% for p in produtos %}
@@ -29,6 +30,11 @@
             
             <button type="submit" class="btn-comprar-compra">COMPRAR</button>
         </form>
+    </div>
+
+    <div class="divisoria-vertical-compra"></div>
+
+    <div class="div-right-compra">
         {% if pag_info %}
             {% if pag_info.tipo == "pix" %}
                 <div class="pix-pagamento">
@@ -39,13 +45,6 @@
                 </div>
             {% endif %}
         {% endif %}
-        
-    </div>
-
-    <div class="divisoria-vertical-compra"></div>
-
-    <div class="div-right-compra">
-        <p>QR Code</p>
     </div>
 </div>
 {% endblock %}
