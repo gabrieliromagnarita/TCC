@@ -55,13 +55,14 @@
     document.addEventListener('DOMContentLoaded', function(){
         const cep = document.querySelector('input[name="cep-compra"]');
         const totalFrete = document.querySelector('#total-compra');
+        const totalHidden = document.querySelector('#total-final');
         const form = document.querySelector('form.div-radio-compra');
 
         let totalBase = parseFloat("{{ total }}");
         let valorFrete = 0;
 
         cep.addEventListener('blur', function(){
-            if (cep.value.length() === 8) {
+            if (cep.value.length === 8) {
                 fetch("{{ url_for('compra.calculo_frete')}}", {
                     method: 'post',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -70,8 +71,10 @@
                     const frete = data[0];
                     const totalComFrete = totalBase + frete.valor;
 
-                    //a # significa id assim como o . significa class
-                    document.querySelector('#valor-total').innerText = totalComFrete.toFixed(2);
+                    totalSpan.innerText = totalComFrete.toFixed(2);
+                    freteInfo.innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
+
+                    totalHidden.value = totalComFrete.toFixed(2);
 
                     document.querySelector('#frete-info').innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
                 }).catch(() => alert("ERRO DE CONEXÃO CORREIOS"));

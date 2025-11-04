@@ -27,11 +27,13 @@ def compra():
 
     return render_template('compra.html', produtos=produtos, total=total)
 
-@compra_bp.route('/calculo_frete', methods=['post'])
+@compra_bp.route('/calculo_frete', methods=['POST'])
 def calculo_frete():
+    print(">>> Rota calculo_frete foi chamada!")
     cep_destino = request.form.get('cep-compra')
+    print(">>> CEP recebido:", cep_destino)
     if not cep_destino or not cep_destino.isdigit():
-        return ("ERRO CEP INVALIDO"), 400
+        return jsonify({"erro": "CEP inválido"}), 400
     
     cep_origem = "35430970"
 
@@ -46,7 +48,7 @@ def calculo_frete():
 
     for servico in codigos_servicos:
         url = (
-            "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx"
+            "https://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx"
             f"?nCdEmpresa=&sDsSenha=&nCdServico={servico}"
             f"&sCepOrigem={cep_origem}&sCepDestino={cep_destino}"
             f"&nVlPeso={peso}&nCdFormato=1&nVlComprimento={comprimento}"
@@ -73,7 +75,7 @@ def calculo_frete():
         
     return jsonify(resultados)
 
-@compra_bp.route('/comprar', methods=['post'])
+@compra_bp.route('/comprar', methods=['POST'])
 def comprar():
     tipo = request.form.get('tipo-pag')
     compra_data = session.get('compra')
