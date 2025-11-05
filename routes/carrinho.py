@@ -40,9 +40,21 @@ def remove_carrinho(produto_id):
 
 @carrinho_bp.route('/add_carrinho/<produto_id>')
 def add_carrinho(produto_id):
+    user = session.get('user')
+    if not user:
+        return redirect(url_for('login.login_render'))
     produto_id = str(produto_id)
-    session.setdefault('carrinho',[])
-    session['carrinho'].append(produto_id)
+    user_email = user.get('email')
+
+    doc_ref = db.collection("carrinhos").document(user_email)
+    doc = doc_ref.get()
+    carrinho_atual = doc.to_dict().get("produtos", [])
+
+    carrinho_atual.append(produto_id)
+
+    doc_ref.set({"produtos": carrinho_atual}, merge=True)
+
+    session['carrinho'] = carrinho_atual
     session.modified = True
     return(redirect(request.referrer or url_for('produto.produto', id="produto_id")))
 

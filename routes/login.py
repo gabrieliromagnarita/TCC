@@ -2,10 +2,10 @@ from connect import db
 from flask import Blueprint, render_template, request, redirect, url_for, session, abort
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
-import requests
+import requests, os
 
 login_bp = Blueprint('login', __name__)
-FIREBASE_API_KEY = 'AIzaSyB83_gLrndTGy1mx5jG8CJEA_LrCsCijdw'
+FIREBASE_API_KEY = os.getenv('FIREBASE_API_KEY')
 
 @login_bp.route('/login-render')
 def login():
@@ -40,12 +40,19 @@ def login_user():
         else:
             session['user'] = {'email': email}
 
+        user_email = session['user'].get('email')
+        doc_ref = db.collection("carrinhos").document(user_email)
+        doc = doc_ref.get()
+        if doc.exists:
+            session['carrinho'] = doc.to_dict().get("produtos", [])
+        else:
+            session['carrinho'] = []
+
         if email == 'gabihromagna@gmail.com':
             return(redirect(url_for('admin.admin')))
         else:
             return(redirect(url_for('home.home')))
-        
-    erro = data.get("error", {}).get("message", "Erro desconhecido")
+    
     return render_template('login.html', erro="E-mail ou senha inválidos.")
     
 @login_bp.route('/recuperar-senha', methods=['POST'])
@@ -75,5 +82,10 @@ def recuperar_senha():
     
 @login_bp.route('/logout')
 def logout():
-    session.pop('user', None)  # remove o usuário da sessão
+    user = session.get('user')
+    if user:
+        user_email = user.get('email')
+        carrinho = session.get('carrinho', [])
+        db.collection("carrinhos").document(user_email).set({"produtos": carrinho}, merge=True)
+    session.clear()# remove o usuário e o carrinho da sessão
     return redirect(url_for('home.home'))

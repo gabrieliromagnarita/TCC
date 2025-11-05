@@ -32,7 +32,7 @@
         {% else %}
         <div  class="carrinho-vazio">
             <p class="mensagem-carrinho-vazio">Seu carrinho está vazio</p>
-            <input type="button" name="btn-redirect" value="IR ÀS COMPRAS" class="btn-redirect">
+            <input type="button" id="btn-redirect" name="btn-redirect" value="IR ÀS COMPRAS" class="btn-redirect">
             <script>
                 document.getElementById('btn-redirect').addEventListener('click', () => {
                     window.location.href="{{url_for('home.home')}}";
