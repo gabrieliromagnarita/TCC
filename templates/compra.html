@@ -5,31 +5,46 @@
 {% block content %}
 <div id="content-compra">
     <div class="div-left-compra">
-        {% if produtos %}
-            <ul>
+        <div class="div-nomes-compra">
+            {% if produtos %}
                 {% for p in produtos %}
-                <li style="margin-bottom: 20px;">
-                    <strong>{{ p.nome }}</strong> - R$ {{ "%.2f"|format(p.preco) }} {{ p.quantidade }}
-                </li>
+                    <p class="nomes-produtos-compra"><strong>{{ p.nome }}</strong> - R$ {{ "%.2f"|format(p.preco) }} <strong>x{{ p.quantidade }}</strong></p>
                 {% endfor %}
-            </ul>
-        {% else %}
-            <p>erro: carrinho vazio</p>
-        {% endif %}
-        <form method="post" class="div-radio-compra" action="{{ url_for('compra.comprar')}}">
-            <label>Método de pagamento:</label>
-            <input type="radio" id="pix" name="tipo-pag" value="pix">
-            <label for="pix">Pix</label>
+            {% else %}
+                <p>erro: carrinho vazio</p>
+            {% endif %}
+        </div>
 
-            <input type="text" name="cep-compra" class="compra-input-cep" placeholder="CEP:" required>
-            <input type="text" name="desconto-compra" class="compra-input-desconto" placeholder="Cupom de desconto:">
-            <p id="frete-info"></p>
-            <p id="total-compra"><strong>Total:</strong> R$ <span id="valor-total">{{ "%.2f"|format(total) }}</span></p>
-            
-            <input type="hidden" name="total-final" id="total-final" value="{{ '%.2f'|format(total) }}">
-            
-            <button type="submit" class="btn-comprar-compra">COMPRAR</button>
-        </form>
+        <div class="div-form-compra">
+            <form method="post" class="form-compra" action="{{ url_for('compra.comprar')}}">
+                <div class="div-radio-compra">
+                    <label class="label-radio-compra">Método de pagamento:</label>
+                    <div class="radio-tipo-compra">
+                        <input type="radio" id="pix" name="tipo-pag" value="pix">
+                        <label for="pix" class="label-tipo-compra">Pix</label>
+                    </div>
+                    <div class="radio-tipo-compra">
+                        <input type="radio" id="dinheiro" name="tipo-pag" value="dinheiro">
+                        <label for="dinheiro" class="label-tipo-compra">Dinheiro (presencial)</label>
+                    </div>
+                </div>
+                
+                <div class="div-inputs-compra">
+                    <input type="text" name="cep-compra" class="compra-input" placeholder="CEP:" required>
+                    <input type="text" name="desconto-compra" class="compra-input" placeholder="Cupom de desconto:">
+                </div>
+
+                <div class="div-total-compra">
+                    <p id="frete-info"></p>
+                    <p id="total-compra" class="total-compra"><strong>PREÇO TOTAL:</strong> R$ <span id="valor-total">{{ "%.2f"|format(total) }}</span></p>
+                    <input type="hidden" name="total-final" id="total-final" value="{{ '%.2f'|format(total) }}">
+                </div>
+                
+                <div class="div-botao-compra">
+                    <button type="submit" class="btn-comprar-compra">COMPRAR</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="divisoria-vertical-compra"></div>
@@ -37,12 +52,13 @@
     <div class="div-right-compra">
         {% if pag_info %}
             {% if pag_info.tipo == "pix" %}
-                <div class="pix-pagamento">
-                    <h3>Escaneie o QR Code para pagar:</h3>
-                    <img src="data:image/png;base64,{{ pag_info.qr_code_img }}" alt="QR Code PIX" class="qr-pix-compra">
-                    <p><strong>Ou copie a chave PIX:</strong></p>
-                    <textarea readonly style="width:100%;height:100px;">{{ pag_info.chave }}</textarea>
+                <div class="pix-compra">
+                    <p class="instrucao-qr-pix-compra">ESCANEIE O QR CODE PARA PAGAR:</p>
+                    <img src="data:image/png;base64,{{ pag_info.qr_code_img }}" alt="QR Code PIX" class="img-qr-pix-compra">
+                    <p class="instrucao-copy-pix-compra">OU COPIE A CHAVE PIX:</p>
+                    <textarea readonly class="copy-pix-compra">{{ pag_info.chave }}</textarea>
                 </div>
+                
             {% endif %}
         {% endif %}
     </div>

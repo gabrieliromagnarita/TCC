@@ -1220,12 +1220,157 @@ details > p{
 }
 
 /*********************** corpo compra  ***********************/
-
-.div-left-compra{
-    
+#content-compra{
+    display: flex;
+    justify-content: center;
+    /* align-items: stretch; */
+    width: 100%;
+    padding: 0;
+    min-height: 77.9vh;
 }
 
-.qr-pix-compra{
-    height: 500px;
-    width: auto;
+.div-left-compra{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 77.9vh;
+    padding-left: 2%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.div-nomes-compra{
+    height: auto;
+    width: 80%;
+}
+
+.div-form-compra {
+   min-height: 300px;
+   width: 100%; 
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.form-compra{
+    min-height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.div-radio-compra{
+    background-color: #D9D9D9;
+    height: 20%;
+    width: 96%;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.radio-tipo-compra{
+    display: flex;
+}
+
+.label-tipo-compra{
+    padding-left: 20px;
+}
+
+.div-inputs-compra{
+    padding-top: 30px;
+    height: 110px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.compra-input{
+    height: 40px;
+    width: 100%;
+    background-color: #D9D9D9;
+    font-size: 25px;
+    margin: 0;
+    border: none;
+}
+
+.div-total-compra{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.total-compra{
+    font-size: 26px;
+}
+
+.div-botao-compra{
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-comprar-compra {
+    width: 220px;
+    height: 30px;
+    background-color: #33B1AE;
+    color: white;
+    border: none;
+    border-radius: 13px;
+    font-size: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divisoria-vertical-compra{
+    border-left: 1px solid #686868;
+    height: auto;
+    align-self: stretch;
+}
+
+.div-right-compra{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+}
+
+.pix-compra{
+    width: 80%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2%;
+}
+
+.instrucao-qr-pix-compra{
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 0;
+}
+
+.img-qr-pix-compra{
+    height: 250px;
+    width: 250px;
+}
+
+.instrucao-copy-pix-compra{
+    font-size: 90%;
+    line-height: 0;
+}
+
+.copy-pix-compra{
+    width: 100%;
+    height: auto;
+    background-color: #D9D9D9;
 }
