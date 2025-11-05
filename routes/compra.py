@@ -1,10 +1,9 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash, jsonify
 import uuid, datetime, qrcode, base64, barcode,mercadopago, random, requests
-from io import BytesIO
 from barcode.writer import ImageWriter
 from barcode import EAN13
 import qrcode.constants
-from connect import mercado_pago_key
+from connect import mercado_pago_key, db
 from xml.etree import ElementTree as ET
 
 compra_bp = Blueprint('compra', __name__)
@@ -26,6 +25,25 @@ def compra():
     total = compra_data.get('total', 0.0)
 
     return render_template('compra.html', produtos=produtos, total=total)
+
+@compra_bp.route('/comprar_agora/<id>', methods=['GET'])
+def comprar_agora(id):
+    produto_ref = db.collection("produtos").document(id).get()
+    if not produto_ref.exists:
+        return "Produto não encontrado", 404
+    
+    produto = produto_ref.to_dict()
+    produto["id"] = id
+    produto["quantidade"] = 1
+
+    compra_data = {
+        "produtos": [produto],
+        "total": float(produto["preco"])
+    }
+
+    session["compra"] = compra_data
+
+    return redirect(url_for('compra.compra'))
 
 @compra_bp.route('/calculo_frete', methods=['POST'])
 def calculo_frete():

@@ -44,16 +44,15 @@ def produto(id):
         print("   -", r["nome"], r.get("categorias"))
 
     # Mais vendidos
-    mais_vendidos_ref = db.collection("produtos")\
+    """ mais_vendidos_ref = db.collection("produtos")\
         .order_by("vendas", direction=firestore.Query.DESCENDING)\
         .limit(5).stream()
     mais_vendidos = [p.to_dict() | {"id": p.id} for p in mais_vendidos_ref]
 
-    print(">>> Qtd mais vendidos:", len(mais_vendidos))
+    print(">>> Qtd mais vendidos:", len(mais_vendidos)) """
 
     return render_template(
         "produto.html",
         produto=produto,
-        recomendados=recomendados,
-        mais_vendidos=mais_vendidos
+        recomendados=recomendados
     )

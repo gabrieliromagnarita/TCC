@@ -12,7 +12,9 @@
             <div class="infos-div-left">
                 <p class="nome-produto">{{ produto.nome }}</p>
                 <p class="preco-produto">R$ {{ "%.2f"|format(produto.preco) }}</p>
-                <button class="btn-comprar-produto">COMPRAR</button>
+                <a href="{{ url_for('compra.comprar_agora', id=produto.id) }}" class="link-btn-produto">
+                    <button class="btn-comprar-produto">COMPRAR</button>
+                </a>
                 <img src="{{ url_for('static', filename=produto.foto1) }}" class="img-produto-view">
                 <img src="{{ url_for('static', filename=produto.foto2) }}" class="img-produto-view">
             </div>
@@ -20,7 +22,7 @@
                 <a href="{{ url_for('carrinho.add_carrinho', produto_id=produto.id) }}"><img src="{{ url_for('static', filename='imagens/shopping-cart-add-icon.png') }}" class="shopping-cart-add"></a>
             </div>
         </div>
-        <div class="offer-div-produto">
+        <!-- <div class="offer-div-produto">
             <div class="offer-div-top">
                 <h2>MAIS VENDIDOS:</h2>
             </div>
@@ -31,7 +33,7 @@
                     <p>R$ {{ "%.2f"|format(mv.preco) }}</p>
                 </a>
             {% endfor %}
-        </div>
+        </div> -->
     </div>
     <div id="div-bottom-produto">
         
