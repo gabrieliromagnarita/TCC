@@ -118,7 +118,7 @@ def comprar():
         return render_template('compra.html', produtos=produtos, total=total, pag_info=pag_info)
     
     elif tipo == "dinheiro":
-        return render_template('compra.html')
+        return render_template('compra.html', produtos=produtos, total=total)
 
     """ elif tipo == "boleto":
         print("DEBUG - Mercado Pago Key:", mercado_pago_key[:10])
