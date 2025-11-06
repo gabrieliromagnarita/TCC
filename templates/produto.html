@@ -36,13 +36,12 @@
         </div> -->
     </div>
     <div id="div-bottom-produto">
-        
         <div class="desc-div-produto">
             <hr>
             <p class="desc-produto-details">{{ produto.descricao }}</p>
             <hr>
         </div>
-        
+
         <div class="rec-div-produto">
         {% for rec in recomendados %}
             <a href="{{ url_for('produto.produto', id=rec.id) }}" class="produto-link-rec">

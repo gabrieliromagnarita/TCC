@@ -569,7 +569,7 @@ p{
     /* flex-wrap: wrap; */
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-between; */
+    justify-content: space-evenly;
     text-decoration: none;
     color: inherit;
     padding: 10px;
@@ -828,6 +828,10 @@ details > p{
 .desc-produto-details{
     font-size: 100%;
     padding: 0;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10 0 10px;
 }
 
 .rec-div-produto{
