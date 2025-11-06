@@ -75,6 +75,8 @@ def calculo_frete():
         )
 
         response = requests.get(url)
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        print(response)
         resposta_xml = ET.fromstring(response.text)
         
         servico_nome = "PAC" if servico == "04510" else "SEDEX"
