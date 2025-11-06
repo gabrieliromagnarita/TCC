@@ -23,10 +23,6 @@
                         <input type="radio" id="pix" name="tipo-pag" value="pix">
                         <label for="pix" class="label-tipo-compra">Pix</label>
                     </div>
-                    <div class="radio-tipo-compra">
-                        <input type="radio" id="dinheiro" name="tipo-pag" value="dinheiro">
-                        <label for="dinheiro" class="label-tipo-compra">Dinheiro (presencial)</label>
-                    </div>
                 </div>
                 
                 <div class="div-inputs-compra">
@@ -56,7 +52,7 @@
                     <p class="instrucao-qr-pix-compra">ESCANEIE O QR CODE PARA PAGAR:</p>
                     <img src="data:image/png;base64,{{ pag_info.qr_code_img }}" alt="QR Code PIX" class="img-qr-pix-compra">
                     <p class="instrucao-copy-pix-compra">OU COPIE A CHAVE PIX:</p>
-                    <textarea readonly class="copy-pix-compra">{{ pag_info.chave }}</textarea>
+                     <textarea readonly class="copy-pix-compra">{{ pag_info.chave }}</textarea>
                 </div>
                 
             {% endif %}
