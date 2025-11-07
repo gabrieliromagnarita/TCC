@@ -65,29 +65,34 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         const cep = document.querySelector('input[name="cep-compra"]');
-        const totalFrete = document.querySelector('#total-compra');
+        const totalFrete = document.querySelector('#valor-total');
         const totalHidden = document.querySelector('#total-final');
-        const form = document.querySelector('form.div-radio-compra');
+        /* const form = document.querySelector('form.div-radio-compra'); */
+        const freteInfo = document.querySelector('#frete-info')
 
         let totalBase = parseFloat("{{ total }}");
-        let valorFrete = 0;
 
         cep.addEventListener('blur', function(){
             if (cep.value.length === 8) {
                 fetch("{{ url_for('compra.calculo_frete')}}", {
-                    method: 'post',
+                    method: 'POST',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     body: new URLSearchParams({ 'cep-compra': cep.value })
                 }).then(res => res.json()).then(data => {
+                    if (data.erro) {
+                        alert("CEP inválido");
+                        return;
+                    }
+
                     const frete = data[0];
                     const totalComFrete = totalBase + frete.valor;
 
-                    totalSpan.innerText = totalComFrete.toFixed(2);
+                    totalFrete.innerText = totalComFrete.toFixed(2);
                     freteInfo.innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
 
                     totalHidden.value = totalComFrete.toFixed(2);
 
-                    document.querySelector('#frete-info').innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
+                    /* document.querySelector('#frete-info').innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`; */
                 }).catch(() => alert("ERRO DE CONEXÃO CORREIOS"));
             }
         });
