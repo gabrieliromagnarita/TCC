@@ -47,9 +47,9 @@ def comprar_agora(id):
 
 @compra_bp.route('/calculo_frete', methods=['POST'])
 def calculo_frete():
-    print(">>> Rota calculo_frete foi chamada!")
+    """ print(">>> Rota calculo_frete foi chamada!") """
     cep_destino = request.form.get('cep-compra')
-    print(">>> CEP recebido:", cep_destino)
+    """ print(">>> CEP recebido:", cep_destino) """
     if not cep_destino or not cep_destino.isdigit():
         return jsonify({"erro": "CEP inválido"}), 400
     
@@ -118,15 +118,15 @@ def comprar():
         }
 
         payment_response = chave_mp.payment().create(payment_data, request_options)
-        print("DEBUG - payment_response:", payment_response)
+        """ print("DEBUG - payment_response:", payment_response) """
         pag_info = payment_response["response"]
-        print("DEBUG - pag_info:", pag_info)
+        """ print("DEBUG - pag_info:", pag_info) """
 
         poi = pag_info.get("point_of_interaction", {}).get("transaction_data")
 
         chave_pix = poi.get("qr_code")
         qr_base64 = poi.get("qr_code_base64")
-        print("DEBUG - transaction_data:", poi)
+        """ print("DEBUG - transaction_data:", poi) """
 
         pag_info = {
             "tipo": "pix",

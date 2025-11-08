@@ -72,7 +72,7 @@
 
         let totalBase = parseFloat("{{ total }}");
 
-        cep.addEventListener('blur', function(){
+        cep.addEventListener('input', function(){
             if (cep.value.length === 8) {
                 fetch("{{ url_for('compra.calculo_frete')}}", {
                     method: 'POST',
@@ -86,6 +86,8 @@
 
                     const frete = data[0];
                     const totalComFrete = totalBase + frete.valor;
+                    console.log("Preço:")
+                    console.log(totalComFrete)
 
                     totalFrete.innerText = totalComFrete.toFixed(2);
                     freteInfo.innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
