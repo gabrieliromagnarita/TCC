@@ -47,9 +47,7 @@ def comprar_agora(id):
 
 @compra_bp.route('/calculo_frete', methods=['POST'])
 def calculo_frete():
-    """ print(">>> Rota calculo_frete foi chamada!") """
     cep_destino = request.form.get('cep-compra')
-    """ print(">>> CEP recebido:", cep_destino) """
     if not cep_destino or not cep_destino.isdigit():
         return jsonify({"erro": "CEP inválido"}), 400
     
@@ -65,28 +63,21 @@ def calculo_frete():
     resultados = []
 
     for servico in codigos_servicos:
-        url = (
-            "https://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx"
-            f"?nCdEmpresa=&sDsSenha=&nCdServico={servico}"
-            f"&sCepOrigem={cep_origem}&sCepDestino={cep_destino}"
-            f"&nVlPeso={peso}&nCdFormato=1&nVlComprimento={comprimento}"
-            f"&nVlAltura={altura}&nVlLargura={largura}&nVlDiametro=0"
-            "&sCdMaoPropria=N&nVlValorDeclarado=0&sCdAvisoRecebimento=N&StrRetorno=xml"
-        )
+        cep_inicial = int(cep_destino[0])
 
-        response = requests.get(url)
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        print(response)
-        resposta_xml = ET.fromstring(response.text)
-        
-        servico_nome = "PAC" if servico == "04510" else "SEDEX"
-        valor = resposta_xml.find(".//Valor").text.replace(",",".")
-        prazo = resposta_xml.find(".//PrazoEntrega").text
-        
+        base_valor = 10.0 + cep_inicial * 2.5
+
+        if servico == "04510":
+            valor = round(base_valor, 2)
+            servico_nome = "PAC"
+
+        else:
+            valor = round(base_valor + 10, 2)
+            servico_nome = "SEDEX"
+
         resultados.append({
             "servico": servico_nome,
-            "valor": float(valor),
-            "prazo": prazo
+            "valor": round(valor, 2)
         })
         print(resultados)
 

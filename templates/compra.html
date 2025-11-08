@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="div-total-compra">
-                    <p id="frete-info"></p>
                     <p id="total-compra" class="total-compra"><strong>PREÇO TOTAL:</strong> R$ <span id="valor-total">{{ "%.2f"|format(total) }}</span></p>
+                    <span id="frete-info"></span>
                     <input type="hidden" name="total-final" id="total-final" value="{{ '%.2f'|format(total) }}">
                 </div>
                 
@@ -68,7 +68,7 @@
         const totalFrete = document.querySelector('#valor-total');
         const totalHidden = document.querySelector('#total-final');
         /* const form = document.querySelector('form.div-radio-compra'); */
-        const freteInfo = document.querySelector('#frete-info')
+        //const freteInfo = document.querySelector('#frete-info')
 
         let totalBase = parseFloat("{{ total }}");
 
@@ -86,11 +86,12 @@
 
                     const frete = data[0];
                     const totalComFrete = totalBase + frete.valor;
+
                     console.log("Preço:")
                     console.log(totalComFrete)
 
                     totalFrete.innerText = totalComFrete.toFixed(2);
-                    freteInfo.innerText = `Frete (${frete.servico}): R$ ${frete.valor.toFixed(2)} - ${frete.prazo} dias úteis`;
+                    /* freteInfo.innerText = `R$ ${frete.valor.toFixed(2)}`; */
 
                     totalHidden.value = totalComFrete.toFixed(2);
 
