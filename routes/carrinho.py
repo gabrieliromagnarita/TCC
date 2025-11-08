@@ -6,6 +6,10 @@ from collections import Counter
 
 carrinho_bp = Blueprint('carrinho', __name__)
 
+def atualizar_carrinho(user_email, carrinho_atual):
+    doc_ref = db.collection("carrinhos").document(user_email)
+    doc_ref.set({"produtos": carrinho_atual}, merge=True)
+
 @carrinho_bp.route('/carrinho-render')
 def carrinho():
     carrinho_ids = session.get('carrinho', [])
@@ -32,10 +36,15 @@ def carrinho():
 def remove_carrinho(produto_id):
     produto_id = str(produto_id)
     carrinho = session.get('carrinho', [])
+    user = session.get('user')
     
     if produto_id in carrinho:
         carrinho.remove(produto_id)
         session['carrinho'] = carrinho
+        session.modified =  True
+
+        if user:
+            atualizar_carrinho(user['email'], carrinho)
     return(redirect(request.referrer or url_for('carrinho.carrinho')))
 
 @carrinho_bp.route('/add_carrinho/<produto_id>')
@@ -46,16 +55,13 @@ def add_carrinho(produto_id):
     produto_id = str(produto_id)
     user_email = user.get('email')
 
-    doc_ref = db.collection("carrinhos").document(user_email)
-    doc = doc_ref.get()
-    carrinho_atual = doc.to_dict().get("produtos", [])
-
+    carrinho_atual = session.get("carrinho", [])
     carrinho_atual.append(produto_id)
-
-    doc_ref.set({"produtos": carrinho_atual}, merge=True)
 
     session['carrinho'] = carrinho_atual
     session.modified = True
+
+    atualizar_carrinho(user_email, carrinho_atual)
     return(redirect(request.referrer or url_for('produto.produto', id="produto_id")))
 
 @carrinho_bp.route('/finalizar_compra', methods=['POST'])
