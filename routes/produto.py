@@ -1,6 +1,6 @@
 import random
 from connect import db
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 from firebase_admin import firestore
 
 produto_bp = Blueprint('produto', __name__)

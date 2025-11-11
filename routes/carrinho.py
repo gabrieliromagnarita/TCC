@@ -66,6 +66,9 @@ def add_carrinho(produto_id):
 
 @carrinho_bp.route('/finalizar_compra', methods=['POST'])
 def finalizar_compra():
+    user = session.get('user')
+    if not user:
+        return redirect(url_for('login.login'))
     selecionados = request.form.getlist('produto-carrinho-ids')
     if not selecionados:
         return(redirect(url_for('carrinho.carrinho')))
