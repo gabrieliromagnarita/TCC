@@ -54,7 +54,7 @@ def remove_carrinho(produto_id):
 def add_carrinho(produto_id):
     user = session.get('user')
     if not user:
-        return redirect(url_for('login.login_render'))
+        return redirect(url_for('login.login'))
     produto_id = str(produto_id)
     user_email = user.get('email')
 
