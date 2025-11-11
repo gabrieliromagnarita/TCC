@@ -13,6 +13,9 @@ def atualizar_carrinho(user_email, carrinho_atual):
 @carrinho_bp.route('/carrinho-render')
 def carrinho():
     carrinho_ids = session.get('carrinho', [])
+    if not isinstance(carrinho_ids, list):
+        session['carrinho'] = []
+        carrinho_ids = []
     contagem = Counter(carrinho_ids)
     produtos_carrinho = []
     total = 0.0
@@ -62,7 +65,7 @@ def add_carrinho(produto_id):
     session.modified = True
 
     atualizar_carrinho(user_email, carrinho_atual)
-    return(redirect(request.referrer or url_for('produto.produto', id="produto_id")))
+    return(redirect(request.referrer or url_for('produto.produto', id=produto_id)))
 
 @carrinho_bp.route('/finalizar_compra', methods=['POST'])
 def finalizar_compra():

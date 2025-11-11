@@ -28,6 +28,9 @@ def compra():
 
 @compra_bp.route('/comprar_agora/<id>', methods=['GET'])
 def comprar_agora(id):
+    user = session.get('user')
+    if not user:
+        return redirect(url_for('login.login'))
     produto_ref = db.collection("produtos").document(id).get()
     if not produto_ref.exists:
         return "Produto não encontrado", 404
