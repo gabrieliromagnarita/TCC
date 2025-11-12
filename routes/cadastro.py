@@ -1,5 +1,5 @@
 from connect import db
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session, redirect, url_for
 import firebase_admin
 from firebase_admin import auth, firestore
 from email_validator import validate_email, EmailNotValidError
@@ -46,7 +46,12 @@ def cadastrar_user():
                 'cpf': cpf,
             }
             db.collection('usuarios').add(user_info)
-            return'Usuário criado com sucesso!'
+        
+            session['user'] = user_info
+            session['carrinho'] = []
+            session.modified = True
+
+            return redirect(url_for('home.home'))
         except Exception:
             return'Falha na criação do usuário!'
     except Exception:
