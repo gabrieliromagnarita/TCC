@@ -5,7 +5,8 @@ import os
 
 admin_bp = Blueprint('admin', __name__)
 
-PASTA_UPLOADS = 'TCC/static/uploads'
+""" PASTA_UPLOADS = 'TCC/static/uploads' """
+PASTA_UPLOADS = os.path.join('static', 'uploads')
 
 @admin_bp.route('/admin-render')
 def admin():
