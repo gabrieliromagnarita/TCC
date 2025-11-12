@@ -141,11 +141,18 @@
         });
 
         async function addCarrinho(event, produtoId) {
-            event.stopPropagation
-            event.preventDefault
+            /* event.stopPropagation */
+            event.preventDefault()
 
             try{
-                const response = await fetch(`/add_carrinho/${produtoId}`);
+                const response = await fetch(`/add_carrinho/${produtoId}`, {
+                    redirect: "follow"
+                });
+                if (response.redirected && response.url.includes("/login-render")){
+                    window.location.href = response.url;
+                    return;
+                }
+
                 if (response.ok){
                     alert("Produto adicionado ao carrinho 🛒");
                 } else {
